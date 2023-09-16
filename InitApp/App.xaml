@@ -2,9 +2,11 @@
     x:Class="HotelManager.InitApp.App"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:dialogHostViewModels="clr-namespace:HotelManager.MVVM.ViewModels.DialogHostViewModels"
+    xmlns:dialogHostViews="clr-namespace:HotelManager.MVVM.Views.Xamls.DialogHostViews"
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-    xmlns:viewmodels="clr-namespace:HotelManager.MVVM.ViewModels"
-    xmlns:views="clr-namespace:HotelManager.MVVM.Views.Xamls.Pages">
+    xmlns:pageViewModels="clr-namespace:HotelManager.MVVM.ViewModels.PageViewModels"
+    xmlns:viewPages="clr-namespace:HotelManager.MVVM.Views.Xamls.Pages">
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -21,12 +23,16 @@
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
             </ResourceDictionary.MergedDictionaries>
 
-            <DataTemplate DataType="{x:Type viewmodels:SystemPageViewModel}">
-                <views:SystemPage />
+            <DataTemplate DataType="{x:Type pageViewModels:SystemPageViewModel}">
+                <viewPages:SystemPage />
             </DataTemplate>
 
-            <DataTemplate DataType="{x:Type viewmodels:TestPageViewModel}">
-                <views:TestPage />
+            <DataTemplate DataType="{x:Type pageViewModels:TestPageViewModel}">
+                <viewPages:TestPage />
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type dialogHostViewModels:RoomCreatorViewModel}">
+                <dialogHostViews:RoomCreator />
             </DataTemplate>
 
         </ResourceDictionary>

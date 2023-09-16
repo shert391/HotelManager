@@ -40,6 +40,7 @@
                     x:Name="AddRoomButton"
                     Width="154"
                     Height="30"
+                    Click="AddRoomButton_Click"
                     Style="{StaticResource YellowStyleButton}">
                     <StackPanel Orientation="Horizontal">
                         <Image Margin="7" Source="../../Icons/plus.png" />
@@ -78,12 +79,9 @@
             <DataGrid
                 x:Name="HotelsDataGrid"
                 Margin="10,0,10,20"
-                materialDesign:DataGridAssist.CellPadding="4 2 2 2"
-                materialDesign:DataGridAssist.ColumnHeaderPadding="4 2 2 2"
                 AutoGenerateColumns="False"
                 Background="#25292f"
                 CanUserAddRows="False"
-                HeadersVisibility="All"
                 ItemsSource="{DynamicResource ResourceKey=Rooms}">
                 <DataGrid.Resources>
                     <Style

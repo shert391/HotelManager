@@ -1,5 +1,6 @@
 ﻿using DevExpress.Mvvm;
 using HotelManager.InitApp;
+using HotelManager.MVVM.ViewModels.PageViewModels;
 using System.Windows.Input;
 
 namespace HotelManager.MVVM.ViewModels;

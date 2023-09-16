@@ -1,4 +1,6 @@
 ﻿using HotelManager.MVVM.ViewModels;
+using HotelManager.MVVM.ViewModels.DialogHostViewModels;
+using HotelManager.MVVM.ViewModels.PageViewModels;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Hosting;
 
@@ -10,9 +12,10 @@ public static class AddViewModelsHostBuilderExtension
     {
         hostBuilder.ConfigureServices(servicesProvider =>
         {
-            servicesProvider.TryAddSingleton<MainWindowViewModel>();
             servicesProvider.TryAddSingleton<TestPageViewModel>();
             servicesProvider.TryAddSingleton<SystemPageViewModel>();
+            servicesProvider.TryAddSingleton<MainWindowViewModel>();
+            servicesProvider.TryAddSingleton<RoomCreatorViewModel>();
         });
 
         return hostBuilder;
