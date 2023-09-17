@@ -15,6 +15,7 @@ public partial class App : Application
     {
         return Host.CreateDefaultBuilder(args)
                     .AddViewModels()
+                    .AddServices()
                     .AddViews()
                     .Build();
     }

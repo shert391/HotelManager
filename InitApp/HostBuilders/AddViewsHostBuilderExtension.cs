@@ -6,7 +6,7 @@ using Microsoft.Extensions.Hosting;
 
 namespace HotelManager.InitApp.HostBuilders;
 
-public static class AddViewHostBuilderExtension
+public static class AddViewsHostBuilderExtension
 {
     public static IHostBuilder AddViews(this IHostBuilder hostBuilder)
     {

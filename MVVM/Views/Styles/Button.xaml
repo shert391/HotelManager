@@ -149,7 +149,7 @@
                             x:Name="border"
                             Background="{TemplateBinding Background}"
                             CornerRadius="10">
-                            <ContentPresenter HorizontalAlignment="Left" VerticalAlignment="Center" />
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
                         </Border>
                         <Border
                             x:Name="opacity"
