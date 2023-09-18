@@ -92,28 +92,28 @@
                 </DataGrid.Resources>
                 <DataGrid.Columns>
                     <materialDesign:DataGridTextColumn
-                        Width="*"
+                        Width="Auto"
                         Binding="{Binding Path=Number}"
                         CanUserResize="True"
                         ElementStyle="{StaticResource ES}"
                         Header="Номер комнаты"
                         IsReadOnly="True" />
                     <materialDesign:DataGridTextColumn
-                        Width="*"
+                        Width="Auto"
                         Binding="{Binding Path=Type, Converter={StaticResource RoomTypeConverter}}"
                         CanUserResize="True"
                         ElementStyle="{StaticResource ES}"
                         Header="Тип номера"
                         IsReadOnly="True" />
                     <materialDesign:DataGridTextColumn
-                        Width="*"
+                        Width="Auto"
                         Binding="{Binding Path=Price, StringFormat={}{0:C}}"
                         CanUserResize="True"
                         ElementStyle="{StaticResource ES}"
                         Header="Цена за сутки"
                         IsReadOnly="True" />
                     <DataGridTemplateColumn
-                        Width="*"
+                        Width="Auto"
                         CanUserResize="True"
                         Header="Операция"
                         IsReadOnly="True">

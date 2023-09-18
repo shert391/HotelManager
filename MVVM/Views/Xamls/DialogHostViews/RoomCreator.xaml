@@ -18,13 +18,14 @@
                     Foreground="White"
                     Text="{Binding Number}" />
                 <ComboBox
-                    Margin="0,18,0,0"
+                    Margin="0,20,0,0"
                     materialDesign:HintAssist.Hint="Тип комнаты"
                     Foreground="White"
                     ItemsSource="{Binding Type, Converter={StaticResource RoomTypeConverter}}"
+                    SelectedIndex="0"
                     SelectedItem="{Binding Type, Converter={StaticResource RoomTypeConverter}}" />
                 <TextBox
-                    Margin="0,18,0,0"
+                    Margin="0,12,0,0"
                     materialDesign:HintAssist.Hint="Цена за сутки"
                     Foreground="White"
                     Style="{StaticResource MaterialDesignFloatingHintTextBox}"

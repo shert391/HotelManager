@@ -1,5 +1,6 @@
 ﻿using HotelManager.MVVM.Models.DataContract;
 using System.Collections.ObjectModel;
+using DevExpress.Mvvm.Native;
 using HotelManager.MVVM.Utils;
 
 namespace HotelManager.MVVM.Models.Services;
@@ -17,8 +18,17 @@ public class RoomService : IRoomService
     {
         string? errorMessage = null;
 
-        if (room.Number < 0)
-            errorMessage = "Намбер меньше нуля";
+        if (room.Number is < 1 or > 100)
+            errorMessage = "Номер должен быть в диапазоне от 1 до 100";
+
+        if (_rooms.Any(x => room.Number == x.Number))
+            errorMessage = "Комната уже существует!";
+
+        if (room.Price < 1000)
+            errorMessage = "Цена должна быть > 1000";
+        
+        if (room.Number == 0 || !Enum.IsDefined(typeof(RoomType), room.Type) || room.Price == 0)
+            errorMessage = "Все поля должны быть заполнены";
 
         if (errorMessage is null)
         {
