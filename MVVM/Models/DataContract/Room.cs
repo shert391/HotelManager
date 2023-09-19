@@ -17,7 +17,7 @@ public enum RoomType
     SemiLuxury,
 
     [Description("Двухместный с раскладным диваном")]
-    DoubleConvertibleSofa
+    DoubleConvertibleSofa,
 }
 
 public class Room

@@ -1,7 +1,6 @@
 ﻿using HotelManager.MVVM.Models.DataContract;
-using System.Collections.ObjectModel;
-using DevExpress.Mvvm.Native;
 using HotelManager.MVVM.Utils;
+using System.Collections.ObjectModel;
 
 namespace HotelManager.MVVM.Models.Services;
 
@@ -26,7 +25,7 @@ public class RoomService : IRoomService
 
         if (room.Price < 1000)
             errorMessage = "Цена должна быть > 1000";
-        
+
         if (room.Number == 0 || !Enum.IsDefined(typeof(RoomType), room.Type) || room.Price == 0)
             errorMessage = "Все поля должны быть заполнены";
 
@@ -35,7 +34,7 @@ public class RoomService : IRoomService
             onSuccess();
             return;
         }
-        
+
         DialogHostController.ShowMessageBox(errorMessage);
     }
 

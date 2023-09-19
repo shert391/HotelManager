@@ -40,8 +40,9 @@
                 <dialogHostViews:MessageBox />
             </DataTemplate>
 
-            <converters:RoomTypeConverter x:Key="RoomTypeConverter" />
-
+            <converters:EmptyStringConverter x:Key="EmptyStringConverter" />
+            <converters:RoomTypeToTextConverter x:Key="RoomTypeConverter" />
+            <converters:EnumToIntConverter x:Key="EnumToIntConverter" />
         </ResourceDictionary>
     </Application.Resources>
 </Application>

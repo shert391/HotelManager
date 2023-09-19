@@ -8,9 +8,9 @@ namespace HotelManager.MVVM.ViewModels.DialogHostViewModels;
 
 class RoomCreatorViewModel : BaseViewModel, IDialogViewModel
 {
-    public int Number { get; set; }
+    public int Number { get; set; } = 1;
 
-    public decimal Price { get; set; }
+    public decimal Price { get; set; } = 3000;
 
     public RoomType Type { get; set; }
 

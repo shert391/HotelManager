@@ -5,7 +5,7 @@ using System.Windows.Data;
 
 namespace HotelManager.MVVM.Views.Xamls.Converters;
 
-public class RoomTypeConverter : IValueConverter
+public class RoomTypeToTextConverter : IValueConverter
 {
     public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
     {
