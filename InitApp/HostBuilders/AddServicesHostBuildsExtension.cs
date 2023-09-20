@@ -11,6 +11,7 @@ public static class AddServicesHostBuildsExtension
         hostBuilder.ConfigureServices(servicesProvider =>
         {
             servicesProvider.TryAddSingleton<IRoomService, RoomService>();
+            servicesProvider.TryAddSingleton<ITestService, TestService>();
         });
 
         return hostBuilder;

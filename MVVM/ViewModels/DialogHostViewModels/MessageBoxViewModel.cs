@@ -12,7 +12,7 @@ internal class MessageBoxViewModel : BaseViewModel, IDialogViewModel
     public MessageBoxViewModel(string message)
     {
         Message = message;
-        AcceptCommand = new DelegateCommand(() => DialogHostController.ShowPreview());
+        AcceptCommand = new DelegateCommand(DialogHostController.ShowPreview);
     }
 }
 

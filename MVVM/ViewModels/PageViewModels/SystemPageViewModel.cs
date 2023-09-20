@@ -11,9 +11,12 @@ public class SystemPageViewModel : AbstractRoomManagerViewModel
     public ICommand AddRoomCommand { get; }
     public ICommand FindRoomCommand { get; }
 
-    public SystemPageViewModel(IRoomService roomService) : base(roomService)
+    public ICommand GenerateRoomsCommand { get; }
+
+    public SystemPageViewModel(IRoomService roomService, ITestService testService) : base(roomService, testService)
     {
-        AddRoomCommand = new DelegateCommand(() => DialogHostController.Show<RoomCreatorViewModel>() );
+        GenerateRoomsCommand = new DelegateCommand(() => TestService.GenerateTestRooms(30, 100, 3000, 100000));
+        AddRoomCommand = new DelegateCommand(DialogHostController.Show<RoomCreatorViewModel> );
         FindRoomCommand = new DelegateCommand<string>(FindRoom);
     }
 

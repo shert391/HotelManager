@@ -101,7 +101,7 @@
                     Width="154"
                     Height="30"
                     Margin="10,0,0,0"
-                    Command="{Binding AddRoomCommand}"
+                    Command="{Binding GenerateRoomsCommand}"
                     Style="{StaticResource YellowStyleButton}">
                     <StackPanel Orientation="Horizontal">
                         <materialDesign:PackIcon
@@ -144,6 +144,7 @@
             <DataGrid
                 x:Name="HotelsDataGrid"
                 Margin="10,0,10,20"
+                materialDesign:DataGridAssist.SelectedCellBorderBrush="Transparent"
                 AutoGenerateColumns="False"
                 Background="#25292f"
                 CanUserAddRows="False"

@@ -18,15 +18,15 @@ class RoomCreatorViewModel : AbstractRoomManagerViewModel, IDialogViewModel
 
     public ICommand CancelCommand { get; }
     
-    public RoomCreatorViewModel(IRoomService roomService) : base(roomService)
+    public RoomCreatorViewModel(IRoomService roomService, ITestService testService) : base(roomService, testService)
     {
         CreateRoomCommand = new DelegateCommand(CreateRoom);
-        CancelCommand = new DelegateCommand(() => DialogHostController.Close());
+        CancelCommand = new DelegateCommand(DialogHostController.Close);
     }
 
     private void CreateRoom()
     {
-        _roomService.AddRoom(new Room
+        RoomService.AddRoom(new Room
         {
             Number = Number,
             Price = Price,  

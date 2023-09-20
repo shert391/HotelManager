@@ -3,17 +3,24 @@ using HotelManager.MVVM.Views.Xamls;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System.Windows;
+using Microsoft.Extensions.Configuration;
 
 namespace HotelManager.InitApp;
-public partial class App : Application
+public partial class App
 {
     private static readonly IHost _host;
-
-    static App() => _host = CreateHost();
+    private static readonly IConfiguration _configurationApp;
+    
+    static App()
+    {
+        _host = CreateHost();
+        _configurationApp = _host.Services.GetRequiredService<IConfiguration>();
+    }
 
     private static IHost CreateHost(string[]? args = null)
     {
         return Host.CreateDefaultBuilder(args)
+                    .AddConfiguration()
                     .AddViewModels()
                     .AddServices()
                     .AddViews()
@@ -38,5 +45,6 @@ public partial class App : Application
         base.OnExit(e);
     }
 
+    public static T? GetRoomSetting<T>(string setting) => _configurationApp.GetSection("RoomSettings").GetValue<T>(setting); 
     public static T Resolve<T>() where T : notnull => _host.Services.GetRequiredService<T>();
 }

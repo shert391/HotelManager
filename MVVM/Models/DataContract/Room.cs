@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel;
+using HotelManager.InitApp;
 
 namespace HotelManager.MVVM.Models.DataContract;
 
@@ -22,7 +23,15 @@ public enum RoomType
 
 public class Room
 {
+    #region Number
     public int Number { get; set; }
-    public RoomType Type { get; set; }
+    public static readonly int MaxNumber = App.GetRoomSetting<int>(nameof(MaxNumber));
+    public static readonly int MinNumber = 1;
+    #endregion
+    #region Price
     public decimal Price { get; set; }
+    public static readonly decimal MaxPrice = App.GetRoomSetting<decimal>(nameof(MaxPrice));
+    public static readonly decimal MinPrice = App.GetRoomSetting<decimal>(nameof(MinPrice));
+    #endregion
+    public RoomType Type { get; set; }
 }

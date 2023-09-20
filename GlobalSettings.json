@@ -1,0 +1,7 @@
+﻿{
+  "RoomSettings": {
+    "MaxPrice": "1000000",
+    "MinPrice": "3000",
+    "MaxNumber": "100",
+  }
+}

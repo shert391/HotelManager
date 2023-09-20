@@ -14,33 +14,36 @@ public class RoomService : IRoomService
 
     public ReadOnlyObservableCollection<Room> GetRooms() => _roomsReadonly;
 
-    private void Validate(Room room, Action onSuccess)
+    private void Validate(Room room, Action onSuccess, bool showDialogMessageOnError)
     {
         string? errorMessage = null;
 
-        if (room.Number is < 1 or > 100)
-            errorMessage = "Номер должен быть в диапазоне от 1 до 100";
+        if (room.Number < Room.MinNumber || room.Number > Room.MaxNumber)
+            errorMessage = $"Номер должен быть в диапазоне от {Room.MinNumber} до {Room.MaxNumber}";
 
-        if (_rooms.Any(x => room.Number == x.Number))
+        else if (_rooms.Any(x => room.Number == x.Number))
             errorMessage = "Комната уже существует!";
 
-        if (room.Price < 1000)
-            errorMessage = "Цена должна быть > 1000";
+        else if (room.Price < Room.MinPrice || room.Price > Room.MaxPrice)
+            errorMessage = $"Суточная цена должна быть в диапазоне от {Room.MinPrice} до {Room.MaxPrice}";
 
-        if (room.Number == 0 || !Enum.IsDefined(typeof(RoomType), room.Type) || room.Price == 0)
+        else if (room.Number == 0 || !Enum.IsDefined(typeof(RoomType), room.Type) || room.Price == 0)
             errorMessage = "Все поля должны быть заполнены";
 
-        if (errorMessage is null)
-        {
-            onSuccess();
+        if (!showDialogMessageOnError && errorMessage is not null)
             return;
-        }
 
-        DialogHostController.ShowMessageBox(errorMessage);
+        if (errorMessage is not null)
+            DialogHostController.ShowMessageBox(errorMessage);
+   
+        onSuccess();
     }
 
-    public void AddRoom(Room room) => Validate(room, () => _rooms.Add(room));
+    public void AddRoom(Room room, bool showDialogMessageOnError = true) => Validate(
+        room, 
+        () => _rooms.Add(room), 
+        showDialogMessageOnError);
 
     public ReadOnlyObservableCollection<Room> Find(int number) =>
-        new ReadOnlyObservableCollection<Room>(_rooms.Where(room => room.Number == number).ToObservableCollection());
+        new(_rooms.Where(room => room.Number == number).ToObservableCollection());
 }

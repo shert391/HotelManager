@@ -14,6 +14,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="GlobalSettings.json" />
     <None Remove="InitApp\FodyWeavers.xsd" />
     <None Remove="MVVM\Views\Fonts\Montserrat\Montserrat-BlackItalic.ttf" />
     <None Remove="MVVM\Views\Fonts\Montserrat\Montserrat-Bold.ttf" />
@@ -46,6 +47,10 @@
 
   <ItemGroup>
     <ApplicationDefinition Include="InitApp\App.xaml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="GlobalSettings.json" />
   </ItemGroup>
 
   <ItemGroup>
