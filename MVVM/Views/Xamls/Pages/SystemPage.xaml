@@ -70,7 +70,8 @@
                             materialDesign:HintAssist.Hint="Поиск"
                             materialDesign:TextFieldAssist.DecorationVisibility="Hidden"
                             BorderThickness="0"
-                            Foreground="#868686">
+                            Foreground="#868686"
+                            Text="{Binding NumberRoomTargetFind}">
                             <TextBox.InputBindings>
                                 <KeyBinding Key="Enter" Command="{Binding FindRoomCommand}" />
                             </TextBox.InputBindings>

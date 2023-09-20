@@ -1,8 +1,8 @@
 ﻿using DevExpress.Mvvm;
+using System.Windows.Input;
 using HotelManager.MVVM.Models.Services;
 using HotelManager.MVVM.Utils;
 using HotelManager.MVVM.ViewModels.DialogHostViewModels;
-using System.Windows.Input;
 
 namespace HotelManager.MVVM.ViewModels.PageViewModels;
 
@@ -14,6 +14,8 @@ public class SystemPageViewModel : AbstractRoomManagerViewModel
     public ICommand DeleteRoomCommand { get; }
 
     public ICommand GenerateRoomsCommand { get; }
+
+    public int? NumberRoomTargetFind { get; set; }
 
     public SystemPageViewModel(IRoomService roomService, ITestService testService) : base(roomService, testService)
     {
@@ -33,6 +35,11 @@ public class SystemPageViewModel : AbstractRoomManagerViewModel
         DialogHostController.ShowMessageBoxConfirmation(
             () => RoomService.DeleteRoom(roomNumber),
             $"Вы точно хотите удалить комнату({roomNumber})?");
+    }
+
+    public override void OnRoomCollectionChanged()
+    {
+        Rooms = NumberRoomTargetFind is not null ? RoomService.Find((int)NumberRoomTargetFind) : RoomService.GetRooms();
     }
 }
 

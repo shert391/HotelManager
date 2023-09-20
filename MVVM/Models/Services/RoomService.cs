@@ -10,6 +10,8 @@ public class RoomService : IRoomService
     private readonly ObservableCollection<Room> _rooms = new();
     private readonly ReadOnlyObservableCollection<Room> _roomsReadonly;
 
+    public event Action? RoomCollectionChanged;
+
     public RoomService() => _roomsReadonly = new(_rooms);
 
     public ReadOnlyObservableCollection<Room> GetRooms() => _roomsReadonly;
@@ -39,13 +41,25 @@ public class RoomService : IRoomService
             DialogHostController.ShowMessageBoxInformation(errorMessage);
     }
 
-    public void AddRoom(Room room, bool showDialogMessageOnError = true) => Validate(
-        room, 
-        () => _rooms.Add(room), 
+    private void ChangeCollection(Action changeMethod)
+    {
+        changeMethod();
+        RoomCollectionChanged?.Invoke();
+    }
+
+    public void AddRoom(Room room, bool showDialogMessageOnError = true) => ChangeCollection(() =>
+    {
+        Validate(
+        room,
+        () => _rooms.Add(room),
         showDialogMessageOnError);
+    });
 
     public ReadOnlyObservableCollection<Room> Find(int roomNumber) =>
         new(_rooms.Where(room => room.Number == roomNumber).ToObservableCollection());
 
-    public void DeleteRoom(int roomNumber) => _rooms.Remove(_rooms.Single(room => room.Number == roomNumber));
+    public void DeleteRoom(int roomNumber) => ChangeCollection(() =>
+    {
+        _rooms.Remove(_rooms.Single(room => room.Number == roomNumber));
+    });
 }

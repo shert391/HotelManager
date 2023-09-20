@@ -5,6 +5,7 @@ namespace HotelManager.MVVM.Models.Services;
 
 public interface IRoomService
 {
+    public event Action RoomCollectionChanged;
     public ReadOnlyObservableCollection<Room> GetRooms();
     public void AddRoom(Room room, bool showDialogMessageOnError = true);
     public ReadOnlyObservableCollection<Room> Find(int roomNumber);

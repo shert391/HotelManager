@@ -14,5 +14,7 @@ public abstract class AbstractRoomManagerViewModel : BaseViewModel
         RoomService = roomService;
         TestService = testService;
         Rooms = roomService.GetRooms();
+        roomService.RoomCollectionChanged += OnRoomCollectionChanged;
     }
+    public virtual void OnRoomCollectionChanged() { }
 }
