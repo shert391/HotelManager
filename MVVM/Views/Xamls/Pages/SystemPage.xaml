@@ -4,6 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:attached="clr-namespace:HotelManager.MVVM.Views.Xamls.AttachedProperties"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     d:DesignHeight="580"
@@ -69,7 +70,16 @@
                             materialDesign:HintAssist.Hint="Поиск"
                             materialDesign:TextFieldAssist.DecorationVisibility="Hidden"
                             BorderThickness="0"
-                            Foreground="#868686" />
+                            Foreground="#868686">
+                            <TextBox.InputBindings>
+                                <KeyBinding Key="Enter" Command="{Binding FindRoomCommand}" />
+                            </TextBox.InputBindings>
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="KeyUp">
+                                    <i:InvokeCommandAction Command="{Binding FindRoomCommand}" CommandParameter="{Binding ElementName=SearchTextBox, Path=Text}" />
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </TextBox>
                     </Grid>
                 </Border>
 

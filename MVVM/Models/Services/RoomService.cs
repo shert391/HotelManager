@@ -1,6 +1,7 @@
 ﻿using HotelManager.MVVM.Models.DataContract;
 using HotelManager.MVVM.Utils;
 using System.Collections.ObjectModel;
+using DevExpress.Mvvm.Native;
 
 namespace HotelManager.MVVM.Models.Services;
 
@@ -39,4 +40,7 @@ public class RoomService : IRoomService
     }
 
     public void AddRoom(Room room) => Validate(room, () => _rooms.Add(room));
+
+    public ReadOnlyObservableCollection<Room> Find(int number) =>
+        new ReadOnlyObservableCollection<Room>(_rooms.Where(room => room.Number == number).ToObservableCollection());
 }

@@ -7,4 +7,5 @@ public interface IRoomService
 {
     public ReadOnlyObservableCollection<Room> GetRooms();
     public void AddRoom(Room room);
+    public ReadOnlyObservableCollection<Room> Find(int number);
 }

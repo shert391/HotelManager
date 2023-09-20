@@ -6,7 +6,7 @@ namespace HotelManager.MVVM.Utils;
 
 public static class DialogHostController
 {
-    private static readonly string _dialogHostName = "MainDialogHost";
+    private const string _dialogHostName = "MainDialogHost";
     private static IDialogViewModel? _previewContent;
 
     private static void ReplaceViewModel(IDialogViewModel newViewModel)
@@ -48,11 +48,8 @@ public static class DialogHostController
     public static void ShowPreview()
     {
         if (_previewContent is null)
-        {
             Close();
-            return;
-        }
-
-        ReplaceViewModel(_previewContent);
+        else
+            ReplaceViewModel(_previewContent);
     }
 }

@@ -6,7 +6,7 @@ using System.Windows.Input;
 
 namespace HotelManager.MVVM.ViewModels.DialogHostViewModels;
 
-class RoomCreatorViewModel : BaseViewModel, IDialogViewModel
+class RoomCreatorViewModel : AbstractRoomManagerViewModel, IDialogViewModel
 {
     public int Number { get; set; } = 1;
 
@@ -17,14 +17,11 @@ class RoomCreatorViewModel : BaseViewModel, IDialogViewModel
     public ICommand CreateRoomCommand { get; }
 
     public ICommand CancelCommand { get; }
-
-    private readonly IRoomService _roomService;
-
-    public RoomCreatorViewModel(IRoomService roomService)
+    
+    public RoomCreatorViewModel(IRoomService roomService) : base(roomService)
     {
         CreateRoomCommand = new DelegateCommand(CreateRoom);
         CancelCommand = new DelegateCommand(() => DialogHostController.Close());
-        _roomService = roomService;
     }
 
     private void CreateRoom()
