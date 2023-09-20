@@ -33,10 +33,10 @@ public class RoomService : IRoomService
         if (!showDialogMessageOnError && errorMessage is not null)
             return;
 
-        if (errorMessage is not null)
-            DialogHostController.ShowMessageBox(errorMessage);
-   
-        onSuccess();
+        if (errorMessage is null)
+            onSuccess();
+        else
+            DialogHostController.ShowMessageBoxInformation(errorMessage);
     }
 
     public void AddRoom(Room room, bool showDialogMessageOnError = true) => Validate(
@@ -44,6 +44,8 @@ public class RoomService : IRoomService
         () => _rooms.Add(room), 
         showDialogMessageOnError);
 
-    public ReadOnlyObservableCollection<Room> Find(int number) =>
-        new(_rooms.Where(room => room.Number == number).ToObservableCollection());
+    public ReadOnlyObservableCollection<Room> Find(int roomNumber) =>
+        new(_rooms.Where(room => room.Number == roomNumber).ToObservableCollection());
+
+    public void DeleteRoom(int roomNumber) => _rooms.Remove(_rooms.Single(room => room.Number == roomNumber));
 }

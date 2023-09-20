@@ -1,6 +1,4 @@
-﻿using HotelManager.MVVM.Models.DataContract;
-using HotelManager.MVVM.Models.Extensions;
-using System.Globalization;
+﻿using System.Globalization;
 using System.Windows.Data;
 
 namespace HotelManager.MVVM.Views.Xamls.Converters;

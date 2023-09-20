@@ -29,9 +29,15 @@ public static class DialogHostController
         ReplaceViewModel(dialogViewModel);
     }
 
-    public static void ShowMessageBox(string message)
+    public static void ShowMessageBoxInformation(string message)
     {
-        var messageBoxViewModel = new MessageBoxViewModel(message);
+        var messageBoxViewModel = new MessageBoxInformationViewModel(message);
+        ReplaceViewModel(messageBoxViewModel);
+    }
+    
+    public static void ShowMessageBoxConfirmation(Action onAgreement , string message)
+    {
+        var messageBoxViewModel = new MessageBoxConfirmationViewModel(onAgreement, message);
         ReplaceViewModel(messageBoxViewModel);
     }
 

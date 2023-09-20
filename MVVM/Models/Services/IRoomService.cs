@@ -7,5 +7,6 @@ public interface IRoomService
 {
     public ReadOnlyObservableCollection<Room> GetRooms();
     public void AddRoom(Room room, bool showDialogMessageOnError = true);
-    public ReadOnlyObservableCollection<Room> Find(int number);
+    public ReadOnlyObservableCollection<Room> Find(int roomNumber);
+    public void DeleteRoom(int roomNumber);
 }

@@ -1,48 +1,15 @@
 ﻿<Application
     x:Class="HotelManager.InitApp.App"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:converters="clr-namespace:HotelManager.MVVM.Views.Xamls.Converters"
-    xmlns:dialogHostViewModels="clr-namespace:HotelManager.MVVM.ViewModels.DialogHostViewModels"
-    xmlns:dialogHostViews="clr-namespace:HotelManager.MVVM.Views.Xamls.DialogHostViews"
-    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-    xmlns:pageViewModels="clr-namespace:HotelManager.MVVM.ViewModels.PageViewModels"
-    xmlns:viewPages="clr-namespace:HotelManager.MVVM.Views.Xamls.Pages">
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="../MVVM/Views/Styles/Button.xaml" />
-                <ResourceDictionary Source="../MVVM/Views/Styles/ToggleButton.xaml" />
-                <ResourceDictionary Source="../MVVM/Views/Styles/ComboBox.xaml" />
-                <ResourceDictionary Source="../MVVM/Views/Styles/Window.xaml" />
-                <ResourceDictionary Source="../MVVM/Views/Styles/RadioButton.xaml" />
-                <ResourceDictionary Source="../MVVM/Views/Styles/Page.xaml" />
-                <materialDesign:BundledTheme
-                    BaseTheme="Dark"
-                    PrimaryColor="Grey"
-                    SecondaryColor="Indigo" />
-                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
+                <ResourceDictionary Source="Resources/AppStyles.xaml" />
+                <ResourceDictionary Source="Resources/Converters.xaml" />
+                <ResourceDictionary Source="Resources/PageDataTemplates.xaml" />
+                <ResourceDictionary Source="Resources/DialogHostViewDataTemplates.xaml" />
             </ResourceDictionary.MergedDictionaries>
-
-            <DataTemplate DataType="{x:Type pageViewModels:SystemPageViewModel}">
-                <viewPages:SystemPage />
-            </DataTemplate>
-
-            <DataTemplate DataType="{x:Type pageViewModels:TestPageViewModel}">
-                <viewPages:TestPage />
-            </DataTemplate>
-
-            <DataTemplate DataType="{x:Type dialogHostViewModels:RoomCreatorViewModel}">
-                <dialogHostViews:RoomCreator />
-            </DataTemplate>
-
-            <DataTemplate DataType="{x:Type dialogHostViewModels:MessageBoxViewModel}">
-                <dialogHostViews:MessageBox />
-            </DataTemplate>
-
-            <converters:EmptyStringConverter x:Key="EmptyStringConverter" />
-            <converters:RoomTypeToTextConverter x:Key="RoomTypeConverter" />
-            <converters:EnumToIntConverter x:Key="EnumToIntConverter" />
         </ResourceDictionary>
     </Application.Resources>
 </Application>

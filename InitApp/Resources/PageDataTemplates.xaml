@@ -1,0 +1,13 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:pageViewModels="clr-namespace:HotelManager.MVVM.ViewModels.PageViewModels"
+    xmlns:pageXamls="clr-namespace:HotelManager.MVVM.Views.Xamls.Pages">
+    <DataTemplate DataType="{x:Type pageViewModels:SystemPageViewModel}">
+        <pageXamls:SystemPage />
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type pageViewModels:TestPageViewModel}">
+        <pageXamls:TestPage />
+    </DataTemplate>
+</ResourceDictionary>

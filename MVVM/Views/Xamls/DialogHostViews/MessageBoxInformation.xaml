@@ -1,9 +1,8 @@
 ﻿<UserControl
-    x:Class="HotelManager.MVVM.Views.Xamls.DialogHostViews.MessageBox"
+    x:Class="HotelManager.MVVM.Views.Xamls.DialogHostViews.MessageBoxInformation"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:local="clr-namespace:HotelManager.MVVM.Views.Xamls.DialogHostViews"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     Width="350"
     Height="150"
@@ -31,7 +30,7 @@
                     Height="30"
                     Margin="10,64,10,10"
                     Background="Yellow"
-                    Command="{Binding AcceptCommand}"
+                    Command="{Binding OkCommand}"
                     Content="ОК"
                     Style="{StaticResource ModifyStyleButton}" />
             </Grid>

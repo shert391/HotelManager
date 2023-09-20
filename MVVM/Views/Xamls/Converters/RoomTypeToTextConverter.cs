@@ -24,7 +24,7 @@ public class RoomTypeToTextConverter : IValueConverter
         return (from RoomType enumValue in Enum.GetValues(typeof(RoomType)) select enumValue.GetDescription()).ToList();
     }
 
-    public object? ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+    public object? ConvertBack(object? value, Type targetType, object parameter, CultureInfo culture)
     {
         if (value is null)
             return null;

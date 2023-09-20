@@ -193,6 +193,8 @@
                                         Height="Auto"
                                         Margin="5"
                                         Background="Red"
+                                        Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}, Path=DataContext.DeleteRoomCommand}"
+                                        CommandParameter="{Binding Number}"
                                         Style="{StaticResource ModifyStyleButton}">
                                         <materialDesign:PackIcon
                                             Width="Auto"
