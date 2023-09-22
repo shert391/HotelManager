@@ -1,8 +1,10 @@
 ﻿using DevExpress.Mvvm;
 using HotelManager.MVVM.Models.DataContract;
 using HotelManager.MVVM.Models.Services;
+using HotelManager.MVVM.Models.Services.RoomService;
 using HotelManager.MVVM.Utils;
 using System.Windows.Input;
+using HotelManager.MVVM.Models.Builders;
 
 namespace HotelManager.MVVM.ViewModels.DialogHostViewModels;
 
@@ -31,7 +33,12 @@ class RoomCreatorViewModel : AbstractRoomManagerViewModel, IDialogViewModel
             Number = Number,
             Price = Price,  
             Type = Type,
-        });
+        },
+        RoomServiceValidatorConfigBuilder
+        .InitDefault()
+        .AddActionOnSuccess(() => DialogHostController.ShowMessageBoxInformation("Комната успешно создана!"))
+        .AddActionOnError((error) => DialogHostController.ShowMessageBoxInformation(error))
+        .Build());
     }
 }
 

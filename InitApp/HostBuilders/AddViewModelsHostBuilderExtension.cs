@@ -16,6 +16,7 @@ public static class AddViewModelsHostBuilderExtension
             servicesProvider.TryAddSingleton<SystemPageViewModel>();
             servicesProvider.TryAddSingleton<MainWindowViewModel>();
             servicesProvider.TryAddSingleton<RoomCreatorViewModel>();
+            servicesProvider.TryAddSingleton<RoomEditorViewModel>();
         });
 
         return hostBuilder;

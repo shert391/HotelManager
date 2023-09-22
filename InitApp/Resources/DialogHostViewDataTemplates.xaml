@@ -14,4 +14,8 @@
     <DataTemplate DataType="{x:Type dialogHostViewModels:MessageBoxConfirmationViewModel}">
         <dialogHostViews:MessageBoxConfirmation />
     </DataTemplate>
+
+    <DataTemplate DataType="{x:Type dialogHostViewModels:RoomEditorViewModel}">
+        <dialogHostViews:RoomEditor />
+    </DataTemplate>
 </ResourceDictionary>

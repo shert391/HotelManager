@@ -1,20 +1,22 @@
 ﻿using HotelManager.InitApp.HostBuilders;
+using HotelManager.MVVM.Utils;
 using HotelManager.MVVM.Views.Xamls;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System.Windows;
-using Microsoft.Extensions.Configuration;
+using IConfiguration = Microsoft.Extensions.Configuration.IConfiguration;
 
 namespace HotelManager.InitApp;
 public partial class App
 {
     private static readonly IHost _host;
-    private static readonly IConfiguration _configurationApp;
-    
+    private static readonly IConfiguration _configApp;
+
     static App()
     {
         _host = CreateHost();
-        _configurationApp = _host.Services.GetRequiredService<IConfiguration>();
+        _configApp = _host.Services.GetRequiredService<IConfiguration>();
     }
 
     private static IHost CreateHost(string[]? args = null)
@@ -45,6 +47,12 @@ public partial class App
         base.OnExit(e);
     }
 
-    public static T? GetRoomSetting<T>(string setting) => _configurationApp.GetSection("RoomSettings").GetValue<T>(setting); 
+    public static T? GetRoomSetting<T>(string setting) => _configApp.GetSection("RoomSettings").GetValue<T>(setting);
     public static T Resolve<T>() where T : notnull => _host.Services.GetRequiredService<T>();
+    public static T Resolve<T, TOption>(TOption option) where T : notnull, IConfigurable<TOption>
+    {
+        var service = _host.Services.GetRequiredService<T>();
+        service.Configurate(option);
+        return service;
+    }
 }

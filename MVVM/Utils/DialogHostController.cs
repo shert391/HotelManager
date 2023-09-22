@@ -29,9 +29,17 @@ public static class DialogHostController
         ReplaceViewModel(dialogViewModel);
     }
 
-    public static void ShowMessageBoxInformation(string message)
+    public static void Show<T, TOption>(TOption option) where T : notnull, IDialogViewModel, IConfigurable<TOption>
     {
-        var messageBoxViewModel = new MessageBoxInformationViewModel(message);
+        var dialogViewModel = App.Resolve<T, TOption>(option);
+        ReplaceViewModel(dialogViewModel);
+    }
+
+    public static void ShowMessageBoxInformation(string message, bool isClose = false)
+    {
+        MessageBoxInformationViewModel messageBoxViewModel;
+        if(isClose) messageBoxViewModel = new(message, DialogHostController.Close);
+        else messageBoxViewModel = new(message, DialogHostController.ShowPreview);
         ReplaceViewModel(messageBoxViewModel);
     }
     

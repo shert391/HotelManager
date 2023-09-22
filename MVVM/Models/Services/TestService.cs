@@ -1,4 +1,6 @@
+using HotelManager.MVVM.Models.Builders;
 using HotelManager.MVVM.Models.DataContract;
+using HotelManager.MVVM.Models.Services.RoomService;
 
 namespace HotelManager.MVVM.Models.Services;
 
@@ -15,19 +17,7 @@ public class TestService : ITestService
         int minPrice, 
         int maxPrice)
     {
-        if (maxRooms > Room.MaxNumber)
-            throw new ArgumentException("maxRooms > Room.MaxNumber what?!");
-        
-        if (maxRooms < minRooms)
-            throw new ArgumentException("maxRooms < minRooms what?!");
-        
-        if (minPrice < Room.MinPrice)
-            throw new ArgumentException("minPrice < Room.MinPrice what?!");
-        
-        if (maxPrice > Room.MaxPrice)
-            throw new ArgumentException("maxPrice > Room.MaxPrice what?!");
-
-        for (var i = Room.MinNumber; 
+        for (var i = 1; 
              i <= _random.Next(minRooms, maxRooms); 
              i++)
         {
@@ -36,7 +26,9 @@ public class TestService : ITestService
                 Number = i,
                 Price = _random.Next(minPrice, maxPrice),
                 Type = (RoomType)_random.Next(0, Enum.GetNames(typeof(RoomType)).Length)
-            }, false);
+            }, RoomServiceValidatorConfigBuilder
+               .InitDefault()
+               .Build());
         }
     }
 }
