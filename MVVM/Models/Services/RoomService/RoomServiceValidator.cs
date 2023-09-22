@@ -6,9 +6,9 @@ namespace HotelManager.MVVM.Models.Services.RoomService;
 
 public class RoomServiceValidatorConfig : IConfiguration
 {
-    public Action? ActionOnSuccess { get; set; }
+    public Action? OnSuccess { get; set; }
     public bool IsGenerateException { get; set; }
-    public Action<string>? ActionOnError { get; set; }
+    public Action<string>? OnError { get; set; }
 }
 
 public class RoomServiceValidator : IRoomServiceValidator
@@ -28,7 +28,7 @@ public class RoomServiceValidator : IRoomServiceValidator
         var status = _roomValidator.Validate(room);
         if (status.IsValid) return status.IsValid;
         var error = status.Errors.First().ErrorMessage;
-        _config.ActionOnError?.Invoke(error);
+        _config.OnError?.Invoke(error);
         if (_config.IsGenerateException) throw new ArgumentException(error);
         return status.IsValid;
     }
@@ -38,7 +38,7 @@ public class RoomServiceValidator : IRoomServiceValidator
             return;
 
         if (additionalVerification())
-            _config.ActionOnSuccess?.Invoke();
+            _config.OnSuccess?.Invoke();
     }
 
     public void AddRoom(Room addRoom, Action addMethod)
@@ -51,15 +51,15 @@ public class RoomServiceValidator : IRoomServiceValidator
                 return true;
             }
             var error = "Комната уже существует!";
-            _config.ActionOnError?.Invoke(error);
+            _config.OnError?.Invoke(error);
             if (_config.IsGenerateException) throw new ArgumentException(error);
             return false;
         });
     }
 
-    public void EditRoom(Room editableRoom, Action editMethod)
+    public void EditRoom(Room newRoom, Action editMethod)
     {
-        DefaultValidateOnUpdateCollection(editableRoom, () =>
+        DefaultValidateOnUpdateCollection(newRoom, () =>
         {
             editMethod();
             return true;

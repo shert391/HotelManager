@@ -1,4 +1,5 @@
 using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using HotelManager.MVVM.Models.DataContract;
 using HotelManager.MVVM.Models.Services;
 using HotelManager.MVVM.Models.Services.RoomService;
@@ -15,8 +16,8 @@ public abstract class AbstractRoomManagerViewModel : BaseViewModel
         RoomService = roomService;
         TestService = testService;
         Rooms = roomService.GetRooms();
-        roomService.RoomCollectionChanged += OnRoomCollectionChanged;
+        roomService.SubscribeChange(OnRoomCollectionChanged);
     }
 
-    protected virtual void OnRoomCollectionChanged() { }
+    protected virtual void OnRoomCollectionChanged(object? sender, NotifyCollectionChangedEventArgs e) { }
 }

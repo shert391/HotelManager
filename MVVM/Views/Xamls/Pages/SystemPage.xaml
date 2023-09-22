@@ -181,6 +181,12 @@
                         ElementStyle="{StaticResource ES}"
                         Header="Цена за сутки"
                         IsReadOnly="True" />
+                    <materialDesign:DataGridTextColumn
+                        Width="Auto"
+                        CanUserResize="True"
+                        ElementStyle="{StaticResource ES}"
+                        Header="Статус"
+                        IsReadOnly="True" />
                     <DataGridTemplateColumn
                         Width="Auto"
                         CanUserResize="True"
@@ -190,8 +196,8 @@
                             <DataTemplate>
                                 <StackPanel Orientation="Horizontal">
                                     <Button
-                                        Width="Auto"
-                                        Height="Auto"
+                                        Width="35"
+                                        Height="35"
                                         Margin="5"
                                         Background="Red"
                                         Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}, Path=DataContext.DeleteRoomCommand}"
@@ -204,8 +210,8 @@
                                             Kind="Delete" />
                                     </Button>
                                     <Button
-                                        Width="Auto"
-                                        Height="Auto"
+                                        Width="35"
+                                        Height="35"
                                         Margin="5"
                                         Background="Green"
                                         Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}, Path=DataContext.EditRoomCommand}"
@@ -216,6 +222,18 @@
                                             Height="Auto"
                                             Margin="5"
                                             Kind="Pencil" />
+                                    </Button>
+                                    <Button
+                                        Width="35"
+                                        Height="35"
+                                        Margin="5"
+                                        Background="LightBlue"
+                                        Style="{StaticResource ModifyStyleButton}">
+                                        <materialDesign:PackIcon
+                                            Width="Auto"
+                                            Height="Auto"
+                                            Margin="5"
+                                            Kind="FileDocumentEditOutline" />
                                     </Button>
                                 </StackPanel>
                             </DataTemplate>

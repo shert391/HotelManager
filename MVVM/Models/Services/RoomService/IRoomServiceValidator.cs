@@ -6,6 +6,6 @@ namespace HotelManager.MVVM.Models.Services.RoomService;
 public interface IRoomServiceValidator : IConfigurable<RoomServiceValidatorConfig>
 {
     public void AddRoom(Room addRoom, Action addMethod);
-    public void EditRoom(Room editableRoom, Action editMethod);
+    public void EditRoom(Room newRoom, Action editMethod);
 }
 

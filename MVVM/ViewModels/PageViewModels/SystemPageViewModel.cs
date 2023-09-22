@@ -5,6 +5,7 @@ using HotelManager.MVVM.Utils;
 using HotelManager.MVVM.ViewModels.DialogHostViewModels;
 using HotelManager.MVVM.Models.DataContract;
 using HotelManager.MVVM.Models.Services.RoomService;
+using System.Collections.Specialized;
 
 namespace HotelManager.MVVM.ViewModels.PageViewModels;
 
@@ -45,7 +46,7 @@ public class SystemPageViewModel : AbstractRoomManagerViewModel
             $"Вы точно хотите удалить комнату({roomNumber})?");
     }
 
-    protected override void OnRoomCollectionChanged()
+    protected override void OnRoomCollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
     {
         Rooms = NumberRoomTargetFind is not null ? RoomService.Find((int)NumberRoomTargetFind) : RoomService.GetRooms();
     }

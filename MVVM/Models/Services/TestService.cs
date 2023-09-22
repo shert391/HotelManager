@@ -27,7 +27,7 @@ public class TestService : ITestService
                 Price = _random.Next(minPrice, maxPrice),
                 Type = (RoomType)_random.Next(0, Enum.GetNames(typeof(RoomType)).Length)
             }, RoomServiceValidatorConfigBuilder
-               .InitDefault()
+               .Create()
                .Build());
         }
     }

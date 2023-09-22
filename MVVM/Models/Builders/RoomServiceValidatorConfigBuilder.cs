@@ -6,16 +6,16 @@ public class RoomServiceValidatorConfigBuilder
 {
     private RoomServiceValidatorConfig _config = new();
 
-    public static RoomServiceValidatorConfigBuilder InitDefault() => new();
+    public static RoomServiceValidatorConfigBuilder Create() => new();
 
     public RoomServiceValidatorConfigBuilder AddActionOnSuccess(Action actionOnSuccess)
     {
-        _config.ActionOnSuccess += actionOnSuccess;
+        _config.OnSuccess += actionOnSuccess;
         return this;
     }
     public RoomServiceValidatorConfigBuilder AddActionOnError(Action<string> actionOnError)
     {
-        _config.ActionOnError = actionOnError;
+        _config.OnError = actionOnError;
         return this;
     }
 
