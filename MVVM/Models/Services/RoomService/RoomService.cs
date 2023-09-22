@@ -1,4 +1,5 @@
 ﻿using DevExpress.Mvvm.Native;
+using HotelManager.MVVM.Models.Builders;
 using HotelManager.MVVM.Models.DataContract;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
@@ -21,7 +22,7 @@ public class RoomService : IRoomService
 
     public void SubscribeChange(NotifyCollectionChangedEventHandler subscriber) => _rooms.CollectionChanged += subscriber;
 
-    public void AddRoom(Room newRoom, RoomServiceValidatorConfig config)
+    public void AddRoom(Room newRoom, IRoomServiceValidatorConfig config)
     {
         _validator.Configurate(config);
         _validator.AddRoom(newRoom, () => _rooms.Add(newRoom));
@@ -31,7 +32,7 @@ public class RoomService : IRoomService
 
     public void DeleteRoom(int roomNumber) => _rooms.Remove(_rooms.Single(room => room.Number == roomNumber));
 
-    public void EditRoom(Room editableRoom, RoomServiceValidatorConfig config)
+    public void EditRoom(Room editableRoom, IRoomServiceValidatorConfig config)
     {
         _validator.Configurate(config);
         _validator.EditRoom(

@@ -35,7 +35,7 @@ class RoomCreatorViewModel : AbstractRoomManagerViewModel, IDialogViewModel
             Type = Type,
         },
         RoomServiceValidatorConfigBuilder
-        .Create()
+        .CreateDefault()
         .AddActionOnSuccess(() => DialogHostController.ShowMessageBoxInformation("Комната успешно создана!"))
         .AddActionOnError((error) => DialogHostController.ShowMessageBoxInformation(error))
         .Build());

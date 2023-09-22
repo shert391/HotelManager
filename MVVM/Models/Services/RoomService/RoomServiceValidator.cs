@@ -1,27 +1,18 @@
-﻿using HotelManager.MVVM.Models.DataContract;
-using HotelManager.MVVM.Utils;
+﻿using HotelManager.MVVM.Models.Builders;
+using HotelManager.MVVM.Models.DataContract;
 using System.Collections.ObjectModel;
 
 namespace HotelManager.MVVM.Models.Services.RoomService;
 
-public class RoomServiceValidatorConfig : IConfiguration
-{
-    public Action? OnSuccess { get; set; }
-    public bool IsGenerateException { get; set; }
-    public Action<string>? OnError { get; set; }
-}
-
 public class RoomServiceValidator : IRoomServiceValidator
 {
-    private RoomServiceValidatorConfig _config = new();
-    
     private readonly RoomValidator _roomValidator = new();
     private readonly ReadOnlyObservableCollection<Room> _rooms;
+    private IRoomServiceValidatorConfig _config = RoomServiceValidatorConfigBuilder.CreateDefault().Build();
 
     public RoomServiceValidator(ReadOnlyObservableCollection<Room> rooms) => _rooms = rooms;
 
-
-    public void Configurate(RoomServiceValidatorConfig config) => _config = config;
+    public void Configurate(IRoomServiceValidatorConfig config) => _config = config;
 
     private bool ValidateRoom(Room room)
     {

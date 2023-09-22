@@ -20,7 +20,7 @@ internal class RoomEditorViewModel : AbstractRoomManagerViewModel, IDialogViewMo
     {
         EditRoomCommand = new DelegateCommand(() => RoomService.EditRoom(NewRoom,
             RoomServiceValidatorConfigBuilder
-            .Create()
+            .CreateDefault()
             .AddActionOnError((error) => DialogHostController.ShowMessageBoxInformation(error))
             .AddActionOnSuccess(() => DialogHostController.ShowMessageBoxInformation("Комната успешно изменена!", true))
             .Build()));

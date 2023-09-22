@@ -1,12 +1,26 @@
-﻿using HotelManager.MVVM.Models.Services.RoomService;
+﻿using HotelManager.MVVM.Utils;
 
 namespace HotelManager.MVVM.Models.Builders;
 
+public interface IRoomServiceValidatorConfig
+{
+    public Action? OnSuccess { get; }
+    public Action<string>? OnError { get; }
+    public bool IsGenerateException { get; }
+}
+
 public class RoomServiceValidatorConfigBuilder
 {
-    private RoomServiceValidatorConfig _config = new();
+    private class RoomServiceValidatorConfig : IConfiguration, IRoomServiceValidatorConfig
+    {
+        public Action? OnSuccess { get; set; }
+        public bool IsGenerateException { get; set; }
+        public Action<string>? OnError { get; set; }
+    }
 
-    public static RoomServiceValidatorConfigBuilder Create() => new();
+    private readonly RoomServiceValidatorConfig _config = new();
+
+    public static RoomServiceValidatorConfigBuilder CreateDefault() => new();
 
     public RoomServiceValidatorConfigBuilder AddActionOnSuccess(Action actionOnSuccess)
     {
@@ -25,5 +39,5 @@ public class RoomServiceValidatorConfigBuilder
         return this;
     }
 
-    public RoomServiceValidatorConfig Build() => _config;
+    public IRoomServiceValidatorConfig Build() => _config;
 }
