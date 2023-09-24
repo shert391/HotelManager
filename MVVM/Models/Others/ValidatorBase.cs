@@ -9,9 +9,9 @@ namespace HotelManager.MVVM.Models.Others;
 
 public class ValidatorBase : IConfigurable<IDefaultValidatorConfig>
 {
-    private IDefaultValidatorConfig _validatorConfig = DefaultValidatorConfigBuilder.Create().Build();
+    protected IDefaultValidatorConfig ValidatorConfig = DefaultValidatorConfigBuilder.Create().Build();
 
-    public ValidatorBase(IDefaultValidatorConfig defaultValidatorConfig) => _validatorConfig = defaultValidatorConfig;
+    public ValidatorBase(IDefaultValidatorConfig defaultValidatorConfig) => ValidatorConfig = defaultValidatorConfig;
 
     public ValidatorBase()
     {
@@ -19,8 +19,8 @@ public class ValidatorBase : IConfigurable<IDefaultValidatorConfig>
 
     protected void ErrorHandler(string error)
     {
-        _validatorConfig.OnError?.Invoke(error);
-        if (_validatorConfig.IsGenerateException)
+        ValidatorConfig.OnError?.Invoke(error);
+        if (ValidatorConfig.IsGenerateException)
             throw new Exception(error);
     }
 
@@ -34,5 +34,5 @@ public class ValidatorBase : IConfigurable<IDefaultValidatorConfig>
         return false;
     }
 
-    public void Configurate(IDefaultValidatorConfig validatorConfig) => _validatorConfig = validatorConfig;
+    public void Configurate(IDefaultValidatorConfig validatorConfig) => ValidatorConfig = validatorConfig;
 }

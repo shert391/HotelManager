@@ -14,13 +14,27 @@ public class RoomServiceValidator : ValidatorBase
         if (!DefaultValidate(newRoom, typeof(RoomValidator)))
             return false;
 
-        if (_rooms.All(x => x.Number != newRoom.Number)) return true;
+        if (_rooms.All(x => x.Number != newRoom.Number))
+        {
+            ValidatorConfig.OnSuccess?.Invoke();
+            return true;
+        }
 
         ErrorHandler("Комната уже существует!");
         return false;
     }
 
-    public bool CanEditRoom(Room newRoom) => DefaultValidate(newRoom, typeof(RoomValidator));
+    public bool CanEditRoom(Room newRoom)
+    {
+        if (!DefaultValidate(newRoom, typeof(RoomValidator))) return false;
+        ValidatorConfig.OnSuccess?.Invoke();
+        return true;
+    }
 
-    public bool CanReserved(Reservation reservation) => DefaultValidate(reservation, typeof(ReservationValidator));
+    public bool CanReserved(Reservation reservation)
+    {
+        if (!DefaultValidate(reservation, typeof(ReservationValidator))) return false;
+        ValidatorConfig.OnSuccess?.Invoke();
+        return true;
+    }
 }

@@ -9,7 +9,7 @@ using System.Windows.Input;
 
 namespace HotelManager.MVVM.ViewModels.DialogHostViewModels;
 
-internal class RoomEditorViewModel : AbstractRoomManagerViewModel, IDialogViewModel, IConfigurable<Room>
+internal class RoomEditorDialogViewModel : AbstractDialogManagerViewModel, IConfigurable<Room>
 {
     public RoomChangeRequest RoomChangeRequest { get; } = new();
 
@@ -17,7 +17,7 @@ internal class RoomEditorViewModel : AbstractRoomManagerViewModel, IDialogViewMo
 
     public ICommand CancelCommand { get; }
 
-    public RoomEditorViewModel(IRoomService roomService, ITestService testService) : base(roomService, testService)
+    public RoomEditorDialogViewModel()
     {
         EditRoomCommand = new DelegateCommand(() => RoomService.EditRoom(RoomChangeRequest,
             DefaultValidatorConfigBuilder.Create()

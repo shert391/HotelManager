@@ -3,27 +3,27 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:dialogHostViewModels="clr-namespace:HotelManager.MVVM.ViewModels.DialogHostViewModels"
     xmlns:dialogHostViews="clr-namespace:HotelManager.MVVM.Views.Xamls.DialogHostViews">
-    <DataTemplate DataType="{x:Type dialogHostViewModels:RoomCreatorViewModel}">
+    <DataTemplate DataType="{x:Type dialogHostViewModels:RoomCreatorDialogViewModel}">
         <dialogHostViews:RoomCreator />
     </DataTemplate>
 
-    <DataTemplate DataType="{x:Type dialogHostViewModels:MessageBoxInformationViewModel}">
+    <DataTemplate DataType="{x:Type dialogHostViewModels:DialogMessageBoxInformationViewModel}">
         <dialogHostViews:MessageBoxInformation />
     </DataTemplate>
 
-    <DataTemplate DataType="{x:Type dialogHostViewModels:MessageBoxConfirmationViewModel}">
+    <DataTemplate DataType="{x:Type dialogHostViewModels:DialogMessageBoxConfirmationViewModel}">
         <dialogHostViews:MessageBoxConfirmation />
     </DataTemplate>
 
-    <DataTemplate DataType="{x:Type dialogHostViewModels:RoomEditorViewModel}">
+    <DataTemplate DataType="{x:Type dialogHostViewModels:RoomEditorDialogViewModel}">
         <dialogHostViews:RoomEditor />
     </DataTemplate>
 
-    <DataTemplate DataType="{x:Type dialogHostViewModels:ReserveRoomViewModel}">
+    <DataTemplate DataType="{x:Type dialogHostViewModels:ReserveRoomDialogViewModel}">
         <dialogHostViews:ReserveRoom />
     </DataTemplate>
 
-    <DataTemplate DataType="{x:Type dialogHostViewModels:PeopleCreatorViewModel}">
+    <DataTemplate DataType="{x:Type dialogHostViewModels:PeopleCreatorDialogViewModel}">
         <dialogHostViews:PeopleCreator />
     </DataTemplate>
 </ResourceDictionary>

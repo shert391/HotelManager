@@ -4,12 +4,12 @@ using System.Windows.Input;
 
 namespace HotelManager.MVVM.ViewModels.DialogHostViewModels;
 
-public class MessageBoxConfirmationViewModel : AbstractMessageBoxViewModel
+public class DialogMessageBoxConfirmationViewModel : AbstractDialogMessageBoxViewModel
 {
     public ICommand AcceptCommand { get; }
     public ICommand CancelCommand { get; }
 
-    public MessageBoxConfirmationViewModel(Action onAgreement, string message) : base(message)
+    public DialogMessageBoxConfirmationViewModel(Action onAgreement, string message) : base(message)
     {
         AcceptCommand = new DelegateCommand(() => {
             onAgreement();

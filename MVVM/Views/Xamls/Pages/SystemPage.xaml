@@ -239,7 +239,7 @@
                                         Height="35"
                                         Margin="5"
                                         Background="LightBlue"
-                                        Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}, Path=DataContext.BookRoomCommand}"
+                                        Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}, Path=DataContext.ReserveRoomCommand}"
                                         CommandParameter="{Binding .}"
                                         Style="{StaticResource ModifyStyleButton}">
                                         <materialDesign:PackIcon

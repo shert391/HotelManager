@@ -8,7 +8,7 @@ using System.Windows.Input;
 
 namespace HotelManager.MVVM.ViewModels.DialogHostViewModels;
 
-class RoomCreatorViewModel : AbstractRoomManagerViewModel, IDialogViewModel
+class RoomCreatorDialogViewModel : AbstractDialogManagerViewModel
 {
     public int Number { get; set; } = 1;
 
@@ -20,7 +20,7 @@ class RoomCreatorViewModel : AbstractRoomManagerViewModel, IDialogViewModel
 
     public ICommand CancelCommand { get; }
 
-    public RoomCreatorViewModel(IRoomService roomService, ITestService testService) : base(roomService, testService)
+    public RoomCreatorDialogViewModel()
     {
         CreateRoomCommand = new DelegateCommand(CreateRoom);
         CancelCommand = new DelegateCommand(DialogHostController.Close);

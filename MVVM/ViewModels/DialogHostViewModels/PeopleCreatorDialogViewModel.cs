@@ -7,7 +7,7 @@ using HotelManager.MVVM.Models.Others;
 
 namespace HotelManager.MVVM.ViewModels.DialogHostViewModels;
 
-public class PeopleCreatorViewModel : IConfigurable<ICommand<People>>, IDialogViewModel
+public class PeopleCreatorDialogViewModel : AbstractDialogManagerViewModel, IConfigurable<ICommand<People>>
 {
     private ValidatorBase _validatorBase = new(DefaultValidatorConfigBuilder.Create().AddShowErrorMessageBox().Build());
     public ICommand ValidateCommand { get; }
@@ -18,20 +18,20 @@ public class PeopleCreatorViewModel : IConfigurable<ICommand<People>>, IDialogVi
     public string FullName { get; set; } = "";
     public int Age { get; set; }
 
-    public PeopleCreatorViewModel()
+    public PeopleCreatorDialogViewModel()
     {
-        CancelCommand = new DelegateCommand(DialogHostController.ShowPreview);
+        CancelCommand = new DelegateCommand(DialogHostController.BackViewModel);
         ValidateCommand = new DelegateCommand(Validate);
     }
 
     private void Validate()
     {
-        var newPeople = new People() { FullName = FullName, Age = Age };
+        var newPeople = new People { FullName = FullName, Age = Age };
 
         if (!_validatorBase.DefaultValidate(newPeople, typeof(PeopleValidator)))
             return;
 
-        DialogHostController.ShowPreview();
+        DialogHostController.BackViewModel();
         _addCommand?.Execute(newPeople);
     }
 
