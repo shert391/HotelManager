@@ -1,19 +1,30 @@
 ﻿using System.ComponentModel;
+using HotelManager.MVVM.Models.CustomAttributes;
 
 namespace HotelManager.MVVM.Models.Extensions;
 
 public static class GetEnumDescriptionExtension
 {
-    public static string GetDescription(this Enum enumValue)
+    private static T GetAttributeFromField<T>(Type typeTarget, Type typeAttribute, string fieldName) where T : Attribute
     {
-        var field = enumValue.GetType().GetField(enumValue.ToString());
-        if (field is null)
-            goto BAD;
-        if (Attribute.GetCustomAttribute(field, typeof(DescriptionAttribute)) is DescriptionAttribute attribute)
-            return attribute.Description;
-
-        BAD:
-        return "Don't find Description";
+        var field = typeTarget.GetField(fieldName) ?? throw new ArgumentException("Field is not found!");
+        if (Attribute.GetCustomAttribute(field, typeof(T)) is not T attribute)
+            throw new Exception("Attribute is not found!");
+        return attribute;
+    }
+    
+    public static string GetDescription(this Enum enumValue)
+    { 
+        return GetAttributeFromField<DescriptionAttribute>(enumValue.GetType(), 
+            typeof(DescriptionAttribute), 
+            enumValue.ToString()).Description;
+    }
+    
+    public static int GetMaxPeople(this Enum enumValue)
+    {
+        return GetAttributeFromField<MaxPeopleAttribute>(enumValue.GetType(),
+            typeof(MaxPeopleAttribute), 
+            enumValue.ToString()).MaxPeoples;
     }
 }
 

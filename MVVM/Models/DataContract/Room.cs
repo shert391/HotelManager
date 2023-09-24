@@ -1,61 +1,39 @@
 ﻿using DevExpress.Mvvm;
-using FluentValidation;
-using HotelManager.InitApp;
 using System.ComponentModel;
+using HotelManager.MVVM.Models.CustomAttributes;
+using HotelManager.MVVM.Models.Extensions;
 
 namespace HotelManager.MVVM.Models.DataContract;
 
 public enum RoomType
 {
-    [Description("Люкс")]
+    [Description("Люкс"), MaxPeople(4)]
     Luxury,
 
-    [Description("Двухместный")]
+    [Description("Двухместный"), MaxPeople(2)]
     Double,
 
-    [Description("Одноместный")]
+    [Description("Одноместный"), MaxPeople(1)]
     Single,
 
-    [Description("Полулюкс")]
+    [Description("Полулюкс"), MaxPeople(3)]
     SemiLuxury,
 
-    [Description("Двухместный с раскладным диваном")]
+    [Description("Двухместный с раскладным диваном"), MaxPeople(2)]
     DoubleConvertibleSofa,
 }
 
-public class RoomValidator : AbstractValidator<Room>
+public class Room
 {
-    public readonly int MinNumber = 1;
-    public readonly int MaxNumber = App.GetRoomSetting<int>(nameof(MaxNumber));
+    public int Number { get; init; }
 
-    public readonly decimal MinPrice = App.GetRoomSetting<decimal>(nameof(MinPrice));
-    public readonly decimal MaxPrice = App.GetRoomSetting<decimal>(nameof(MaxPrice));
+    public decimal Price { get; init; }
 
-    public RoomValidator()
-    {
-        RuleFor(room => room.Number)
-            .InclusiveBetween(MinNumber, MaxNumber)
-            .WithMessage($"Номер должен быть в диапазоне от {MinNumber} до {MaxNumber}")
-            .NotEmpty()
-            .WithMessage($"Задайте номер комнаты!");
-
-        RuleFor(room => room.Price)
-            .InclusiveBetween(MinPrice, MaxPrice)
-            .WithMessage($"Диапазон суточной цены: [{MinPrice};{MaxPrice}]")
-            .NotEmpty()
-            .WithMessage($"Укажите ежесуточный ценник!");
-
-        RuleFor(room => room.Type).IsInEnum().WithMessage($"Тип комнаты задан неправильно!");
-    }
-}
-
-public class Room : BindableBase
-{
-    public int Number { get; set; }
-
-    public decimal Price { get; set; }
-
-    public RoomType Type { get; set; }
-
-    public Room Clone() => new() { Number = Number, Price = Price, Type = Type };
+    public RoomType Type { get; init; }
+    
+    public Reservation? Reservation { get; set; }
+    
+    public Room Clone() => (Room)MemberwiseClone();
+    
+    public int MaxPeoples => Type.GetMaxPeople();
 }

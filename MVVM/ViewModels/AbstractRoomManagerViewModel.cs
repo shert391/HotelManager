@@ -2,7 +2,7 @@ using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using HotelManager.MVVM.Models.DataContract;
 using HotelManager.MVVM.Models.Services;
-using HotelManager.MVVM.Models.Services.RoomService;
+using HotelManager.MVVM.Models.Services.RoomServices;
 
 namespace HotelManager.MVVM.ViewModels;
 

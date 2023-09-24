@@ -1,5 +1,5 @@
 ﻿using HotelManager.MVVM.Models.Services;
-using HotelManager.MVVM.Models.Services.RoomService;
+using HotelManager.MVVM.Models.Services.RoomServices;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Hosting;
 
@@ -13,7 +13,6 @@ public static class AddServicesHostBuilderExtension
         {
             servicesProvider.TryAddSingleton<IRoomService, RoomService>();
             servicesProvider.TryAddSingleton<ITestService, TestService>();
-            servicesProvider.TryAddSingleton<IRoomServiceValidator, RoomServiceValidator>();
         });
 
         return hostBuilder;

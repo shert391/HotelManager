@@ -1,0 +1,140 @@
+﻿<UserControl
+    x:Class="HotelManager.MVVM.Views.Xamls.DialogHostViews.ReserveRoom"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Width="642"
+    Height="522"
+    mc:Ignorable="d">
+    <Border Background="#323232" ClipToBounds="True">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.10*" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <StackPanel
+                    Margin="10,0,10,0"
+                    VerticalAlignment="Center"
+                    Orientation="Horizontal">
+                    <DatePicker
+                        x:Name="FutureDatePicker"
+                        Width="100"
+                        materialDesign:CalendarAssist.IsHeaderVisible="False"
+                        materialDesign:HintAssist.Hint="Конец брони"
+                        Foreground="LightGray" />
+                </StackPanel>
+                <StackPanel
+                    Grid.Column="1"
+                    Margin="0,0,10,0"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Center"
+                    Orientation="Horizontal">
+                    <TextBlock Foreground="LightGray" Text="Осталось мест: " />
+                    <TextBlock
+                        Grid.Column="1"
+                        HorizontalAlignment="Right"
+                        Foreground="LightGray"
+                        Text="{Binding TargetRoom.MaxPeoples}" />
+                </StackPanel>
+            </Grid>
+            <materialDesign:Card Grid.Row="1" Background="#323232">
+                <StackPanel>
+                    <DataGrid
+                        x:Name="RoomsDataGrid"
+                        Height="412"
+                        materialDesign:DataGridAssist.SelectedCellBorderBrush="Transparent"
+                        AutoGenerateColumns="False"
+                        CanUserAddRows="False"
+                        ItemsSource="{Binding NewPeoples}"
+                        HorizontalScrollBarVisibility="Disabled">
+                        <DataGrid.Resources>
+                            <Style
+                                x:Key="ES"
+                                BasedOn="{StaticResource MaterialDesignDataGridTextColumnStyle}"
+                                TargetType="{x:Type TextBlock}">
+                                <Setter Property="VerticalAlignment" Value="Center" />
+                            </Style>
+                        </DataGrid.Resources>
+                        <DataGrid.Columns>
+                            <materialDesign:DataGridTextColumn
+                                Width="Auto"
+                                CanUserResize="True"
+                                Binding="{Binding FullName}"
+                                ElementStyle="{StaticResource ES}"
+                                Header="ФИО"
+                                IsReadOnly="True" />
+                            <materialDesign:DataGridTextColumn
+                                Width="Auto"
+                                CanUserResize="True"
+                                Binding="{Binding Age}"
+                                ElementStyle="{StaticResource ES}"
+                                Header="Возраст"
+                                IsReadOnly="True" />
+                            <DataGridTemplateColumn
+                                Width="Auto"
+                                CanUserResize="True"
+                                Header="Операция"
+                                IsReadOnly="True">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate />
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="0.75*" />
+                        </Grid.ColumnDefinitions>
+                        <StackPanel
+                            Margin="10"
+                            VerticalAlignment="Center"
+                            Orientation="Horizontal">
+                            <Button
+                                Width="150"
+                                Height="30"
+                                HorizontalAlignment="Right"
+                                Background="#FFC42828"
+                                Command="{Binding CancelCommand}"
+                                Style="{StaticResource ModifyStyleButton}">
+                                <TextBlock Style="{StaticResource MaterialDesignSubtitle2TextBlock}">Отмена</TextBlock>
+                            </Button>
+                            <Button
+                                Width="150"
+                                Height="30"
+                                Margin="8,0,0,0"
+                                HorizontalAlignment="Right"
+                                Background="Yellow"
+                                Command="{Binding ReserveCommand}"
+                                Style="{StaticResource ModifyStyleButton}">
+                                <TextBlock Style="{StaticResource MaterialDesignSubtitle2TextBlock}">Забронировать</TextBlock>
+                            </Button>
+                        </StackPanel>
+                        <Button
+                            Grid.Column="1"
+                            Width="40"
+                            Height="40"
+                            Margin="0,10,10,10"
+                            HorizontalAlignment="Right"
+                            Command="{Binding AddPeopleCommand}"
+                            Style="{StaticResource MaterialDesignFloatingActionLightButton}"
+                            ToolTip="MaterialDesignFloatingActionSecondaryLightButton">
+                            <materialDesign:PackIcon
+                                Width="Auto"
+                                Height="Auto"
+                                Margin="8"
+                                Kind="AccountPlus" />
+                        </Button>
+                    </Grid>
+                </StackPanel>
+            </materialDesign:Card>
+        </Grid>
+    </Border>
+</UserControl>

@@ -4,14 +4,16 @@ using HotelManager.MVVM.Models.Services;
 using HotelManager.MVVM.Utils;
 using HotelManager.MVVM.ViewModels.DialogHostViewModels;
 using HotelManager.MVVM.Models.DataContract;
-using HotelManager.MVVM.Models.Services.RoomService;
 using System.Collections.Specialized;
+using HotelManager.MVVM.Models.Services.RoomServices;
 
 namespace HotelManager.MVVM.ViewModels.PageViewModels;
 
 public class SystemPageViewModel : AbstractRoomManagerViewModel
 {
     public ICommand AddRoomCommand { get; }
+
+    public ICommand BookRoomCommand { get; }
 
     public ICommand FindRoomCommand { get; }
 
@@ -29,6 +31,7 @@ public class SystemPageViewModel : AbstractRoomManagerViewModel
 
         AddRoomCommand = new DelegateCommand(DialogHostController.Show<RoomCreatorViewModel>);
         EditRoomCommand = new DelegateCommand<Room>(DialogHostController.Show<RoomEditorViewModel, Room>);
+        BookRoomCommand = new DelegateCommand<Room>(DialogHostController.Show<ReserveRoomViewModel, Room>);
 
         DeleteRoomCommand = new DelegateCommand<int>(DeleteRoom);
         FindRoomCommand = new DelegateCommand<string>(FindRoom);

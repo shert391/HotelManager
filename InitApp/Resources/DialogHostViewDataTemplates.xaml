@@ -18,4 +18,12 @@
     <DataTemplate DataType="{x:Type dialogHostViewModels:RoomEditorViewModel}">
         <dialogHostViews:RoomEditor />
     </DataTemplate>
+
+    <DataTemplate DataType="{x:Type dialogHostViewModels:ReserveRoomViewModel}">
+        <dialogHostViews:ReserveRoom />
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type dialogHostViewModels:PeopleCreatorViewModel}">
+        <dialogHostViews:PeopleCreator />
+    </DataTemplate>
 </ResourceDictionary>

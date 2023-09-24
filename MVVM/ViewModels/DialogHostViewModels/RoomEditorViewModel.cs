@@ -1,16 +1,17 @@
 ﻿using DevExpress.Mvvm;
+using HotelManager.MVVM.Models.Builders;
 using HotelManager.MVVM.Models.DataContract;
+using HotelManager.MVVM.Models.DataContract.Requests;
 using HotelManager.MVVM.Models.Services;
-using HotelManager.MVVM.Models.Services.RoomService;
+using HotelManager.MVVM.Models.Services.RoomServices;
 using HotelManager.MVVM.Utils;
 using System.Windows.Input;
-using HotelManager.MVVM.Models.Builders;
 
 namespace HotelManager.MVVM.ViewModels.DialogHostViewModels;
 
 internal class RoomEditorViewModel : AbstractRoomManagerViewModel, IDialogViewModel, IConfigurable<Room>
 {
-    public Room NewRoom { get; set; } = new();
+    public RoomChangeRequest RoomChangeRequest { get; } = new();
 
     public ICommand EditRoomCommand { get; }
 
@@ -18,15 +19,16 @@ internal class RoomEditorViewModel : AbstractRoomManagerViewModel, IDialogViewMo
 
     public RoomEditorViewModel(IRoomService roomService, ITestService testService) : base(roomService, testService)
     {
-        EditRoomCommand = new DelegateCommand(() => RoomService.EditRoom(NewRoom,
-            RoomServiceValidatorConfigBuilder
-            .CreateDefault()
-            .AddActionOnError((error) => DialogHostController.ShowMessageBoxInformation(error))
-            .AddActionOnSuccess(() => DialogHostController.ShowMessageBoxInformation("Комната успешно изменена!", true))
-            .Build()));
+        EditRoomCommand = new DelegateCommand(() => RoomService.EditRoom(RoomChangeRequest,
+            DefaultValidatorConfigBuilder.Create()
+                .AddShowMessageBoxSuccessError("Комната успешно изменена!", isCloseSuccess: true).Build()));
 
         CancelCommand = new DelegateCommand(DialogHostController.Close);
     }
 
-    public void Configurate(Room room) => NewRoom = room.Clone();
+    public void Configurate(Room targetRoom) {
+        RoomChangeRequest.NewType = targetRoom.Type;
+        RoomChangeRequest.NewPrice = targetRoom.Price;
+        RoomChangeRequest.NumberTargetRoom = targetRoom.Number;
+    }
 }

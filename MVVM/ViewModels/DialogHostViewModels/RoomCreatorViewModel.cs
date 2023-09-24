@@ -1,10 +1,10 @@
 ﻿using DevExpress.Mvvm;
+using HotelManager.MVVM.Models.Builders;
 using HotelManager.MVVM.Models.DataContract;
 using HotelManager.MVVM.Models.Services;
-using HotelManager.MVVM.Models.Services.RoomService;
+using HotelManager.MVVM.Models.Services.RoomServices;
 using HotelManager.MVVM.Utils;
 using System.Windows.Input;
-using HotelManager.MVVM.Models.Builders;
 
 namespace HotelManager.MVVM.ViewModels.DialogHostViewModels;
 
@@ -19,7 +19,7 @@ class RoomCreatorViewModel : AbstractRoomManagerViewModel, IDialogViewModel
     public ICommand CreateRoomCommand { get; }
 
     public ICommand CancelCommand { get; }
-    
+
     public RoomCreatorViewModel(IRoomService roomService, ITestService testService) : base(roomService, testService)
     {
         CreateRoomCommand = new DelegateCommand(CreateRoom);
@@ -31,14 +31,10 @@ class RoomCreatorViewModel : AbstractRoomManagerViewModel, IDialogViewModel
         RoomService.AddRoom(new Room
         {
             Number = Number,
-            Price = Price,  
+            Price = Price,
             Type = Type,
         },
-        RoomServiceValidatorConfigBuilder
-        .CreateDefault()
-        .AddActionOnSuccess(() => DialogHostController.ShowMessageBoxInformation("Комната успешно создана!"))
-        .AddActionOnError((error) => DialogHostController.ShowMessageBoxInformation(error))
-        .Build());
+        DefaultValidatorConfigBuilder.Create().AddShowMessageBoxSuccessError("Комната успешно создана!").Build());
     }
 }
 

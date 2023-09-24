@@ -146,7 +146,13 @@
     <Reference Include="MaterialDesignThemes.Wpf">
       <HintPath>MaterialDesignThemes.Wpf.dll</HintPath>
     </Reference>
+
+
+
+
   </ItemGroup>
+
+
 
 
 </Project>

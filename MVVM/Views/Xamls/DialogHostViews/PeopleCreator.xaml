@@ -1,5 +1,5 @@
 ﻿<UserControl
-    x:Class="HotelManager.MVVM.Views.Xamls.DialogHostViews.RoomEditor"
+    x:Class="HotelManager.MVVM.Views.Xamls.DialogHostViews.PeopleCreator"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:attached="clr-namespace:HotelManager.MVVM.Views.Xamls.AttachedProperties"
@@ -7,41 +7,24 @@
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     Width="300"
-    Height="195"
-    d:DesignHeight="195"
-    d:DesignWidth="300"
+    Height="170"
     mc:Ignorable="d">
     <Grid>
         <Border Background="#454545" ClipToBounds="True">
             <StackPanel Margin="10">
-                <StackPanel
-                    Margin="0,0,0,5"
-                    HorizontalAlignment="Center"
-                    Orientation="Horizontal">
-                    <TextBlock
-                        Foreground="LightGray"
-                        Style="{StaticResource MaterialDesignSubtitle2TextBlock}"
-                        Text="Редактор комнаты: " />
-                    <TextBlock
-                        Foreground="LightGray"
-                        Style="{StaticResource MaterialDesignSubtitle2TextBlock}"
-                        Text="{Binding RoomChangeRequest.NumberTargetRoom}" />
-                </StackPanel>
-                <ComboBox
-                    Margin="0,15,0,0"
-                    materialDesign:HintAssist.Hint="Новый тип комнаты"
+                <TextBox
+                    materialDesign:HintAssist.Hint="ФИО"
                     Foreground="White"
-                    ItemsSource="{Binding RoomChangeRequest.NewType, Converter={StaticResource RoomTypeConverter}}"
-                    SelectedIndex="{Binding RoomChangeRequest.NewType, Converter={StaticResource EnumToIntConverter}}"
-                    SelectedItem="{Binding RoomChangeRequest.NewType, Converter={StaticResource RoomTypeConverter}}" />
+                    Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                    Text="{Binding FullName}" />
                 <TextBox
                     Margin="0,12,0,0"
                     attached:InputFilterTextBox.AllowedType="Integer"
                     attached:InputFilterTextBox.MaxValue="1000000"
-                    materialDesign:HintAssist.Hint="Новая цена за сутки"
+                    materialDesign:HintAssist.Hint="Возраст"
                     Foreground="White"
                     Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                    Text="{Binding RoomChangeRequest.NewPrice, Converter={StaticResource EmptyStringConverter}}" />
+                    Text="{Binding Age, Converter={StaticResource EmptyStringConverter}, ConverterParameter='1'}" />
                 <StackPanel
                     Margin="0,10"
                     HorizontalAlignment="Center"
@@ -50,10 +33,10 @@
                         Width="130"
                         Height="30"
                         Margin="0,18,18,0"
-                        Background="Green"
-                        Command="{Binding EditRoomCommand}"
+                        Background="Yellow"
+                        Command="{Binding ValidateCommand}"
                         Style="{StaticResource ModifyStyleButton}">
-                        <TextBlock Style="{StaticResource MaterialDesignSubtitle2TextBlock}">Изменить</TextBlock>
+                        <TextBlock Style="{StaticResource MaterialDesignSubtitle2TextBlock}">Добавить</TextBlock>
                     </Button>
                     <Button
                         Width="130"

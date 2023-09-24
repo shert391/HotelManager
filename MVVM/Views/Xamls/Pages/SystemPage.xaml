@@ -183,10 +183,21 @@
                         IsReadOnly="True" />
                     <materialDesign:DataGridTextColumn
                         Width="Auto"
+                        Binding="{Binding Reservation, TargetNullValue=Свободно}"
                         CanUserResize="True"
-                        ElementStyle="{StaticResource ES}"
+                        FontWeight="Bold"
                         Header="Статус"
-                        IsReadOnly="True" />
+                        IsReadOnly="True">
+                        <materialDesign:DataGridTextColumn.ElementStyle>
+                            <Style BasedOn="{StaticResource ES}" TargetType="TextBlock">
+                                <Style.Triggers>
+                                    <Trigger Property="Text" Value="Свободно">
+                                        <Setter Property="Foreground" Value="Green" />
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </materialDesign:DataGridTextColumn.ElementStyle>
+                    </materialDesign:DataGridTextColumn>
                     <DataGridTemplateColumn
                         Width="Auto"
                         CanUserResize="True"
@@ -228,6 +239,8 @@
                                         Height="35"
                                         Margin="5"
                                         Background="LightBlue"
+                                        Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}, Path=DataContext.BookRoomCommand}"
+                                        CommandParameter="{Binding .}"
                                         Style="{StaticResource ModifyStyleButton}">
                                         <materialDesign:PackIcon
                                             Width="Auto"

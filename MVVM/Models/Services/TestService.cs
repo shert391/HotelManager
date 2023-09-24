@@ -1,6 +1,6 @@
 using HotelManager.MVVM.Models.Builders;
 using HotelManager.MVVM.Models.DataContract;
-using HotelManager.MVVM.Models.Services.RoomService;
+using HotelManager.MVVM.Models.Services.RoomServices;
 
 namespace HotelManager.MVVM.Models.Services;
 
@@ -21,14 +21,13 @@ public class TestService : ITestService
              i <= _random.Next(minRooms, maxRooms); 
              i++)
         {
+            var room = new Room();
             _roomService.AddRoom(new Room()
             {
                 Number = i,
                 Price = _random.Next(minPrice, maxPrice),
                 Type = (RoomType)_random.Next(0, Enum.GetNames(typeof(RoomType)).Length)
-            }, RoomServiceValidatorConfigBuilder
-               .CreateDefault()
-               .Build());
+            }, DefaultValidatorConfigBuilder.Create().Build());
         }
   }
 }

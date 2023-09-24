@@ -3,6 +3,6 @@ public interface IConfiguration { }
 
 public interface IConfigurable<T>
 {
-    public void Configurate(T configuration);
+    public void Configurate(T param);
 }
 

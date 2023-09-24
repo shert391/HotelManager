@@ -1,6 +1,6 @@
 ﻿namespace HotelManager.MVVM.ViewModels.DialogHostViewModels;
 
-public abstract class AbstractMessageBoxViewModel : BaseViewModel, IDialogViewModel
+public abstract class AbstractMessageBoxViewModel : IDialogViewModel
 {
     public string Message { get; }
 
