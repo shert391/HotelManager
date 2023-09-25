@@ -9,12 +9,15 @@ public static class DialogHostController
     private const string _dialogHostName = "MainDialogHost";
     private static IDialogViewModel? _currentDialogViewModel;
     
-    public static void BackViewModel()
+    public static void BackViewModel(int count = 1)
     {
         var dialogSession = DialogHost.GetDialogSession(_dialogHostName);
         if (dialogSession is null) return;
-        _currentDialogViewModel = _currentDialogViewModel?.Parent;
-        dialogSession.UpdateContent(_currentDialogViewModel);
+        for (var i = 0; i < count; i++)
+        {
+            _currentDialogViewModel = _currentDialogViewModel?.Parent;
+            dialogSession.UpdateContent(_currentDialogViewModel);
+        }
     }
     
     private static void ShowViewModel(IDialogViewModel newViewModel)
@@ -48,11 +51,18 @@ public static class DialogHostController
     public static void ShowMessageBoxInformation(string message, bool isClose = false)
     {
         DialogMessageBoxInformationViewModel messageBoxViewModel;
-        if(isClose) messageBoxViewModel = new(message, DialogHostController.Close);
-        else messageBoxViewModel = new(message, DialogHostController.BackViewModel);
+        if (isClose) messageBoxViewModel = new(message, Close);
+        else messageBoxViewModel = new(message, () => BackViewModel());
         ShowViewModel(messageBoxViewModel);
     }
-    
+
+    public static void ShowMessageBoxInformation(string message, Action onOkButtonClick)
+    {
+        DialogMessageBoxInformationViewModel messageBoxViewModel;
+        messageBoxViewModel = new(message, onOkButtonClick);
+        ShowViewModel(messageBoxViewModel);
+    }
+
     public static void ShowMessageBoxConfirmation(Action onAgreement , string message)
     {
         var messageBoxViewModel = new DialogMessageBoxConfirmationViewModel(onAgreement, message);

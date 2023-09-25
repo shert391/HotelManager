@@ -4,6 +4,7 @@ using HotelManager.MVVM.Models.Services;
 using HotelManager.MVVM.Models.Services.RoomServices;
 using HotelManager.MVVM.Utils;
 using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.Windows.Input;
 
 namespace HotelManager.MVVM.ViewModels.DialogHostViewModels;
@@ -12,29 +13,31 @@ public class ReserveRoomDialogViewModel : AbstractDialogManagerViewModel, IConfi
 {
     public ObservableCollection<People> NewPeoples { get; } = new();
 
+    public int RemainPlaces { get; set; }
     public DateTime EndData { get; set; }
-    public Room TargetRoom { get; set; } = new();
+    public Room? TargetRoom { get; set; }
 
     public ICommand AddPeopleCommand { get; }
     public ICommand CancelCommand { get; }
 
     public ReserveRoomDialogViewModel()
     {
-        CancelCommand = new DelegateCommand(DialogHostController.Close);
         AddPeopleCommand = new DelegateCommand(AddPeople);
-    }
-
-    public void DelegateCommandAddPeople(People newPeople)
-    {
-        NewPeoples.Add(newPeople);
-        DialogHostController.ShowMessageBoxInformation("Жилец успешно добавлен!");
+        NewPeoples.CollectionChanged += OnPeopleCollectionChanged;
+        CancelCommand = new DelegateCommand(DialogHostController.Close);
     }
     
+    public void OnPeopleCollectionChanged(object? sender, NotifyCollectionChangedEventArgs e) => RemainPlaces = TargetRoom!.MaxPeoples - NewPeoples.Count;
     public void AddPeople()
     {
-        DialogHostController.Show<PeopleCreatorDialogViewModel, ICommand<People>>(
-            new DelegateCommand<People>(DelegateCommandAddPeople));
+        if (RemainPlaces == 0)
+            DialogHostController.ShowMessageBoxInformation("Комната полностью заполнена!");
+        else
+            DialogHostController.Show<PeopleCreatorDialogViewModel, ObservableCollection<People>>(NewPeoples);
     }
-
-    public void Configurate(Room room) => TargetRoom = room;
+    public void Configurate(Room room)
+    {
+        TargetRoom = room;
+        RemainPlaces = room.MaxPeoples;
+    }
 }

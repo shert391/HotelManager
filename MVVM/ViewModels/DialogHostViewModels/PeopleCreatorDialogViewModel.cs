@@ -1,39 +1,38 @@
 ﻿using DevExpress.Mvvm;
-using System.Windows.Input;
-using HotelManager.MVVM.Utils;
 using HotelManager.MVVM.Models.Builders;
 using HotelManager.MVVM.Models.DataContract;
 using HotelManager.MVVM.Models.Others;
+using HotelManager.MVVM.Utils;
+using System.Collections.ObjectModel;
+using System.Windows.Input;
 
 namespace HotelManager.MVVM.ViewModels.DialogHostViewModels;
 
-public class PeopleCreatorDialogViewModel : AbstractDialogManagerViewModel, IConfigurable<ICommand<People>>
+public class PeopleCreatorDialogViewModel : AbstractDialogManagerViewModel, IConfigurable<ObservableCollection<People>>
 {
     private ValidatorBase _validatorBase = new(DefaultValidatorConfigBuilder.Create().AddShowErrorMessageBox().Build());
-    public ICommand ValidateCommand { get; }
+    public ICommand AddPeopleCommand { get; }
     public ICommand CancelCommand { get; }
 
-    private ICommand<People>? _addCommand;
+    public ObservableCollection<People>? PeoplesCollection { get; private set; }
 
-    public string FullName { get; set; } = "";
-    public int Age { get; set; }
+    public People NewPeople { get; } = new();
 
     public PeopleCreatorDialogViewModel()
     {
-        CancelCommand = new DelegateCommand(DialogHostController.BackViewModel);
-        ValidateCommand = new DelegateCommand(Validate);
+        CancelCommand = new DelegateCommand(() => DialogHostController.BackViewModel(1));
+        AddPeopleCommand = new DelegateCommand(AddPeople);
     }
 
-    private void Validate()
+    private void AddPeople()
     {
-        var newPeople = new People { FullName = FullName, Age = Age };
-
-        if (!_validatorBase.DefaultValidate(newPeople, typeof(PeopleValidator)))
+        if (!_validatorBase.DefaultValidate(NewPeople, typeof(PeopleValidator)))
             return;
 
-        DialogHostController.BackViewModel();
-        _addCommand?.Execute(newPeople);
+        PeoplesCollection?.Add(NewPeople);
+
+        DialogHostController.ShowMessageBoxInformation("Жилец успешно добавлен!", () => DialogHostController.BackViewModel(2));
     }
 
-    public void Configurate(ICommand<People> addCommand) => _addCommand = addCommand;
+    public void Configurate(ObservableCollection<People> peoplesCollection) => PeoplesCollection = peoplesCollection;
 }

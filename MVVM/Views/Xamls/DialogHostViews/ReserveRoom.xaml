@@ -5,8 +5,8 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    Width="642"
-    Height="522"
+    Width="900"
+    Height="356"
     mc:Ignorable="d">
     <Border Background="#323232" ClipToBounds="True">
         <Grid>
@@ -41,19 +41,19 @@
                         Grid.Column="1"
                         HorizontalAlignment="Right"
                         Foreground="LightGray"
-                        Text="{Binding TargetRoom.MaxPeoples}" />
+                        Text="{Binding RemainPlaces}" />
                 </StackPanel>
             </Grid>
             <materialDesign:Card Grid.Row="1" Background="#323232">
                 <StackPanel>
                     <DataGrid
                         x:Name="RoomsDataGrid"
-                        Height="412"
+                        Height="268"
                         materialDesign:DataGridAssist.SelectedCellBorderBrush="Transparent"
                         AutoGenerateColumns="False"
                         CanUserAddRows="False"
-                        ItemsSource="{Binding NewPeoples}"
-                        HorizontalScrollBarVisibility="Disabled">
+                        HorizontalScrollBarVisibility="Disabled"
+                        ItemsSource="{Binding NewPeoples}">
                         <DataGrid.Resources>
                             <Style
                                 x:Key="ES"
@@ -65,17 +65,45 @@
                         <DataGrid.Columns>
                             <materialDesign:DataGridTextColumn
                                 Width="Auto"
-                                CanUserResize="True"
                                 Binding="{Binding FullName}"
+                                CanUserResize="True"
                                 ElementStyle="{StaticResource ES}"
                                 Header="ФИО"
                                 IsReadOnly="True" />
                             <materialDesign:DataGridTextColumn
                                 Width="Auto"
-                                CanUserResize="True"
                                 Binding="{Binding Age}"
+                                CanUserResize="True"
                                 ElementStyle="{StaticResource ES}"
                                 Header="Возраст"
+                                IsReadOnly="True" />
+                            <materialDesign:DataGridTextColumn
+                                Width="Auto"
+                                Binding="{Binding NumberPassport}"
+                                CanUserResize="True"
+                                ElementStyle="{StaticResource ES}"
+                                Header="Номер паспорта"
+                                IsReadOnly="True" />
+                            <materialDesign:DataGridTextColumn
+                                Width="Auto"
+                                Binding="{Binding SeriesPassport}"
+                                CanUserResize="True"
+                                ElementStyle="{StaticResource ES}"
+                                Header="Серия паспорта"
+                                IsReadOnly="True" />
+                            <materialDesign:DataGridTextColumn
+                                Width="Auto"
+                                Binding="{Binding ResidenceAddress}"
+                                CanUserResize="True"
+                                ElementStyle="{StaticResource ES}"
+                                Header="Адрес проживания"
+                                IsReadOnly="True" />
+                            <materialDesign:DataGridTextColumn
+                                Width="Auto"
+                                Binding="{Binding PhoneNumber}"
+                                CanUserResize="True"
+                                ElementStyle="{StaticResource ES}"
+                                Header="Номер телфона"
                                 IsReadOnly="True" />
                             <DataGridTemplateColumn
                                 Width="Auto"
