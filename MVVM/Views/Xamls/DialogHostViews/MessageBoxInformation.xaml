@@ -17,14 +17,16 @@
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
 
-                <TextBlock
+                <Viewbox
                     Grid.Row="1"
-                    Margin="0,10,0,0"
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Top"
-                    FontSize="15"
-                    Foreground="White"
-                    Text="{Binding Message}" />
+                    Height="25"
+                    Margin="0,10,0,65">
+                    <TextBlock
+                        Margin="10,0,10,0"
+                        Foreground="White"
+                        Text="{Binding Message}" />
+                </Viewbox>
+
                 <Button
                     Grid.Row="1"
                     Height="30"

@@ -14,16 +14,12 @@ public class RoomValidator : AbstractValidator<Room>
     {
         RuleFor(room => room.Number)
             .InclusiveBetween(MinNumber, MaxNumber)
-            .WithMessage($"Номер должен быть в диапазоне от {MinNumber} до {MaxNumber}")
-            .NotEmpty()
-            .WithMessage($"Задайте номер комнаты!");
+            .NotEmpty();
 
         RuleFor(room => room.Price)
             .InclusiveBetween(MinPrice, MaxPrice)
-            .WithMessage($"Диапазон суточной цены: [{MinPrice};{MaxPrice}]")
-            .NotEmpty()
-            .WithMessage($"Укажите ежесуточный ценник!");
+            .NotEmpty();
 
-        RuleFor(room => room.Type).IsInEnum().WithMessage($"Тип комнаты задан неправильно!");
+        RuleFor(room => room.Type).IsInEnum();
     }
 }
