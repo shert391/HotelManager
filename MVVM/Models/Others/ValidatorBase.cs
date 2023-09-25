@@ -1,5 +1,4 @@
-﻿using System.CodeDom;
-using FluentValidation;
+﻿using FluentValidation;
 using HotelManager.MVVM.Models.Builders;
 using HotelManager.MVVM.Models.Configs;
 using HotelManager.MVVM.Models.Extensions;
@@ -13,11 +12,9 @@ public class ValidatorBase : IConfigurable<IDefaultValidatorConfig>
 
     public ValidatorBase(IDefaultValidatorConfig defaultValidatorConfig) => ValidatorConfig = defaultValidatorConfig;
 
-    public ValidatorBase()
-    {
-    }
+    public ValidatorBase() { }
 
-    protected void ErrorHandler(string error)
+    protected void HandleError(string error)
     {
         ValidatorConfig.OnError?.Invoke(error);
         if (ValidatorConfig.IsGenerateException)
@@ -30,7 +27,7 @@ public class ValidatorBase : IConfigurable<IDefaultValidatorConfig>
                         throw new Exception("Validator Type fail!");
         var error = validator.Validate<TType>(verifiable);
         if (error is null) return true;
-        ErrorHandler(error);
+        HandleError(error);
         return false;
     }
 

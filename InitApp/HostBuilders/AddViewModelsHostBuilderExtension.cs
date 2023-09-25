@@ -13,10 +13,10 @@ public static class AddViewModelsHostBuilderExtension
         hostBuilder.ConfigureServices(servicesProvider =>
         {
             servicesProvider.TryAddSingleton<TestPageViewModel>();
-            servicesProvider.TryAddSingleton<RoomEditorDialogViewModel>();
             servicesProvider.TryAddSingleton<SystemPageViewModel>();
             servicesProvider.TryAddSingleton<MainWindowViewModel>();
-            servicesProvider.TryAddSingleton<ReserveRoomDialogViewModel>();
+            servicesProvider.TryAddSingleton<RoomEditorDialogViewModel>();
+            servicesProvider.TryAddTransient<ReserveRoomDialogViewModel>();
             servicesProvider.TryAddSingleton<RoomCreatorDialogViewModel>();
             servicesProvider.TryAddSingleton<PeopleCreatorDialogViewModel>();
         });

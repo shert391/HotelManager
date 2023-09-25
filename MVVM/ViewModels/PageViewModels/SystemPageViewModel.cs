@@ -1,29 +1,48 @@
 ﻿using DevExpress.Mvvm;
-using System.Windows.Input;
-using HotelManager.MVVM.Models.Services;
+using HotelManager.MVVM.Models.DataContract;
 using HotelManager.MVVM.Utils;
 using HotelManager.MVVM.ViewModels.DialogHostViewModels;
-using HotelManager.MVVM.Models.DataContract;
 using System.Collections.Specialized;
-using HotelManager.MVVM.Models.Services.RoomServices;
+using System.ComponentModel;
+using System.Windows.Input;
+using DevExpress.Mvvm.Native;
 
 namespace HotelManager.MVVM.ViewModels.PageViewModels;
+
+public enum TypeViewRooms
+{
+    [Description("Все")]
+    All,
+
+    [Description("Свободные")]
+    Free,
+
+    [Description("Занятые")]
+    Busy,
+}
 
 public class SystemPageViewModel : AbstractAppManagerViewModel
 {
     public ICommand AddRoomCommand { get; }
 
-    public ICommand ReserveRoomCommand { get; }
-
     public ICommand FindRoomCommand { get; }
 
     public ICommand EditRoomCommand { get; }
 
+    public ICommand ShowRoomsCommand { get; }
+
     public ICommand DeleteRoomCommand { get; }
+
+    public ICommand ReserveRoomCommand { get; }
 
     public ICommand GenerateRoomsCommand { get; }
 
+
+
     public int? NumberRoomTargetFind { get; set; }
+    public TypeViewRooms TypeViewRooms { get; set; }
+
+
 
     public SystemPageViewModel()
     {
@@ -33,25 +52,37 @@ public class SystemPageViewModel : AbstractAppManagerViewModel
         EditRoomCommand = new DelegateCommand<Room>(DialogHostController.Show<RoomEditorDialogViewModel, Room>);
         ReserveRoomCommand = new DelegateCommand<Room>(DialogHostController.Show<ReserveRoomDialogViewModel, Room>);
 
+        FindRoomCommand = new DelegateCommand(ShowRooms);
+        ShowRoomsCommand = new DelegateCommand(ShowRooms);
         DeleteRoomCommand = new DelegateCommand<int>(DeleteRoom);
-        FindRoomCommand = new DelegateCommand<string>(FindRoom);
     }
 
-    public void FindRoom(string text)
+    private void ShowRooms()
     {
-        Rooms = !string.IsNullOrEmpty(text) ? RoomService.Find(int.Parse(text)) : RoomService.GetRooms();
-    }
+        var rooms = RoomService.GetRooms();
 
-    public void DeleteRoom(int roomNumber)
+        switch (TypeViewRooms)
+        {
+            case TypeViewRooms.All:
+                break;
+            case TypeViewRooms.Free:
+                rooms = rooms.Where(room => room.Reservation is null).ToReadOnlyObservableCollection();
+                break;
+            case TypeViewRooms.Busy:
+                rooms = rooms.Where(room => room.Reservation is not null).ToReadOnlyObservableCollection();
+                break;
+        }
+
+        Rooms = NumberRoomTargetFind is null ? rooms : rooms.Where(room => room.Number == NumberRoomTargetFind).ToReadOnlyObservableCollection();
+    }
+    
+    private void DeleteRoom(int roomNumber)
     {
         DialogHostController.ShowMessageBoxConfirmation(
             () => RoomService.DeleteRoom(roomNumber),
             $"Вы точно хотите удалить комнату({roomNumber})?");
     }
 
-    protected override void OnRoomCollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
-    {
-        Rooms = NumberRoomTargetFind is not null ? RoomService.Find((int)NumberRoomTargetFind) : RoomService.GetRooms();
-    }
+    protected override void OnRoomCollectionChanged(object? sender, NotifyCollectionChangedEventArgs e) => ShowRooms();
 }
 

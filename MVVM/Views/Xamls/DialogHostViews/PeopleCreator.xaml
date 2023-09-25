@@ -19,20 +19,19 @@
                     Text="{Binding NewPeople.FullName}" />
                 <TextBox
                     Margin="0,12,0,0"
+                    attached:InputFilterTextBox.AllowedType="Integer"
                     materialDesign:HintAssist.Hint="Возраст"
                     Foreground="White"
                     Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                    Text="{Binding NewPeople.Age}" />
+                    Text="{Binding NewPeople.Age, Converter={StaticResource EmptyStringConverter}}" />
                 <TextBox
                     Margin="0,12,0,0"
-                    attached:InputFilterTextBox.AllowedType="Integer"
                     materialDesign:HintAssist.Hint="Серия паспорта"
                     Foreground="White"
                     Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                     Text="{Binding NewPeople.SeriesPassport}" />
                 <TextBox
                     Margin="0,12,0,0"
-                    attached:InputFilterTextBox.AllowedType="Integer"
                     materialDesign:HintAssist.Hint="Номер паспорта"
                     Foreground="White"
                     Style="{StaticResource MaterialDesignFloatingHintTextBox}"

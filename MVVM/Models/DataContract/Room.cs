@@ -23,7 +23,7 @@ public enum RoomType
     DoubleConvertibleSofa,
 }
 
-public class Room
+public class Room : BindableBase
 {
     public int Number { get; init; }
 

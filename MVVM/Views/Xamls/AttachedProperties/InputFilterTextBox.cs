@@ -34,6 +34,8 @@ public class InputFilterTextBox
 
     public static void AllowedTypeChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
     {
+        ConfigurateMaxValue(d, (AllowedType)e.NewValue);
+
         if (d is not TextBox textBox)
             throw new ArgumentException("failed");
 
@@ -42,6 +44,19 @@ public class InputFilterTextBox
 
         if (allowedType == AllowedType.Integer)
             textBox.PreviewTextInput += IntegerFilterCallback;
+    }
+
+    public static void ConfigurateMaxValue(DependencyObject d, AllowedType typeFilter)
+    {
+        if (!double.IsNaN(GetMaxValue(d)))
+            return;
+
+        switch (typeFilter)
+        {
+            case AllowedType.Integer:
+                SetMaxValue(d, int.MaxValue);
+                return;
+        }
     }
 
     public static void IntegerFilterCallback(object sender, TextCompositionEventArgs e)

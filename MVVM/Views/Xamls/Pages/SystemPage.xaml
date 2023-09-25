@@ -71,13 +71,13 @@
                             materialDesign:TextFieldAssist.DecorationVisibility="Hidden"
                             BorderThickness="0"
                             Foreground="#868686"
-                            Text="{Binding NumberRoomTargetFind, Converter={StaticResource EmptyStringConverter}}">
+                            Text="{Binding NumberRoomTargetFind, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource EmptyStringConverter}}">
                             <TextBox.InputBindings>
                                 <KeyBinding Key="Enter" Command="{Binding FindRoomCommand}" />
                             </TextBox.InputBindings>
                             <i:Interaction.Triggers>
                                 <i:EventTrigger EventName="KeyUp">
-                                    <i:InvokeCommandAction Command="{Binding FindRoomCommand}" CommandParameter="{Binding ElementName=SearchTextBox, Path=Text}" />
+                                    <i:InvokeCommandAction Command="{Binding FindRoomCommand}" />
                                 </i:EventTrigger>
                             </i:Interaction.Triggers>
                         </TextBox>
@@ -120,14 +120,18 @@
                     Margin="20,5,10,5"
                     VerticalAlignment="Center">
                     <ComboBox
+                        ItemsSource="{Binding TypeViewRooms, Converter={StaticResource EnumConverter}}"
+                        SelectedItem="{Binding TypeViewRooms, Converter={StaticResource EnumConverter}}"
+                        SelectedIndex="{Binding TypeViewRooms, Converter={StaticResource EnumConverter}}"
                         x:Name="SelectComboBox"
                         Width="120"
                         Height="30"
-                        Foreground="White"
-                        SelectedIndex="0">
-                        <ComboBoxItem Content="Все" />
-                        <ComboBoxItem Content="Пустые" />
-                        <ComboBoxItem Content="Занятые" />
+                        Foreground="White">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="SelectionChanged">
+                                <i:InvokeCommandAction Command="{Binding ShowRoomsCommand}" />
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
                     </ComboBox>
                 </StackPanel>
             </StackPanel>
@@ -169,7 +173,7 @@
                         IsReadOnly="True" />
                     <materialDesign:DataGridTextColumn
                         Width="Auto"
-                        Binding="{Binding Path=Type, Converter={StaticResource RoomTypeConverter}}"
+                        Binding="{Binding Path=Type, Converter={StaticResource EnumConverter}}"
                         CanUserResize="True"
                         ElementStyle="{StaticResource ES}"
                         Header="Тип номера"
@@ -183,17 +187,19 @@
                         IsReadOnly="True" />
                     <materialDesign:DataGridTextColumn
                         Width="Auto"
-                        Binding="{Binding Reservation, TargetNullValue=Свободно}"
                         CanUserResize="True"
                         FontWeight="Bold"
                         Header="Статус"
                         IsReadOnly="True">
                         <materialDesign:DataGridTextColumn.ElementStyle>
                             <Style BasedOn="{StaticResource ES}" TargetType="TextBlock">
+                                <Setter Property="Foreground" Value="Red" />
+                                <Setter Property="Text" Value="Занято" />
                                 <Style.Triggers>
-                                    <Trigger Property="Text" Value="Свободно">
+                                    <DataTrigger Binding="{Binding Reservation}" Value="{x:Null}">
+                                        <Setter Property="Text" Value="Свободно" />
                                         <Setter Property="Foreground" Value="Green" />
-                                    </Trigger>
+                                    </DataTrigger>
                                 </Style.Triggers>
                             </Style>
                         </materialDesign:DataGridTextColumn.ElementStyle>

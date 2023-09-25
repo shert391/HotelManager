@@ -5,6 +5,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:sys="clr-namespace:System;assembly=mscorlib"
     Width="900"
     Height="356"
     mc:Ignorable="d">
@@ -24,11 +25,19 @@
                     VerticalAlignment="Center"
                     Orientation="Horizontal">
                     <DatePicker
-                        x:Name="FutureDatePicker"
-                        Width="100"
+                        Width="184"
                         materialDesign:CalendarAssist.IsHeaderVisible="False"
-                        materialDesign:HintAssist.Hint="Конец брони"
-                        Foreground="LightGray" />
+                        materialDesign:HintAssist.Hint="Дата выселения"
+                        Foreground="LightGray"
+                        SelectedDate="{Binding EndData, Mode=TwoWay}" />
+                    <materialDesign:TimePicker
+                        Width="184"
+                        Margin="20,0,0,0"
+                        materialDesign:CalendarAssist.IsHeaderVisible="False"
+                        materialDesign:HintAssist.Hint="Время выселения"
+                        Foreground="LightGray"
+                        Is24Hours="True"
+                        SelectedTime="{Binding EndData, Mode=TwoWay}" />
                 </StackPanel>
                 <StackPanel
                     Grid.Column="1"

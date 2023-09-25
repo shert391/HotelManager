@@ -15,5 +15,5 @@ public interface IRoomService
     
     public void SubscribeChange(NotifyCollectionChangedEventHandler subscriber);
     public ReadOnlyObservableCollection<Room> GetRooms();
-    public ReadOnlyObservableCollection<Room> Find(int roomNumber);
+    public ReadOnlyObservableCollection<Room> FindAll(Func<Room, bool> expression);
 }
