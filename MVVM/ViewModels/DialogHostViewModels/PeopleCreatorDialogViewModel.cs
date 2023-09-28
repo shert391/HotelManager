@@ -3,36 +3,46 @@ using HotelManager.MVVM.Models.Builders;
 using HotelManager.MVVM.Models.DataContract;
 using HotelManager.MVVM.Models.Others;
 using HotelManager.MVVM.Utils;
-using System.Collections.ObjectModel;
 using System.Windows.Input;
 
 namespace HotelManager.MVVM.ViewModels.DialogHostViewModels;
 
-public class PeopleCreatorDialogViewModel : AbstractDialogManagerViewModel, IConfigurable<ObservableCollection<People>>
+public class PeopleCreatorDialogViewModel : AbstractDialogInteractiveViewModel, IConfigurable<PeopleCreatorDialogViewModel.Configuration>
 {
-    private ValidatorBase _validatorBase = new(DefaultValidatorConfigBuilder.Create().AddShowErrorMessageBox().Build());
-    public ICommand AddPeopleCommand { get; }
+    public class Configuration : BindableBase
+    {
+        public bool IsStateEditing { get; init; } = false;
+        public Action<People>? OnSuccessfulValidation { get; init; }
+        public People? InitInputDefault;
+    }
+    
+    public ICommand ValidateInputCommand { get; }
     public ICommand CancelCommand { get; }
+    public Configuration? Config { get; private set; }
+    
+    private readonly ValidatorBase _validatorBase = new(DefaultValidatorConfigBuilder.Create().AddShowErrorMessageBox().Build());
 
-    public ObservableCollection<People>? PeoplesCollection { get; private set; }
-
-    public People NewPeople { get; } = new();
+    public People NewPeople { get; private set; } = new();
 
     public PeopleCreatorDialogViewModel()
     {
         CancelCommand = new DelegateCommand(() => DialogHostController.BackViewModel(1));
-        AddPeopleCommand = new DelegateCommand(AddPeople);
+        ValidateInputCommand = new DelegateCommand(ValidateInput);
     }
 
-    private void AddPeople()
+    private void ValidateInput()
     {
         if (!_validatorBase.DefaultValidate(NewPeople, typeof(PeopleValidator)))
             return;
 
-        PeoplesCollection?.Add(NewPeople);
-
-        DialogHostController.ShowMessageBoxInformation("Жилец успешно добавлен!", () => DialogHostController.BackViewModel(2));
+        Config?.OnSuccessfulValidation?.Invoke(NewPeople);
     }
-
-    public void Configurate(ObservableCollection<People> peoplesCollection) => PeoplesCollection = peoplesCollection;
+    
+    public void Configurate(Configuration configuration)
+    {
+        Config = configuration;
+        
+        if(configuration.InitInputDefault is not null)
+            NewPeople = configuration.InitInputDefault;
+    }
 }

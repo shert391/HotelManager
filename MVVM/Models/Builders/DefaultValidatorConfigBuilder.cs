@@ -35,13 +35,13 @@ public class DefaultValidatorConfigBuilder
 
     public DefaultValidatorConfigBuilder AddShowErrorMessageBox(bool isClose = false)
     {
-        _validatorConfig.OnError = error => DialogHostController.ShowMessageBoxInformation(error, isClose);
+        _validatorConfig.OnError = error => DialogHostController.ShowMessageBoxInformation(error, isCloseDialogViewOnAccept: isClose);
         return this;
     }
     
     public DefaultValidatorConfigBuilder AddShowMessageBox(string message, bool isClose = false)
     {
-        _validatorConfig.OnSuccess = () => DialogHostController.ShowMessageBoxInformation(message, isClose);
+        _validatorConfig.OnSuccess = () => DialogHostController.ShowMessageBoxInformation(message, isCloseDialogViewOnAccept: isClose);
         return this;
     }
 

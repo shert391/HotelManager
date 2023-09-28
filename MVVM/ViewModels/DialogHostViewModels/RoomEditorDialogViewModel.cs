@@ -7,7 +7,7 @@ using System.Windows.Input;
 
 namespace HotelManager.MVVM.ViewModels.DialogHostViewModels;
 
-internal class RoomEditorDialogViewModel : AbstractDialogManagerViewModel, IConfigurable<Room>
+internal class RoomEditorDialogViewModel : AbstractDialogInteractiveViewModel, IConfigurable<Room>
 {
     public RoomChangeRequest RoomChangeRequest { get; } = new();
 

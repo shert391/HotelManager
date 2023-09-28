@@ -6,7 +6,7 @@ using System.Windows.Input;
 
 namespace HotelManager.MVVM.ViewModels.DialogHostViewModels;
 
-class RoomCreatorDialogViewModel : AbstractDialogManagerViewModel
+class RoomCreatorDialogViewModel : AbstractDialogInteractiveViewModel
 {
     public int Number { get; set; } = 1;
 

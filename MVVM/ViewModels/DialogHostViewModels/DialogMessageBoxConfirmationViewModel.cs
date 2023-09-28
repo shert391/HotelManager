@@ -13,9 +13,9 @@ public class DialogMessageBoxConfirmationViewModel : AbstractDialogMessageBoxVie
     {
         AcceptCommand = new DelegateCommand(() => {
             onAgreement();
-            DialogHostController.Close();
+            DialogHostController.BackViewModel();
         });
 
-        CancelCommand = new DelegateCommand(DialogHostController.Close);
+        CancelCommand = new DelegateCommand(() => DialogHostController.BackViewModel());
     }
 }

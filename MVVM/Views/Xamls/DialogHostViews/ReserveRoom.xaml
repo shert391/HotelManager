@@ -5,8 +5,8 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:sys="clr-namespace:System;assembly=mscorlib"
-    Width="900"
+    Style="{StaticResource PageStyle}"
+    Width="1100"
     Height="356"
     mc:Ignorable="d">
     <Border Background="#323232" ClipToBounds="True">
@@ -120,7 +120,38 @@
                                 Header="Операция"
                                 IsReadOnly="True">
                                 <DataGridTemplateColumn.CellTemplate>
-                                    <DataTemplate />
+                                    <DataTemplate>
+                                        <StackPanel Orientation="Horizontal">
+                                            <Button
+                                                Width="35"
+                                                Height="35"
+                                                Margin="5"
+                                                Background="Red"
+                                                Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}, Path=DataContext.DeletePeopleCommand}"
+                                                CommandParameter="{Binding .}"
+                                                Style="{StaticResource ModifyStyleButton}">
+                                                <materialDesign:PackIcon
+                                                    Width="Auto"
+                                                    Height="Auto"
+                                                    Margin="5"
+                                                    Kind="Delete" />
+                                            </Button>
+                                            <Button
+                                                Width="35"
+                                                Height="35"
+                                                Margin="5"
+                                                Background="Green"
+                                                Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}, Path=DataContext.EditPeopleCommand}"
+                                                CommandParameter="{Binding .}"
+                                                Style="{StaticResource ModifyStyleButton}">
+                                                <materialDesign:PackIcon
+                                                    Width="Auto"
+                                                    Height="Auto"
+                                                    Margin="5"
+                                                    Kind="Pencil" />
+                                            </Button>
+                                        </StackPanel>
+                                    </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
                         </DataGrid.Columns>

@@ -6,8 +6,8 @@
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     Title="HotelManager"
-    Width="1000"
-    Height="650"
+    Width="1200"
+    Height="800"
     AllowsTransparency="True"
     Background="Transparent"
     ResizeMode="NoResize"
@@ -22,7 +22,7 @@
         MouseDown="WindowMove">
         <Grid x:Name="GridApp">
             <Grid.RowDefinitions>
-                <RowDefinition Height="0.08*" />
+                <RowDefinition Height="0.06*" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
 
@@ -35,7 +35,7 @@
 
             <Grid x:Name="GridHeader">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="0.063*" />
+                    <ColumnDefinition Width="0.053*" />
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="0.15*" />
                 </Grid.ColumnDefinitions>
@@ -58,9 +58,10 @@
                 </StackPanel>
 
                 <Image
-                    x:Name="ImageLogo"
+                    Grid.Column="0" x:Name="ImageLogo"
+                    HorizontalAlignment="Left"
+                    Margin="10 0 0 0 "
                     Width="30"
-                    HorizontalAlignment="Center"
                     RenderOptions.BitmapScalingMode="HighQuality"
                     Source="../Icons/main_app_icon.ico" />
 

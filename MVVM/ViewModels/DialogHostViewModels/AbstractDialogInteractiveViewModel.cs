@@ -1,6 +1,6 @@
 namespace HotelManager.MVVM.ViewModels.DialogHostViewModels;
 
-public abstract class AbstractDialogManagerViewModel : AbstractAppManagerViewModel, IDialogViewModel
+public abstract class AbstractDialogInteractiveViewModel : AbstractAppManagerViewModel, IDialogViewModel
 {
     public IDialogViewModel? Parent { get; set; }
 }

@@ -15,7 +15,15 @@ public static class DialogHostController
         if (dialogSession is null) return;
         for (var i = 0; i < count; i++)
         {
-            _currentDialogViewModel = _currentDialogViewModel?.Parent;
+            var parentViewModel = _currentDialogViewModel?.Parent;
+            _currentDialogViewModel = parentViewModel;
+            
+            if (parentViewModel is null)
+            {
+                Close();
+                return;
+            }
+            
             dialogSession.UpdateContent(_currentDialogViewModel);
         }
     }
@@ -23,6 +31,7 @@ public static class DialogHostController
     private static void ShowViewModel(IDialogViewModel newViewModel)
     {
         var dialogSession = DialogHost.GetDialogSession(_dialogHostName);
+        _currentDialogViewModel = newViewModel;
 
         if (dialogSession is null)
         {
@@ -31,8 +40,6 @@ public static class DialogHostController
         }
 
         newViewModel.Parent = dialogSession.Content as IDialogViewModel;
-        _currentDialogViewModel = newViewModel;
-        
         dialogSession.UpdateContent(newViewModel);
     }
 
@@ -48,18 +55,17 @@ public static class DialogHostController
         ShowViewModel(dialogViewModel);
     }
 
-    public static void ShowMessageBoxInformation(string message, bool isClose = false)
+    public static void ShowMessageBoxInformation(string message, int backCount = 1, bool isCloseDialogViewOnAccept = false)
     {
         DialogMessageBoxInformationViewModel messageBoxViewModel;
-        if (isClose) messageBoxViewModel = new(message, Close);
-        else messageBoxViewModel = new(message, () => BackViewModel());
+        if (isCloseDialogViewOnAccept) messageBoxViewModel = new(message, Close);
+        else messageBoxViewModel = new(message, () => BackViewModel(backCount));
         ShowViewModel(messageBoxViewModel);
     }
 
     public static void ShowMessageBoxInformation(string message, Action onOkButtonClick)
     {
-        DialogMessageBoxInformationViewModel messageBoxViewModel;
-        messageBoxViewModel = new(message, onOkButtonClick);
+        DialogMessageBoxInformationViewModel messageBoxViewModel = new(message, onOkButtonClick);
         ShowViewModel(messageBoxViewModel);
     }
 

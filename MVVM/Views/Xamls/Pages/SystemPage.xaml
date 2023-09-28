@@ -7,14 +7,14 @@
     xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    d:DesignHeight="580"
-    d:DesignWidth="950"
+    Width="1154"
+    Height="744"
     Language="ru-Ru"
     Style="{StaticResource PageStyle}"
     mc:Ignorable="d">
     <Grid x:Name="ControllGrid">
         <Grid.RowDefinitions>
-            <RowDefinition Height="0.15*" />
+            <RowDefinition Height="0.08*" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 

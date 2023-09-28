@@ -5,6 +5,7 @@
     xmlns:attached="clr-namespace:HotelManager.MVVM.Views.Xamls.AttachedProperties"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+    Style="{StaticResource PageStyle}"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     Width="300"
     Height="195"
