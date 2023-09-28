@@ -7,7 +7,7 @@ namespace HotelManager.MVVM.Utils;
 public static class DialogHostController
 {
     private const string _dialogHostName = "MainDialogHost";
-    private static IDialogViewModel? _currentDialogViewModel;
+    private static AbstractDialogViewModel? _currentDialogViewModel;
     
     public static void BackViewModel(int count = 1)
     {
@@ -28,7 +28,7 @@ public static class DialogHostController
         }
     }
     
-    private static void ShowViewModel(IDialogViewModel newViewModel)
+    private static void ShowViewModel(AbstractDialogViewModel newViewModel)
     {
         var dialogSession = DialogHost.GetDialogSession(_dialogHostName);
         _currentDialogViewModel = newViewModel;
@@ -39,17 +39,17 @@ public static class DialogHostController
             return;
         }
 
-        newViewModel.Parent = dialogSession.Content as IDialogViewModel;
+        newViewModel.Parent = dialogSession.Content as AbstractDialogViewModel;
         dialogSession.UpdateContent(newViewModel);
     }
 
-    public static void Show<T>() where T : notnull, IDialogViewModel
+    public static void Show<T>() where T : notnull, AbstractDialogViewModel
     {
         var dialogViewModel = App.Resolve<T>();
         ShowViewModel(dialogViewModel);
     }
 
-    public static void Show<T, TOption>(TOption option) where T : notnull, IDialogViewModel, IConfigurable<TOption>
+    public static void Show<T, TOption>(TOption option) where T : notnull, AbstractDialogViewModel, IConfigurable<TOption>
     {
         var dialogViewModel = App.Resolve<T, TOption>(option);
         ShowViewModel(dialogViewModel);

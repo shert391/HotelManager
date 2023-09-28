@@ -16,7 +16,7 @@ public static class AddViewModelsHostBuilderExtension
             servicesProvider.TryAddSingleton<SystemPageViewModel>();
             servicesProvider.TryAddSingleton<MainWindowViewModel>();
             servicesProvider.TryAddSingleton<RoomEditorDialogViewModel>();
-            servicesProvider.TryAddTransient<ReserveRoomDialogViewModel>();
+            servicesProvider.TryAddTransient<ReserveCreatorDialogViewModel>();
             servicesProvider.TryAddTransient<PeopleCreatorDialogViewModel>();
             servicesProvider.TryAddSingleton<RoomCreatorDialogViewModel>();
         });

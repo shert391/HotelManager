@@ -21,7 +21,6 @@ public class TestService : ITestService
              i <= _random.Next(minRooms, maxRooms); 
              i++)
         {
-            var room = new Room();
             _roomService.AddRoom(new Room()
             {
                 Number = i,

@@ -7,7 +7,7 @@ using System.Windows.Input;
 
 namespace HotelManager.MVVM.ViewModels.DialogHostViewModels;
 
-public class PeopleCreatorDialogViewModel : AbstractDialogInteractiveViewModel, IConfigurable<PeopleCreatorDialogViewModel.Configuration>
+public class PeopleCreatorDialogViewModel : AbstractDialogViewModel, IConfigurable<PeopleCreatorDialogViewModel.Configuration>
 {
     public class Configuration : BindableBase
     {

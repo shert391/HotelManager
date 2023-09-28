@@ -3,11 +3,14 @@ using HotelManager.MVVM.Models.Builders;
 using HotelManager.MVVM.Models.DataContract;
 using HotelManager.MVVM.Utils;
 using System.Windows.Input;
+using HotelManager.MVVM.Models.Services.RoomServices;
 
 namespace HotelManager.MVVM.ViewModels.DialogHostViewModels;
 
-class RoomCreatorDialogViewModel : AbstractDialogInteractiveViewModel
+class RoomCreatorDialogViewModel : AbstractDialogViewModel
 {
+    private IRoomService _roomService;
+    
     public int Number { get; set; } = 1;
 
     public decimal Price { get; set; } = 3000;
@@ -18,15 +21,16 @@ class RoomCreatorDialogViewModel : AbstractDialogInteractiveViewModel
 
     public ICommand CancelCommand { get; }
 
-    public RoomCreatorDialogViewModel()
+    public RoomCreatorDialogViewModel(IRoomService roomService)
     {
+        _roomService = roomService;
         CreateRoomCommand = new DelegateCommand(CreateRoom);
         CancelCommand = new DelegateCommand(DialogHostController.Close);
     }
 
     private void CreateRoom()
     {
-        RoomService.AddRoom(new Room
+        _roomService.AddRoom(new Room
         {
             Number = Number,
             Price = Price,

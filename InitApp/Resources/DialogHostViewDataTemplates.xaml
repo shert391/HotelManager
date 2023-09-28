@@ -19,7 +19,7 @@
         <dialogHostViews:RoomEditor />
     </DataTemplate>
 
-    <DataTemplate DataType="{x:Type dialogHostViewModels:ReserveRoomDialogViewModel}">
+    <DataTemplate DataType="{x:Type dialogHostViewModels:ReserveCreatorDialogViewModel}">
         <dialogHostViews:ReserveRoom />
     </DataTemplate>
 

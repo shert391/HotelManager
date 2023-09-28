@@ -1,8 +1,19 @@
 ﻿using DevExpress.Mvvm;
-using System.ComponentModel;
 
 namespace HotelManager.MVVM.Models.DataContract;
-public class People : BindableBase
+
+public interface IPeople
+{
+    public int? Age { get; }
+    public string? FullName { get; }
+    public string? PhoneNumber { get; }
+    public string? NumberPassport { get; }
+    public string? SeriesPassport { get; }
+    public string? ResidenceAddress { get; }
+    public People Clone();
+}
+
+public class People : BindableBase, IPeople
 {
     public int? Age { get; set; }
     public string? FullName { get; set; }
@@ -10,5 +21,6 @@ public class People : BindableBase
     public string? NumberPassport { get; set; }
     public string? SeriesPassport { get; set; }
     public string? ResidenceAddress { get; set; }
+    public People Clone() => (People)MemberwiseClone();
 }
 

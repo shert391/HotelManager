@@ -14,6 +14,7 @@ public interface IRoomService
     public void DeleteRoom(int roomNumber);
     
     public void SubscribeChange(NotifyCollectionChangedEventHandler subscriber);
-    public ReadOnlyObservableCollection<Room> GetRooms();
-    public ReadOnlyObservableCollection<Room> FindAll(Func<Room, bool> expression);
+    public IReadOnlyCollection<IRoom> GetRooms();
+    public IReadOnlyCollection<IPeople> GetPeoplesInfo(int targetRoomIndex);
+    public T GetReservationInfo<T>(int configTargetRoomIndex, Func<IReservation, T> expression);
 }

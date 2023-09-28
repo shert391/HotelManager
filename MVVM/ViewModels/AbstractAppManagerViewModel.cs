@@ -1,4 +1,3 @@
-using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using HotelManager.InitApp;
 using HotelManager.MVVM.Models.DataContract;
@@ -11,7 +10,7 @@ public abstract class AbstractAppManagerViewModel : BaseViewModel
 {
     protected readonly IRoomService RoomService = App.Resolve<IRoomService>();
     protected readonly ITestService TestService = App.Resolve<ITestService>();
-    public ReadOnlyObservableCollection<Room> Rooms { get; set; }
+    public IReadOnlyCollection<IRoom> Rooms { get; protected set; }
     protected AbstractAppManagerViewModel()
     {
         Rooms = RoomService.GetRooms();

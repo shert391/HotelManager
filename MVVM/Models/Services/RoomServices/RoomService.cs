@@ -4,7 +4,6 @@ using HotelManager.MVVM.Models.DataContract;
 using HotelManager.MVVM.Models.DataContract.Requests;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
-using System.Linq;
 
 namespace HotelManager.MVVM.Models.Services.RoomServices;
 
@@ -12,21 +11,29 @@ public class RoomService : IRoomService
 {
     private readonly ObservableCollection<Room> _rooms = new();
     private readonly RoomServiceValidator _roomServiceValidator;
-    private readonly ReadOnlyObservableCollection<Room> _roomsReadonly;
 
-    public RoomService()
+    public RoomService() => _roomServiceValidator = new RoomServiceValidator(_rooms);
+
+    public IReadOnlyCollection<IRoom> GetRooms() => _rooms;
+    public IReadOnlyCollection<IPeople> GetPeoplesInfo(int targetRoomIndex) => GetReservation(FindRoom(targetRoomIndex)).Peoples;
+
+    private Reservation GetReservation(Room room)
     {
-        _roomsReadonly = new(_rooms);
-        _roomServiceValidator = new RoomServiceValidator(_roomsReadonly);
-    }
+        if (room.Reservation is null)
+            throw new Exception("Reservation is null");
 
-    public ReadOnlyObservableCollection<Room> GetRooms() => _roomsReadonly;
+        return room.Reservation;
+    }
+    private Room FindRoom(int numberRoom) => _rooms.First(room => room.Number == numberRoom);
+    
+    public T GetReservationInfo<T>(int configTargetRoomIndex, Func<IReservation, T> expression)
+    {
+        var reservation = FindRoom(configTargetRoomIndex);
+        return expression(GetReservation(reservation));
+    }
 
     public void SubscribeChange(NotifyCollectionChangedEventHandler subscriber) =>
         _rooms.CollectionChanged += subscriber;
-
-    public ReadOnlyObservableCollection<Room> FindAll(Func<Room, bool> expression) =>
-        new(_rooms.Where(expression).ToObservableCollection());
 
     public void DeleteRoom(int roomNumber) => _rooms.Remove(_rooms.Single(room => room.Number == roomNumber));
 
@@ -50,7 +57,7 @@ public class RoomService : IRoomService
     {
         var index = _rooms.IndexOf(room => room.Number == roomChangeRequest.NumberTargetRoom);
 
-        var newRoom = new Room()
+        var newRoom = new Room
         {
             Number = roomChangeRequest.NumberTargetRoom,
             Price = roomChangeRequest.NewPrice,

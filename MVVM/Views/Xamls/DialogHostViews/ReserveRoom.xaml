@@ -179,10 +179,29 @@
                                 Height="30"
                                 Margin="8,0,0,0"
                                 HorizontalAlignment="Right"
-                                Background="Yellow"
-                                Command="{Binding ReserveCommand}"
-                                Style="{StaticResource ModifyStyleButton}">
-                                <TextBlock Style="{StaticResource MaterialDesignSubtitle2TextBlock}">Забронировать</TextBlock>
+                                Command="{Binding ReserveCommand}">
+                                <TextBlock>
+                                    <TextBlock.Style>
+                                        <Style BasedOn="{StaticResource MaterialDesignSubtitle2TextBlock}" TargetType="TextBlock">
+                                            <Setter Property="Text" Value="Забронировать"></Setter>
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding Config.IsStateEditing}" Value="True">
+                                                    <Setter Property="Text" Value="Изменить"></Setter>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </TextBlock.Style>
+                                </TextBlock>
+                                <Button.Style>
+                                    <Style BasedOn="{StaticResource ModifyStyleButton}" TargetType="Button">
+                                        <Setter Property="Background" Value="Yellow"></Setter>
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding Config.IsStateEditing}" Value="True">
+                                                <Setter Property="Background" Value="Green"></Setter>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Button.Style>
                             </Button>
                         </StackPanel>
                         <Button

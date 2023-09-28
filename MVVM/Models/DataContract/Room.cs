@@ -23,16 +23,27 @@ public enum RoomType
     DoubleConvertibleSofa,
 }
 
-public class Room : BindableBase
+public interface IRoom
+{
+    public int Number { get; }
+    public decimal Price { get; }
+    public RoomType Type { get; }
+    public int MaxPeoples { get; }
+    public bool IsReservation { get; }
+}
+
+public class Room : BindableBase, IRoom
 {
     public int Number { get; init; }
 
     public decimal Price { get; init; }
 
     public RoomType Type { get; init; }
-    
+
+    public bool IsReservation => Reservation is not null; 
+
     public Reservation? Reservation { get; set; }
-    
+
     public Room Clone() => (Room)MemberwiseClone();
     
     public int MaxPeoples => Type.GetMaxPeople();

@@ -244,15 +244,34 @@
                                         Width="35"
                                         Height="35"
                                         Margin="5"
-                                        Background="LightBlue"
-                                        Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}, Path=DataContext.ReserveRoomCommand}"
-                                        CommandParameter="{Binding .}"
-                                        Style="{StaticResource ModifyStyleButton}">
+                                        CommandParameter="{Binding .}">
+                                        <Button.Style>
+                                            <Style BasedOn="{StaticResource ModifyStyleButton}" TargetType="Button">
+                                                <Setter Property="Background" Value="Aqua"></Setter>
+                                                <Setter Property="Command" Value="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}, Path=DataContext.EditReservetionRoomCommand}"></Setter>
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding Reservation}" Value="{x:Null}">
+                                                        <Setter Property="Background" Value="LightBlue"></Setter>
+                                                        <Setter Property="Command" Value="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}, Path=DataContext.ReserveRoomCommand}"></Setter>
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </Button.Style>
                                         <materialDesign:PackIcon
                                             Width="Auto"
                                             Height="Auto"
-                                            Margin="5"
-                                            Kind="FileDocumentEditOutline" />
+                                            Margin="5">
+                                            <materialDesign:PackIcon.Style>
+                                                <Style TargetType="materialDesign:PackIcon">
+                                                    <Setter Property="Kind" Value="FileDocumentEditOutline"></Setter>
+                                                    <Style.Triggers>
+                                                        <DataTrigger Binding="{Binding Reservation}" Value="{x:Null}">
+                                                            <Setter Property="Kind" Value="FileDocumentArrowRightOutline"></Setter>
+                                                        </DataTrigger>
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </materialDesign:PackIcon.Style>
+                                        </materialDesign:PackIcon>
                                     </Button>
                                 </StackPanel>
                             </DataTemplate>
