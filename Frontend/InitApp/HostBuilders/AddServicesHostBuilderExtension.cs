@@ -1,4 +1,5 @@
 ﻿using HotelManager.MVVM.Models;
+using HotelManager.MVVM.Models.Services.PostmanService;
 using HotelManager.MVVM.Models.Services.ReservationService;
 using HotelManager.MVVM.Models.Services.RoomService;
 using HotelManager.MVVM.Models.Services.TestService;
@@ -22,6 +23,7 @@ public static class AddServicesHostBuilderExtension
             servicesProvider.TryAddSingleton<IRoomServiceValidator, RoomServiceValidator>();
             
             servicesProvider.TryAddSingleton<ITestService, TestService>();
+            servicesProvider.TryAddSingleton<IPostmanService, PostmanService>();
         });
 
         return hostBuilder;

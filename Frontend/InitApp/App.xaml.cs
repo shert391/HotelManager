@@ -1,9 +1,10 @@
-﻿using HotelManager.InitApp.HostBuilders;
-using HotelManager.MVVM.Utils;
+﻿using System.Diagnostics;
+using HotelManager.InitApp.HostBuilders;
 using HotelManager.MVVM.Views.Xamls;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System.Windows;
+using Microsoft.Extensions.Configuration;
 using IConfiguration = Microsoft.Extensions.Configuration.IConfiguration;
 
 namespace HotelManager.InitApp;
@@ -43,9 +44,11 @@ public partial class App
     {
         await _host.StopAsync();
         _host.Dispose();
-
         base.OnExit(e);
+        Process.GetCurrentProcess().Kill();
     }
 
+    public static void ExecuteFromMainThread(Action action) => Current.Dispatcher.Invoke(action);
+    public static T? GetSetting<T>(string setting) where T : notnull => _configApp.GetValue<T>(setting);
     public static T Resolve<T>() where T : notnull => _host.Services.GetRequiredService<T>();
 }

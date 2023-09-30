@@ -1,10 +1,12 @@
 ﻿using System.ComponentModel;
 using DevExpress.Mvvm;
+using DevExpress.Mvvm.Native;
 using HotelManager.MVVM.Utils;
 using HotelManager.MVVM.ViewModels.DialogHostViewModels;
 using System.Windows.Input;
 using DataContract.Extensions;
 using DataContract.ViewModelsDto;
+using HotelManager.MVVM.Models.Services.PostmanService.Messages;
 
 namespace HotelManager.MVVM.ViewModels.PageViewModels;
 
@@ -42,23 +44,30 @@ public class SystemPageViewModel : AbstractRoomManagerViewModel
 
     public SystemPageViewModel()
     {
-        GenerateRoomsCommand = new DelegateCommand(() => TestService.GenerateTestRooms());
+        RoomsView.Filter = FilteringRooms;
 
-        ReserveRoomCommand = new DelegateCommand<RoomViewModel>(ReserveRoom);
-        EditReservationRoomCommand = new DelegateCommand<RoomViewModel>(EditReservationRoom);
-        AddRoomCommand = new DelegateCommand(DialogHostController.Show<RoomCreatorDialogViewModel>);
         EditRoomCommand = new DelegateCommand<RoomViewModel>(roomViewModel =>
         {
             var viewModel = DialogHostController.ShowPull<RoomEditorDialogViewModel>();
             viewModel.NewRoomDto = roomViewModel.Clone();
         });
-
-        RoomsView.Filter = FilteringRooms;
+        
+        DeleteRoomCommand = new DelegateCommand<int>(DeleteRoom);
         FindRoomCommand = new DelegateCommand(RoomsView.Refresh);
         ShowRoomsCommand = new DelegateCommand(RoomsView.Refresh);
-        DeleteRoomCommand = new DelegateCommand<int>(DeleteRoom);
+        ReserveRoomCommand = new DelegateCommand<RoomViewModel>(ReserveRoom);
+        EditReservationRoomCommand = new DelegateCommand<RoomViewModel>(EditReservationRoom);
+        AddRoomCommand = new DelegateCommand(DialogHostController.Show<RoomCreatorDialogViewModel>);
+        GenerateRoomsCommand = new DelegateCommand(() => TestService.GenerateTestRooms());
     }
 
+    protected override void RequestPayment(PayInformation payInfo)
+    {
+        var targetRoom = Rooms[Rooms.IndexOf(room => room.Number == payInfo.NumberRoom)];
+        targetRoom.CurrentState = RoomState.NeedPaid;
+        targetRoom.NeedPaid = payInfo.Price;
+    }
+    
     private bool FilteringRooms(object obj)
     {
         if (obj is not RoomViewModel roomViewModel)

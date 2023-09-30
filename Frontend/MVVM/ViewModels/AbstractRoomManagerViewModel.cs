@@ -1,9 +1,11 @@
-using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Windows.Data;
+using DataContract.Extensions;
 using DataContract.ViewModelsDto;
 using HotelManager.InitApp;
+using HotelManager.MVVM.Models.Services.PostmanService;
+using HotelManager.MVVM.Models.Services.PostmanService.Messages;
 using HotelManager.MVVM.Models.Services.ReservationService;
 using HotelManager.MVVM.Models.Services.RoomService;
 using HotelManager.MVVM.Models.Services.TestService;
@@ -16,29 +18,28 @@ public abstract class AbstractRoomManagerViewModel : BaseViewModel
 {
     protected readonly IRoomService RoomService = App.Resolve<IRoomService>();
     protected readonly ITestService TestService = App.Resolve<ITestService>();
+    private readonly IPostmanService _postmanService = App.Resolve<IPostmanService>();
+    
     protected readonly IReservationService ReservationService = App.Resolve<IReservationService>();
     
-    private readonly ObservableCollection<RoomViewModel> _rooms; // TODO: Наслоить оболочку с функционалом уведомления об изменении ссылочных типов
+    protected readonly ExtendedObservableCollection<RoomViewModel> Rooms; 
     public ICollectionView RoomsView { get; }
 
     protected AbstractRoomManagerViewModel()
     {
-        _rooms = RoomService.GetRoomsForViewModel();
-        // RoomService.NewMessage += NewMessageHandler;
-        RoomsView = CollectionViewSource.GetDefaultView(_rooms);
+        Rooms = RoomService.GetRoomsForViewModel();
+        _postmanService.NewMessage += OnNewMessage;
+        RoomsView = CollectionViewSource.GetDefaultView(Rooms);
+        Rooms.ItemPropertyChanged += () => RoomsView?.Refresh();
         RoomService.RoomCollectionChanged += OnRoomCollectionChanged;
     }
 
-    // protected virtual void NewMessageHandler(IRoomServiceMessage message) // TODO: надо декомпозировать
-    // {
-    //     if (message is not TimeEvictMessage evictMessage)
-    //         return;
-    //     
-    //     var room = _rooms.First(room => room.Number == evictMessage.NumberRoom);
-    //     
-    //     room.CurrentState = RoomState.NeedPaid;
-    //     room.NeedPaid = evictMessage.NeedPay;
-    // }
+    private void OnNewMessage(IMessage message)
+    {
+        if (message is PayInformation payInfo) RequestPayment(payInfo);
+    }
+
+    protected virtual void RequestPayment(PayInformation payInformation) { }
 
     private void OnRoomCollectionChanged(RoomViewModel? roomViewModel, NotifyCollectionChangedAction action,
         int newIndex, int oldIndex)
@@ -46,13 +47,13 @@ public abstract class AbstractRoomManagerViewModel : BaseViewModel
         switch (action)
         {
             case NotifyCollectionChangedAction.Add:
-                _rooms.Add(roomViewModel!);
+                Rooms.Add(roomViewModel!);
                 break;
             case NotifyCollectionChangedAction.Remove:
-                _rooms.RemoveAt(oldIndex);
+                Rooms.RemoveAt(oldIndex);
                 break;
             case NotifyCollectionChangedAction.Replace:
-                _rooms[newIndex] = roomViewModel!;
+                Rooms[newIndex] = roomViewModel!;
                 break;
             case NotifyCollectionChangedAction.Move:
                 break;
