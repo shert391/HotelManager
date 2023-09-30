@@ -1,0 +1,156 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net7.0-windows</TargetFramework>
+    <RootNamespace>HotelManager</RootNamespace>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UseWPF>true</UseWPF>
+    <ApplicationIcon>MVVM\Views\Icons\main_app_icon.ico</ApplicationIcon>
+    <BaseOutputPath>..\Builds</BaseOutputPath>
+    <AssemblyName>HotelManager</AssemblyName>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="GlobalSettings.json" />
+    <None Remove="InitApp\FodyWeavers.xsd" />
+    <None Remove="MVVM\Views\Fonts\Montserrat\Montserrat-BlackItalic.ttf" />
+    <None Remove="MVVM\Views\Fonts\Montserrat\Montserrat-Bold.ttf" />
+    <None Remove="MVVM\Views\Fonts\Montserrat\Montserrat-BoldItalic.ttf" />
+    <None Remove="MVVM\Views\Fonts\Montserrat\Montserrat-ExtraBold.ttf" />
+    <None Remove="MVVM\Views\Fonts\Montserrat\Montserrat-ExtraBoldItalic.ttf" />
+    <None Remove="MVVM\Views\Fonts\Montserrat\Montserrat-ExtraLight.ttf" />
+    <None Remove="MVVM\Views\Fonts\Montserrat\Montserrat-ExtraLightItalic.ttf" />
+    <None Remove="MVVM\Views\Fonts\Montserrat\Montserrat-Italic.ttf" />
+    <None Remove="MVVM\Views\Fonts\Montserrat\Montserrat-Light.ttf" />
+    <None Remove="MVVM\Views\Fonts\Montserrat\Montserrat-LightItalic.ttf" />
+    <None Remove="MVVM\Views\Fonts\Montserrat\Montserrat-Medium.ttf" />
+    <None Remove="MVVM\Views\Fonts\Montserrat\Montserrat-MediumItalic.ttf" />
+    <None Remove="MVVM\Views\Fonts\Montserrat\Montserrat-Regular.ttf" />
+    <None Remove="MVVM\Views\Fonts\Montserrat\Montserrat-Thin.ttf" />
+    <None Remove="MVVM\Views\Fonts\Montserrat\Montserrat-ThinItalic.ttf" />
+    <None Remove="MVVM\Views\Icons\close_red.png" />
+    <None Remove="MVVM\Views\Icons\close_white.png" />
+    <None Remove="MVVM\Views\Icons\minimize_grey.png" />
+    <None Remove="MVVM\Views\Icons\minimize_white.png" />
+    <None Remove="MVVM\Views\Icons\plus.png" />
+    <None Remove="MVVM\Views\Icons\stretch.png" />
+    <None Remove="MVVM\Views\Icons\system.png" />
+    <None Remove="MVVM\Views\Icons\testing.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Remove="InitApp\App.xaml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ApplicationDefinition Include="InitApp\App.xaml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="..\GlobalSettings.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="MVVM\Views\Fonts\Montserrat\Montserrat-BlackItalic.ttf">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="MVVM\Views\Fonts\Montserrat\Montserrat-Bold.ttf">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="MVVM\Views\Fonts\Montserrat\Montserrat-BoldItalic.ttf">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="MVVM\Views\Fonts\Montserrat\Montserrat-ExtraBold.ttf">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="MVVM\Views\Fonts\Montserrat\Montserrat-ExtraBoldItalic.ttf">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="MVVM\Views\Fonts\Montserrat\Montserrat-ExtraLight.ttf">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="MVVM\Views\Fonts\Montserrat\Montserrat-ExtraLightItalic.ttf">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="MVVM\Views\Fonts\Montserrat\Montserrat-Italic.ttf">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="MVVM\Views\Fonts\Montserrat\Montserrat-Light.ttf">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="MVVM\Views\Fonts\Montserrat\Montserrat-LightItalic.ttf">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="MVVM\Views\Fonts\Montserrat\Montserrat-Medium.ttf">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="MVVM\Views\Fonts\Montserrat\Montserrat-MediumItalic.ttf">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="MVVM\Views\Fonts\Montserrat\Montserrat-Regular.ttf">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="MVVM\Views\Fonts\Montserrat\Montserrat-Thin.ttf">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="MVVM\Views\Fonts\Montserrat\Montserrat-ThinItalic.ttf">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="MVVM\Views\Icons\main_app_icon.ico">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="MVVM\Views\Icons\close_red.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="MVVM\Views\Icons\close_white.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="MVVM\Views\Icons\minimize_white.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="MVVM\Views\Icons\minimize_grey.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="MVVM\Views\Icons\plus.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="MVVM\Views\Icons\stretch.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="MVVM\Views\Icons\system.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="MVVM\Views\Icons\testing.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="12.0.1" />
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.1" />
+    <PackageReference Include="DevExpressMvvm" Version="22.1.3" />
+    <PackageReference Include="FluentValidation" Version="11.7.1" />
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="7.0.1" />
+    <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.39" />
+    <PackageReference Include="PropertyChanged.Fody" Version="4.1.0" PrivateAssets="All" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\DataContract\DataContract.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="MaterialDesignColors">
+      <HintPath>Libs\MaterialDesignColors.dll</HintPath>
+    </Reference>
+    <Reference Include="MaterialDesignThemes.Wpf">
+      <HintPath>MaterialDesignThemes.Wpf.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+</Project>
