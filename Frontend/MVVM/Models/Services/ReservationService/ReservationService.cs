@@ -1,6 +1,8 @@
 using DataContract.BusinessModels;
 using DataContract.ViewModelsDto;
-using HotelManager.MVVM.Models.Services.PostmanService.Messages;
+using DataContract.ViewModelsDto.Messages;
+using HotelManager.MVVM.Models.Services.FinanceService;
+using HotelManager.MVVM.Models.Services.PostmanService;
 using HotelManager.MVVM.Utils;
 
 namespace HotelManager.MVVM.Models.Services.ReservationService;
@@ -8,8 +10,16 @@ namespace HotelManager.MVVM.Models.Services.ReservationService;
 public class ReservationService : AbstractHotelManager, IReservationService
 {
     private readonly IReservationServiceValidator _reservationServiceValidator;
+    private readonly IFinanceService _financeService;
+    private readonly IPostmanService _postmanService;
 
-    public ReservationService(IReservationServiceValidator reservationServiceValidator) => _reservationServiceValidator = reservationServiceValidator;
+    public ReservationService(IReservationServiceValidator reservationServiceValidator, IFinanceService financeService,
+        IPostmanService postmanService)
+    {
+        _reservationServiceValidator = reservationServiceValidator;
+        _financeService = financeService;
+        _postmanService = postmanService;
+    }
 
     public bool Reserved(ReservationViewModel newReservationDto, int roomNumber)
     {
@@ -26,25 +36,16 @@ public class ReservationService : AbstractHotelManager, IReservationService
         foreach (var room in Rooms)
             if (room.Reservation is not null)
                 if (IsReservationExpired(room.Reservation))
-                    PostmanService.SendNewMessage(new PayInformation
+                    _postmanService.SendNewMessage(new PayInformationDto
                     {
-                        Price = GeneratePrice(room), 
+                        Price = _financeService.GetTotalPrice(room),
+                        Fines = _financeService.GetFinePrice(room),
                         NumberRoom = room.Number,
                     });
     }
 
-    /// <summary>
-    /// <b>GeneratePrice</b> - вычисляет итоговую цену для оплаты.
-    /// </summary>
-    /// <returns></returns>
-    private decimal GeneratePrice(Room room)
-    {
-        var delta = (room.Reservation!.EndData - room.Reservation!.StartData).TotalDays;
-        var price = delta * (double)room.Price;
-        return (decimal)price;
-    }
     private bool IsReservationExpired(Reservation reservation) => DateTime.Now >= reservation.EndData;
-    
+
     public T GetReservationInfo<T>(Func<ReservationViewModel, T> expression, int roomNumber)
     {
         return expression(Mapper.Map<ReservationViewModel>(GlobalLocalStorage.GetRoom(roomNumber)!.Reservation));

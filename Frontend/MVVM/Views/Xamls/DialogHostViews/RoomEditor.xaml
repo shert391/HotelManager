@@ -5,12 +5,12 @@
     xmlns:attached="clr-namespace:HotelManager.MVVM.Views.Xamls.AttachedProperties"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-    Style="{StaticResource PageStyle}"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     Width="300"
     Height="195"
     d:DesignHeight="195"
     d:DesignWidth="300"
+    Style="{StaticResource PageStyle}"
     mc:Ignorable="d">
     <Grid>
         <Border Background="#454545" ClipToBounds="True">
@@ -26,7 +26,7 @@
                     <TextBlock
                         Foreground="LightGray"
                         Style="{StaticResource MaterialDesignSubtitle2TextBlock}"
-                        Text="{Binding RoomChangeRequest.NumberTargetRoom}" />
+                        Text="{Binding NewRoomDto.Number}" />
                 </StackPanel>
                 <ComboBox
                     Margin="0,15,0,0"

@@ -3,9 +3,10 @@ using System.ComponentModel;
 using System.Windows.Data;
 using DataContract.Extensions;
 using DataContract.ViewModelsDto;
+using DataContract.ViewModelsDto.Messages;
 using HotelManager.InitApp;
+using HotelManager.MVVM.Models.Services.FinanceService;
 using HotelManager.MVVM.Models.Services.PostmanService;
-using HotelManager.MVVM.Models.Services.PostmanService.Messages;
 using HotelManager.MVVM.Models.Services.ReservationService;
 using HotelManager.MVVM.Models.Services.RoomService;
 using HotelManager.MVVM.Models.Services.TestService;
@@ -18,9 +19,10 @@ public abstract class AbstractRoomManagerViewModel : BaseViewModel
 {
     protected readonly IRoomService RoomService = App.Resolve<IRoomService>();
     protected readonly ITestService TestService = App.Resolve<ITestService>();
-    private readonly IPostmanService _postmanService = App.Resolve<IPostmanService>();
-    
+    protected readonly IFinanceService FinanceService = App.Resolve<IFinanceService>();
     protected readonly IReservationService ReservationService = App.Resolve<IReservationService>();
+
+    private readonly IPostmanService _postmanService = App.Resolve<IPostmanService>();
     
     protected readonly ExtendedObservableCollection<RoomViewModel> Rooms; 
     public ICollectionView RoomsView { get; }
@@ -36,10 +38,10 @@ public abstract class AbstractRoomManagerViewModel : BaseViewModel
 
     private void OnNewMessage(IMessage message)
     {
-        if (message is PayInformation payInfo) RequestPayment(payInfo);
+        if (message is PayInformationDto payInfo) RequestPayment(payInfo);
     }
 
-    protected virtual void RequestPayment(PayInformation payInformation) { }
+    protected virtual void RequestPayment(PayInformationDto payInformation) { }
 
     private void OnRoomCollectionChanged(RoomViewModel? roomViewModel, NotifyCollectionChangedAction action,
         int newIndex, int oldIndex)

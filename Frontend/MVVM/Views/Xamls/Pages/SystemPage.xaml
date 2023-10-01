@@ -2,12 +2,12 @@
     x:Class="HotelManager.MVVM.Views.Xamls.Pages.SystemPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:my="clr-namespace:DataContract.ViewModelsDto;assembly=DataContract"
     xmlns:attached="clr-namespace:HotelManager.MVVM.Views.Xamls.AttachedProperties"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:my="clr-namespace:DataContract.ViewModelsDto;assembly=DataContract"
     Width="1154"
     Height="744"
     Language="ru-Ru"
@@ -27,7 +27,7 @@
 
         <Grid x:Name="HeaderGrid">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="0.40*" />
+                <ColumnDefinition Width="0.30*" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
 
@@ -113,6 +113,24 @@
                             Kind="GeneratorMobile" />
                         <TextBlock VerticalAlignment="Center" Style="{StaticResource MaterialDesignSubtitle2TextBlock}">
                             Сгенерировать
+                        </TextBlock>
+                    </StackPanel>
+                </Button>
+                <Button
+                    x:Name="ShowPayHistoryButton"
+                    Width="160"
+                    Height="30"
+                    Margin="10,0,0,0"
+                    Command="{Binding ShowPayHistoryCommand}"
+                    Style="{StaticResource YellowStyleButton}">
+                    <StackPanel Orientation="Horizontal">
+                        <materialDesign:PackIcon
+                            Width="20"
+                            Height="20"
+                            Margin="0,0,5,0"
+                            Kind="HandCoin" />
+                        <TextBlock VerticalAlignment="Center" Style="{StaticResource MaterialDesignSubtitle2TextBlock}">
+                            История платежей
                         </TextBlock>
                     </StackPanel>
                 </Button>
@@ -247,11 +265,11 @@
                                     <Button
                                         Width="35"
                                         Height="35"
-                                        Margin="5"
-                                        CommandParameter="{Binding .}">
+                                        Margin="5">
                                         <Button.Style>
                                             <Style BasedOn="{StaticResource ModifyStyleButton}" TargetType="Button">
                                                 <Setter Property="Background" Value="Aqua" />
+                                                <Setter Property="CommandParameter" Value="{Binding .}" />
                                                 <Setter Property="Command" Value="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}, Path=DataContext.EditReservationRoomCommand}" />
                                                 <Style.Triggers>
                                                     <DataTrigger Binding="{Binding CurrentState}" Value="{x:Static my:RoomState.Free}">

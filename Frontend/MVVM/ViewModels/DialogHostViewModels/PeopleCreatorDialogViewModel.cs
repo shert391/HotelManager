@@ -12,7 +12,6 @@ public class PeopleCreatorDialogViewModel : AbstractDialogViewModel
     public Action<PeopleViewModel>? OnSuccessPeopleValidated;
     public PeopleViewModel NewPeople { get; set; } = new();
     public ICommand ValidateInputCommand { get; }
-    public ICommand CancelCommand { get; }
 
     public PeopleCreatorDialogViewModel()
     {

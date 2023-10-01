@@ -1,6 +1,7 @@
 ﻿using DevExpress.Mvvm;
-using DataContract.BusinessModels;
 using DataContract.Extensions;
+using DataContract.BusinessModels;
+using DataContract.ViewModelsDto.Messages;
 
 namespace DataContract.ViewModelsDto;
 
@@ -14,12 +15,12 @@ public enum RoomState
 public class RoomViewModel : BindableBase
 {
     public int Number { get; set; }
+    public decimal Score { get; set; }
+
     public decimal Price { get; set; }
     public RoomType Type { get; set; }
-    public decimal NeedPaid { get; set; }
-
-    public RoomState CurrentState { get; set; } = RoomState.Free;
     public int MaxPeoples => Type.GetMaxPeople();
-    
+    public PayInformationDto? PayInformationDto { get; set; }
+    public RoomState CurrentState { get; set; } = RoomState.Free;
     public RoomViewModel Clone() => (RoomViewModel)MemberwiseClone();
 }

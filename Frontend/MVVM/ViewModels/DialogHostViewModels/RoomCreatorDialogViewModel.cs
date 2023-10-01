@@ -14,13 +14,10 @@ class RoomCreatorDialogViewModel : AbstractDialogViewModel
 
     public ICommand CreateRoomCommand { get; }
 
-    public ICommand CancelCommand { get; }
-
     public RoomCreatorDialogViewModel(IRoomService roomService)
     {
         _roomService = roomService;
         CreateRoomCommand = new DelegateCommand(CreateRoom);
-        CancelCommand = new DelegateCommand(DialogHostController.Close);
     }
 
     private void CreateRoom() => _roomService.AddRoom(NewRoomDto);

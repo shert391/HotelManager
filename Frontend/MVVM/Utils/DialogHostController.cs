@@ -48,7 +48,13 @@ public static class DialogHostController
         var dialogViewModel = App.Resolve<T>();
         ShowViewModel(dialogViewModel);
     }
-    
+
+    public static void Show<T, TOption>(TOption option) where T : notnull, AbstractDialogViewModel, IConfigurable<TOption>
+    {
+        var dialogViewModel = App.Resolve<T, TOption>(option);
+        ShowViewModel(dialogViewModel);
+    }
+
     public static T ShowPull<T>() where T : notnull, AbstractDialogViewModel
     {
         var dialogViewModel = App.Resolve<T>();

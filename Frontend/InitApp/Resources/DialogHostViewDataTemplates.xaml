@@ -26,4 +26,12 @@
     <DataTemplate DataType="{x:Type dialogHostViewModels:PeopleCreatorDialogViewModel}">
         <dialogHostViews:PeopleCreator />
     </DataTemplate>
+
+    <DataTemplate DataType="{x:Type dialogHostViewModels:PayRoomViewModel}">
+        <dialogHostViews:PayRoom />
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type dialogHostViewModels:PayHistoryViewModel}">
+        <dialogHostViews:PayHistory />
+    </DataTemplate>
 </ResourceDictionary>

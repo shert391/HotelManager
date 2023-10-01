@@ -1,4 +1,5 @@
-﻿using System.Text.RegularExpressions;
+﻿using System.Globalization;
+using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -17,6 +18,8 @@ public class InputFilterTextBox
     public static void SetAllowedType(DependencyObject obj, AllowedType value) => obj.SetValue(AllowedTypeProperty, value);
     public static double GetMaxValue(DependencyObject obj) => (double)obj.GetValue(MaxValueProperty);
     public static void SetMaxValue(DependencyObject obj, double value) => obj.SetValue(MaxValueProperty, value);
+    public static double GetDefaultValue(DependencyObject obj) => (double)obj.GetValue(DefaultValueProperty);
+    public static void SetDefaultValue(DependencyObject obj, double value) => obj.SetValue(DefaultValueProperty, value);
 
     private static readonly Regex _regexForIntegerFilter = new("[0-9]");
 
@@ -28,6 +31,12 @@ public class InputFilterTextBox
 
     public static readonly DependencyProperty MaxValueProperty = DependencyProperty.RegisterAttached(
         "MaxValue",
+        typeof(double),
+        typeof(InputFilterTextBox),
+        new FrameworkPropertyMetadata(double.NaN));
+    
+    public static readonly DependencyProperty DefaultValueProperty = DependencyProperty.RegisterAttached(
+        "DefaultValue",
         typeof(double),
         typeof(InputFilterTextBox),
         new FrameworkPropertyMetadata(double.NaN));
@@ -43,7 +52,10 @@ public class InputFilterTextBox
             throw new ArgumentException("failed");
 
         if (allowedType == AllowedType.Integer)
+        {
             textBox.PreviewTextInput += IntegerFilterCallback;
+            textBox.TextChanged += IntegerFilterCallback;
+        }
     }
 
     private static void ConfigurateMaxValue(DependencyObject d, AllowedType typeFilter)
@@ -59,7 +71,7 @@ public class InputFilterTextBox
         }
     }
 
-    private static void IntegerFilterCallback(object sender, TextCompositionEventArgs e)
+    private static void IntegerFilterCallback(object sender, TextCompositionEventArgs e) // TODO: есть проблема с проверкой decimal и приложенным к ним форматером для конвертации в денежный вид!
     {
         if (sender is not TextBox textBox)
             throw new ArgumentException("failed");
@@ -75,6 +87,18 @@ public class InputFilterTextBox
         }
 
         e.Handled = !(_regexForIntegerFilter.IsMatch(e.Text) || (e.Text == ""));
+    }
+    
+    private static void IntegerFilterCallback(object sender, TextChangedEventArgs e)
+    {
+        if (sender is not TextBox textBox)
+            throw new ArgumentException("failed");
+        
+        if(double.IsNaN( GetDefaultValue(textBox)))
+            return;
+
+        if (textBox.Text == "")
+            textBox.Text = GetDefaultValue(textBox).ToString(CultureInfo.InvariantCulture);
     }
 }
 

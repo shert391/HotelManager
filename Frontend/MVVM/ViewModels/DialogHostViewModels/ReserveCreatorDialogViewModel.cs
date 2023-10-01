@@ -30,7 +30,6 @@ public class ReserveCreatorDialogViewModel : AbstractDialogViewModel
     
     private readonly IReservationService _reservationService;
     
-    public ICommand CancelCommand { get; }
     public ICommand ReserveCommand { get; }
     public ICommand AddPeopleCommand { get; }
     public ICommand EditPeopleCommand { get; }
@@ -43,7 +42,6 @@ public class ReserveCreatorDialogViewModel : AbstractDialogViewModel
 
         ReserveCommand = new DelegateCommand(Reserve);
         AddPeopleCommand = new DelegateCommand(AddPeople);
-        CancelCommand = new DelegateCommand(DialogHostController.Close);
         EditPeopleCommand = new DelegateCommand<PeopleViewModel>(EditPeople);
         DeletePeopleCommand = new DelegateCommand<PeopleViewModel>(DeletePeople);
     }

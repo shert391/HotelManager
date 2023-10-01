@@ -1,4 +1,4 @@
-using HotelManager.MVVM.Models.Services.PostmanService.Messages;
+using DataContract.ViewModelsDto.Messages;
 
 namespace HotelManager.MVVM.Models.Services.PostmanService;
 
@@ -6,5 +6,5 @@ public interface IPostmanService
 {
     public event Action<IMessage>? NewMessage;
 
-    public void SendNewMessage(IMessage payInfo);
+    public void SendNewMessage(IMessage information);
 }

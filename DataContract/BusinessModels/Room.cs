@@ -29,6 +29,7 @@ public class Room
     public decimal Price { get; init; } = RoomConstants.MinPrice;
 
     public RoomType Type { get; init; } = RoomType.Single;
-
     public Reservation? Reservation { get; set; }
+    
+    public List<Assessment> Feedbacks = new(); 
 }
