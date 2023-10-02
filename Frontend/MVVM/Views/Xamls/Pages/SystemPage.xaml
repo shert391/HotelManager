@@ -9,7 +9,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:my="clr-namespace:DataContract.ViewModelsDto;assembly=DataContract"
     Width="1154"
-    Height="744"
+    Height="759"
     Language="ru-Ru"
     Style="{StaticResource PageStyle}"
     mc:Ignorable="d">
