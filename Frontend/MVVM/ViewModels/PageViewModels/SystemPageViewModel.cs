@@ -8,7 +8,6 @@ using System.Windows.Input;
 using DataContract.Extensions;
 using DataContract.ViewModelsDto;
 using DataContract.ViewModelsDto.Messages;
-using HotelManager.MVVM.Models.Services.FinanceService;
 
 namespace HotelManager.MVVM.ViewModels.PageViewModels;
 
@@ -65,7 +64,7 @@ public class SystemPageViewModel : AbstractRoomManagerViewModel
         FindRoomCommand = new DelegateCommand(RoomsView.Refresh);
         ShowRoomsCommand = new DelegateCommand(RoomsView.Refresh);
         ReserveRoomCommand = new DelegateCommand<RoomViewModel>(ReserveRoom);
-        GenerateRoomsCommand = new DelegateCommand(TestService.GenerateTestRooms);
+        GenerateRoomsCommand = new DelegateCommand(DebugHelperService.GenerateTestRooms);
         EditReservationRoomCommand = new DelegateCommand<RoomViewModel>(EditReservationRoom);
         AddRoomCommand = new DelegateCommand(DialogHostController.Show<RoomCreatorDialogViewModel>);
         PayRoomCommand = new DelegateCommand<RoomViewModel>(DialogHostController.Show<PayRoomViewModel, RoomViewModel>);

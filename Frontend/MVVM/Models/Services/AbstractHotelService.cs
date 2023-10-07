@@ -3,18 +3,16 @@ using System.Collections.Specialized;
 using AutoMapper;
 using DataContract.BusinessModels;
 using HotelManager.InitApp;
-using HotelManager.MVVM.Models.Services.FinanceService;
-using HotelManager.MVVM.Models.Services.PostmanService;
 
 namespace HotelManager.MVVM.Models.Services;
 
-public class AbstractHotelManager
+public class AbstractHotelService
 {
     protected readonly IGlobalLocalStorage GlobalLocalStorage = App.Resolve<IGlobalLocalStorage>();
     protected readonly IMapper Mapper = App.Resolve<IMapper>();
     protected readonly ObservableCollection<Room> Rooms;
 
-    protected AbstractHotelManager()
+    protected AbstractHotelService()
     {
         Rooms = GlobalLocalStorage.Rooms;   
         RuntimeUpdater.RuntimeUpdate += Update;

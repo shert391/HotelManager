@@ -1,11 +1,12 @@
 using DataContract.BusinessModels;
 using DataContract.GlobalConstants;
 
-namespace HotelManager.MVVM.Models.Services.TestService;
+namespace HotelManager.MVVM.Models.Services.DebugHelperService;
 
-public class TestService : AbstractHotelManager, ITestService
+public class DebugHelperService : AbstractHotelService, IDebugHelperService
 {
     private readonly Random _random = new();
+    
     public void GenerateTestRooms()
     {
         for (var i = 1; i <= _random.Next(RoomConstants.MinRoomNumber, RoomConstants.MaxRoomNumber); i++)

@@ -7,7 +7,7 @@
         <pageXamls:SystemPage />
     </DataTemplate>
 
-    <DataTemplate DataType="{x:Type pageViewModels:TestPageViewModel}">
-        <pageXamls:TestPage />
+    <DataTemplate DataType="{x:Type pageViewModels:SimulatorPageViewModel}">
+        <pageXamls:SimulatorPage />
     </DataTemplate>
 </ResourceDictionary>

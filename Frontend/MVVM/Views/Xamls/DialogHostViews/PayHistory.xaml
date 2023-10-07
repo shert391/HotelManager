@@ -26,21 +26,13 @@
                         Margin="10,0,10,0"
                         VerticalAlignment="Center"
                         Orientation="Horizontal">
-                        <StackPanel Margin="5,10,0,5" Orientation="Horizontal">
-                            <TextBlock
-                                VerticalAlignment="Center"
-                                FontFamily="Bahnschrift SemiBold"
-                                FontSize="16"
-                                Foreground="#9e9e9e"
-                                Text="Выручка отеля:" />
-                            <TextBlock
-                                Margin="10,0,0,0"
-                                VerticalAlignment="Center"
-                                FontFamily="Bahnschrift SemiCondensed"
-                                FontSize="16"
-                                Foreground="#9e9e9e"
-                                Text="{Binding GlobalCurrency, StringFormat={}{0:C}}" />
-                        </StackPanel>
+                        <TextBlock
+                            Margin="5,10,0,5"
+                            VerticalAlignment="Center"
+                            FontFamily="Bahnschrift SemiBold"
+                            FontSize="16"
+                            Foreground="#9e9e9e"
+                            Text="{Binding GlobalCurrency, StringFormat=Выручка отеля: {0:C}}" />
                     </StackPanel>
                 </Grid>
                 <materialDesign:Card Grid.Row="1" Background="#323232">
@@ -117,9 +109,7 @@
                                     Style="{StaticResource ModifyStyleButton}">
                                     <TextBlock Style="{StaticResource MaterialDesignSubtitle2TextBlock}">Зыкрыть</TextBlock>
                                 </Button>
-
                             </StackPanel>
-
                         </Grid>
                     </StackPanel>
                 </materialDesign:Card>

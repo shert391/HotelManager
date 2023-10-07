@@ -3,7 +3,7 @@ using DataContract.BusinessModels;
 using DataContract.ViewModelsDto.Messages;
 
 namespace HotelManager.MVVM.Models.Services.FinanceService;
-public class FinanceService : AbstractHotelManager, IFinanceService
+public class FinanceService : AbstractHotelService, IFinanceService
 {
     private readonly List<PayInformation> _payHistory = new();
     

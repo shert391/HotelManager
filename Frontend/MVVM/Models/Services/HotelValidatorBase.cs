@@ -4,7 +4,7 @@ using HotelManager.MVVM.Utils;
 
 namespace HotelManager.MVVM.Models.Services;
 
-public class HotelValidatorBase : AbstractHotelManager
+public class HotelValidatorBase : AbstractHotelService
 {
     public static bool DefaultValidate<TType>(TType verifiable, Type validatorType)
     {

@@ -11,7 +11,7 @@ public static class AddConfigurationsHostBuilderExtension
         return hostBuilder.ConfigureAppConfiguration(configureBuilder =>
         {
             configureBuilder.AddJsonStream(Assembly.GetExecutingAssembly()
-                .GetManifestResourceStream("HotelManager.GlobalSettings.json")!);
+                .GetManifestResourceStream("HotelManager.AppSettings.json")!);
         });
     }
 }

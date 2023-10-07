@@ -15,19 +15,11 @@
     <Grid>
         <Border Background="#454545" ClipToBounds="True">
             <StackPanel Margin="10">
-                <StackPanel
+                <TextBlock
                     Margin="0,0,0,5"
-                    HorizontalAlignment="Center"
-                    Orientation="Horizontal">
-                    <TextBlock
-                        Foreground="LightGray"
-                        Style="{StaticResource MaterialDesignSubtitle2TextBlock}"
-                        Text="Редактор комнаты: " />
-                    <TextBlock
-                        Foreground="LightGray"
-                        Style="{StaticResource MaterialDesignSubtitle2TextBlock}"
-                        Text="{Binding NewRoomDto.Number}" />
-                </StackPanel>
+                    Foreground="LightGray"
+                    Style="{StaticResource MaterialDesignSubtitle2TextBlock}"
+                    Text="{Binding NewRoomDto.Number, StringFormat=Редактор комнаты: {0}}" />
                 <ComboBox
                     Margin="0,15,0,0"
                     materialDesign:HintAssist.Hint="Новый тип комнаты"

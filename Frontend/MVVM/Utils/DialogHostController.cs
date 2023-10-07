@@ -48,7 +48,9 @@ public static class DialogHostController
         var dialogViewModel = App.Resolve<T>();
         ShowViewModel(dialogViewModel);
     }
-
+    
+    public static void ConcreteShow(AbstractDialogViewModel viewModel) => ShowViewModel(viewModel);
+    
     public static void Show<T, TOption>(TOption option) where T : notnull, AbstractDialogViewModel, IConfigurable<TOption>
     {
         var dialogViewModel = App.Resolve<T, TOption>(option);

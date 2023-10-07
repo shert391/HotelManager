@@ -2,7 +2,7 @@
 
 namespace HotelManager.MVVM.Models.Services.StatisticService;
 
-public class StatisticService : AbstractHotelManager, IStatisticService
+public class StatisticService : AbstractHotelService, IStatisticService
 {
     public decimal GetScore(int roomNumber)
     {

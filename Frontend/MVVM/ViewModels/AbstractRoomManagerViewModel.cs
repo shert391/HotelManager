@@ -5,11 +5,11 @@ using DataContract.Extensions;
 using DataContract.ViewModelsDto;
 using DataContract.ViewModelsDto.Messages;
 using HotelManager.InitApp;
+using HotelManager.MVVM.Models.Services.DebugHelperService;
 using HotelManager.MVVM.Models.Services.FinanceService;
 using HotelManager.MVVM.Models.Services.PostmanService;
 using HotelManager.MVVM.Models.Services.ReservationService;
 using HotelManager.MVVM.Models.Services.RoomService;
-using HotelManager.MVVM.Models.Services.TestService;
 using PropertyChanged;
 
 namespace HotelManager.MVVM.ViewModels;
@@ -18,8 +18,8 @@ namespace HotelManager.MVVM.ViewModels;
 public abstract class AbstractRoomManagerViewModel : BaseViewModel
 {
     protected readonly IRoomService RoomService = App.Resolve<IRoomService>();
-    protected readonly ITestService TestService = App.Resolve<ITestService>();
     protected readonly IFinanceService FinanceService = App.Resolve<IFinanceService>();
+    protected readonly IDebugHelperService DebugHelperService = App.Resolve<IDebugHelperService>();
     protected readonly IReservationService ReservationService = App.Resolve<IReservationService>();
 
     private readonly IPostmanService _postmanService = App.Resolve<IPostmanService>();

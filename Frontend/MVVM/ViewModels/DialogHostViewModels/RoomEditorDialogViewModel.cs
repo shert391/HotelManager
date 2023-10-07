@@ -1,5 +1,4 @@
 ﻿using DevExpress.Mvvm;
-using HotelManager.MVVM.Utils;
 using System.Windows.Input;
 using DataContract.ViewModelsDto;
 using HotelManager.MVVM.Models.Services.RoomService;

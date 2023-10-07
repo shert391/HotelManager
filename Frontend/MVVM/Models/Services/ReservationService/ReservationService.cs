@@ -7,7 +7,7 @@ using HotelManager.MVVM.Utils;
 
 namespace HotelManager.MVVM.Models.Services.ReservationService;
 
-public class ReservationService : AbstractHotelManager, IReservationService
+public class ReservationService : AbstractHotelService, IReservationService
 {
     private readonly IReservationServiceValidator _reservationServiceValidator;
     private readonly IFinanceService _financeService;

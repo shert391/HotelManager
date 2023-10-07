@@ -15,7 +15,6 @@ public class RoomServiceValidator : HotelValidatorBase, IRoomServiceValidator
         
         DialogHostController.ShowMessageBox("Комната уже существует");
         return false;
-
     }
 
     public bool CanEditRoom(Room newRoom)

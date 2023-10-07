@@ -170,7 +170,7 @@
                         x:Name="SystemButton"
                         Width="Auto"
                         Height="50"
-                        Command="{Binding SelectSystemView}"
+                        Command="{Binding SelectSystemViewCommand}"
                         IsChecked="True"
                         Style="{StaticResource NavigateRadioButtonStyle}">
                         <StackPanel Orientation="Horizontal">
@@ -192,7 +192,7 @@
                         x:Name="TestButton"
                         Width="Auto"
                         Height="50"
-                        Command="{Binding SelectTestView}"
+                        Command="{Binding SelectSimulatorPageViewCommand}"
                         Style="{StaticResource NavigateRadioButtonStyle}">
                         <StackPanel Orientation="Horizontal">
                             <Image Margin="10,10,0,10" Source="../Icons/testing.png" />

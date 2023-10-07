@@ -8,13 +8,13 @@ namespace HotelManager.MVVM.ViewModels;
 public class MainWindowViewModel : BaseViewModel
 {
     public BaseViewModel CurrentViewModel { get; private set; } = App.Resolve<SystemPageViewModel>();
-    public ICommand SelectSystemView { get; }
-    public ICommand SelectTestView { get; }
+    public ICommand SelectSystemViewCommand { get; }
+    public ICommand SelectSimulatorPageViewCommand { get; }
 
     public MainWindowViewModel()
     {
-        SelectSystemView = new DelegateCommand(() => CurrentViewModel = App.Resolve<SystemPageViewModel>());
-        SelectTestView = new DelegateCommand(() => CurrentViewModel = App.Resolve<TestPageViewModel>());
+        SelectSystemViewCommand = new DelegateCommand(() => CurrentViewModel = App.Resolve<SystemPageViewModel>());
+        SelectSimulatorPageViewCommand = new DelegateCommand(() => CurrentViewModel = App.Resolve<SimulatorPageViewModel>());
     }
 }
 
