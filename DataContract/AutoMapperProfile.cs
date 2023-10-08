@@ -9,10 +9,16 @@ public class AutoMapperProfile : Profile
 {
     public AutoMapperProfile()
     {
+        CreateMap<Room, Room>();
+        CreateMap<People, People>();
+        CreateMap<Reservation, Reservation>();
+        CreateMap<PayInformation, PayInformation>();
+        
         CreateMap<People, PeopleViewModel>().ReverseMap();
         CreateMap<Reservation, ReservationViewModel>().ReverseMap();
         CreateMap<PayInformation, PayInformationDto>().ReverseMap();
         CreateMap<Room, RoomViewModel>().ForMember(dst => dst.Score, opt => opt.MapFrom(src => AverageScore(src.Feedbacks))).ReverseMap();
+        CreateMap<Room, RoomViewModel>().ForMember(dst => dst.CurrentState, opt => opt.MapFrom(src => GetRoomType(src.Reservation))).ReverseMap();
     }
 
     /// <summary>
@@ -22,5 +28,15 @@ public class AutoMapperProfile : Profile
     private double AverageScore(IReadOnlyCollection<Assessment> assessments)
     {
         return assessments.Count == 0 ? 0 : assessments.Sum(x => x.Score) / assessments.Count;
+    }
+
+    /// <summary>
+    /// Метод проецирования наличия брони комнаты на RoomType соответствующего DTO
+    /// </summary>
+    /// <param name="reservation"></param>
+    /// <returns></returns>
+    private RoomState GetRoomType(Reservation? reservation)
+    {
+        return reservation is not null ? RoomState.Busy : RoomState.Free;
     }
 }

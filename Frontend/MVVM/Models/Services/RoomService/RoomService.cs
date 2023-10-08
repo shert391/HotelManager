@@ -52,4 +52,19 @@ public class RoomService : AbstractHotelService, IRoomService
         Rooms[index] = newRoom;
         DialogHostController.ShowMessageBox("Комната успешно изменена", isCloseDialogViewOnAccept: true);
     }
+
+    public void CreateBackup()
+    {
+        foreach (var room in Rooms)
+            RoomsBackup.Add(Mapper.Map<Room>(room));
+    }
+
+    public void ReturnBackup()
+    {
+        Rooms.Clear();
+        foreach (var roomBackup in RoomsBackup)
+            Rooms.Add(Mapper.Map<Room>(roomBackup));
+        RoomsBackup.Clear();
+        GlobalLocalStorage.StorageTime = DateTime.Now;
+    }
 };

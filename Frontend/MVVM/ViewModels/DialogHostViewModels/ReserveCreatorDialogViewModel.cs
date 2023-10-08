@@ -86,7 +86,6 @@ public class ReserveCreatorDialogViewModel : AbstractDialogViewModel
 
     private void Reserve()
     {
-        if (_reservationService.Reserved(new() { Peoples = NewPeoples, EndData = EndData }, _targetRoomDto!.Number))
-            _targetRoomDto.CurrentState = RoomState.Busy;
+        _reservationService.Reserved(new() { Peoples = NewPeoples, EndData = EndData }, _targetRoomDto!.Number);
     }
 }

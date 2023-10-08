@@ -4,7 +4,7 @@ namespace HotelManager.MVVM.Models.Services;
 
 public static class RuntimeUpdater
 {
-    public static event Action? RuntimeUpdate;
+    public static event Action? Update;
 
     static RuntimeUpdater()
     {
@@ -13,7 +13,7 @@ public static class RuntimeUpdater
             while (true)
             {
                 Thread.Sleep(App.GetSetting<int>("UpdaterDelay"));
-                App.ExecuteFromMainThread(() => RuntimeUpdate?.Invoke());
+                App.ExecuteFromMainThread(() => Update?.Invoke());
             }
         });
         rootThread.Start();

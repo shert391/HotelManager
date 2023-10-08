@@ -10,12 +10,15 @@ public class AbstractHotelService
 {
     protected readonly IGlobalLocalStorage GlobalLocalStorage = App.Resolve<IGlobalLocalStorage>();
     protected readonly IMapper Mapper = App.Resolve<IMapper>();
+    
     protected readonly ObservableCollection<Room> Rooms;
+    protected readonly ObservableCollection<Room> RoomsBackup;
 
     protected AbstractHotelService()
     {
+        RoomsBackup = GlobalLocalStorage.RoomsBackup;
         Rooms = GlobalLocalStorage.Rooms;   
-        RuntimeUpdater.RuntimeUpdate += Update;
+        RuntimeUpdater.Update += Update;
         Rooms.CollectionChanged += OnRoomCollectionChanged;
     }
 

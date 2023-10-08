@@ -7,21 +7,35 @@ namespace HotelManager.MVVM.Models.Services.FinanceService;
 public interface IFinanceService
 {
     /// <summary>
-    /// <b>GetTotalPrice</b> - вычисляет общую цену для оплаты.<i/><br/><br/>
+    /// <b>GetRoomTotalPrice</b> - вычисляет общую цену для оплаты.<i/><br/><br/>
     /// Результирующим значением является разница между концом действия брони и началом в днях умноженное на ежесуточную цену
     /// </summary>
     /// <returns></returns>
-    public decimal GetTotalPrice(Room room);
-
-
+    public decimal GetRoomTotalPrice(Room room);
+    
     /// <summary>
-    /// <b>GetFinePrice</b> - вычисляет сумму штрафа на основании имеющихся данных.<i/><br/><br/>
+    /// <b>GetRoomFinePrice</b> - вычисляет сумму штрафа на основании имеющихся данных.<i/><br/><br/>
     /// Значение вычисляется так: если кол-во просроченных дней >= 1, то результатом будет стоимость просроченных дней + 30% от ежедневной стоимости комнаты 
     /// </summary>
     /// <returns></returns>
-    public decimal GetFinePrice(Room room);
+    public decimal GetRoomFinePrice(Room room);
 
-    public bool Pay(PayInformationDto payInformationDto);
+    /// <summary>
+    /// Возвращает общую выручку отеля
+    /// </summary>
+    /// <returns></returns>
+    public decimal GetHotelRevenues();
     
+    /// <summary>
+    /// Оплатить комнату
+    /// </summary>
+    /// <param name="payInformationDto"></param>
+    /// <returns></returns>
+    public bool PayRoom(PayInformationDto payInformationDto);
+    
+    /// <summary>
+    /// Для передачи ViewModel информации об истории оплат
+    /// </summary>
+    /// <returns></returns>
     public ObservableCollection<PayInformationDto> GetPayHistory();
 }

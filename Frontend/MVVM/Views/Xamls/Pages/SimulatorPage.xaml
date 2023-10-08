@@ -47,7 +47,7 @@
                     Width="200"
                     Height="30"
                     Margin="0,0,10,0"
-                    Command="{Binding StartTestCommand}"
+                    Command="{Binding StartSimulateCommand}"
                     Style="{StaticResource YellowStyleButton}">
                     <StackPanel Orientation="Horizontal">
                         <materialDesign:PackIcon
@@ -164,8 +164,8 @@
                         Foreground="White">
                         <TextBlock.Text>
                             <MultiBinding StringFormat="День: {0} Час: {1}">
-                                <Binding Path="SimulatorStateInformationDto.CurrentDay"></Binding>
-                                <Binding Path="SimulatorStateInformationDto.CurrentHour"></Binding>
+                                <Binding Path="CurrentDay"></Binding>
+                                <Binding Path="CurrentHour"></Binding>
                             </MultiBinding>
                         </TextBlock.Text>
                     </TextBlock>
@@ -198,27 +198,20 @@
                         FontFamily="Cascadia Mono"
                         FontSize="12"
                         Foreground="White"
-                        Text="{Binding SimulatorStateInformationDto.HandledApplicationCurrentDay, StringFormat=Обработано за текущий день: {0}}">
-                    </TextBlock>
-                    <TextBlock
-                        Margin="0,0,0,7"
-                        FontFamily="Cascadia Mono"
-                        FontSize="12"
-                        Foreground="White"
-                        Text="{Binding SimulatorStateInformationDto.HandledApplication, StringFormat=Всего обработано заявок: {0}}">
+                        Text="{Binding HandledApplication, StringFormat=Обработано заявок: {0}}">
                     </TextBlock>
                     <TextBlock
                         FontFamily="Cascadia Mono"
                         Margin="0,0,0,7"
                         FontSize="12"
                         Foreground="White"
-                        Text="{Binding SimulatorStateInformationDto.TotalApplication, StringFormat=Висячих заявок: {0}}">
+                        Text="{Binding TotalApplication, StringFormat=Текущее кол-во заявок: {0}}">
                     </TextBlock>
                     <TextBlock
                         FontFamily="Cascadia Mono"
                         FontSize="12"
                         Foreground="White"
-                        Text="{Binding SimulatorStateInformationDto.Profit, StringFormat=Прибыль: {0:C}}" />
+                        Text="{Binding Profit, StringFormat=Прибыль: {0:C}}" />
                 </StackPanel>
             </Border>
         </Grid>

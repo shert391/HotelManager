@@ -7,14 +7,16 @@ public class FinanceService : AbstractHotelService, IFinanceService
 {
     private readonly List<PayInformation> _payHistory = new();
     
-    public decimal GetTotalPrice(Room room)
+    public decimal GetRoomTotalPrice(Room room)
     {
         var delta = (room.Reservation!.EndData - room.Reservation!.StartData).TotalDays;
         var price = delta * (double)room.Price;
         return (decimal)price;
     }
 
-    public decimal GetFinePrice(Room room)
+    public decimal GetHotelRevenues() => _payHistory.Sum(payInfo => payInfo.TotalPrice);
+    
+    public decimal GetRoomFinePrice(Room room)
     {
         var delta = (DateTime.Now - room.Reservation!.EndData).TotalDays;
         
@@ -26,7 +28,7 @@ public class FinanceService : AbstractHotelService, IFinanceService
         return (decimal)fine;
     }
 
-    public bool Pay(PayInformationDto payInformationDto)
+    public bool PayRoom(PayInformationDto payInformationDto)
     {
         _payHistory.Add(Mapper.Map<PayInformation>(payInformationDto));
         var room = GlobalLocalStorage.GetRoom(payInformationDto.NumberRoom);

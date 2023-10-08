@@ -22,7 +22,7 @@
                     Style="{StaticResource MaterialDesignDiscreteSlider}"
                     TickFrequency="5"
                     TickPlacement="BottomRight"
-                    Value="{Binding SettingTestRuntime.MaxNumberApplicationPerHour}" />
+                    Value="{Binding MaxNumberApplicationPerHour}" />
                 <StackPanel Margin="0,10,0,0">
                     <TextBlock
                         FontWeight="Medium"
@@ -34,7 +34,7 @@
                         Style="{StaticResource MaterialDesignDiscreteSlider}"
                         TickFrequency="1"
                         TickPlacement="BottomRight"
-                        Value="{Binding SettingTestRuntime.NumberDayTestPeriod}" />
+                        Value="{Binding NumberDayTestPeriod}" />
                 </StackPanel>
                 <StackPanel
                     Margin="0,0"

@@ -2,9 +2,9 @@ namespace DataContract.GlobalConstants;
 
 public static class RoomConstants
 {
-    public static readonly decimal MaxPrice = 500000;
-    public static readonly decimal MinPrice = 3000;
-    
-    public static readonly int MaxRoomNumber = 100;
-    public static readonly int MinRoomNumber = 1;
+    public const decimal MaxPrice = 500000;
+    public const decimal MinPrice = 3000;
+
+    public const int MaxRoomNumber = 100;
+    public const int MinRoomNumber = 1;
 }

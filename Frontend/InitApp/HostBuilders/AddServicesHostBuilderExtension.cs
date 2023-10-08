@@ -1,4 +1,5 @@
 ﻿using HotelManager.MVVM.Models;
+using HotelManager.MVVM.Models.Services.ApplicationService;
 using HotelManager.MVVM.Models.Services.DebugHelperService;
 using HotelManager.MVVM.Models.Services.FinanceService;
 using HotelManager.MVVM.Models.Services.PostmanService;
@@ -27,6 +28,7 @@ public static class AddServicesHostBuilderExtension
             servicesProvider.TryAddSingleton<IFinanceService, FinanceService>();
             servicesProvider.TryAddSingleton<IPostmanService, PostmanService>();
             servicesProvider.TryAddSingleton<IStatisticService, StatisticService>();
+            servicesProvider.TryAddSingleton<IApplicationService, ApplicationService>();
             servicesProvider.TryAddSingleton<IDebugHelperService, DebugHelperService>();
         });
 

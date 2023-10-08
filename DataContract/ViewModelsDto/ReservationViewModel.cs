@@ -5,6 +5,6 @@ namespace DataContract.ViewModelsDto;
 
 public class ReservationViewModel : BindableBase
 {
-    public ObservableCollection<PeopleViewModel> Peoples { get; init; }
+    public ObservableCollection<PeopleViewModel> Peoples { get; init; } = new();
     public DateTime EndData { get; init; }
 }

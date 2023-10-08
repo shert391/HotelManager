@@ -13,4 +13,6 @@ public interface IRoomService
     public void DeleteRoom(int roomNumber);
     public void AddRoom(RoomViewModel newRoomDto);
     public void EditRoom(RoomViewModel newRoomDto);
+    public void CreateBackup();
+    public void ReturnBackup();
 }

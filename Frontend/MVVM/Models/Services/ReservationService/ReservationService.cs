@@ -21,14 +21,14 @@ public class ReservationService : AbstractHotelService, IReservationService
         _postmanService = postmanService;
     }
 
-    public bool Reserved(ReservationViewModel newReservationDto, int roomNumber)
+    public void Reserved(ReservationViewModel newReservationDto, int roomNumber, bool isTest = false)
     {
         var reservation = Mapper.Map<Reservation>(newReservationDto);
-        if (!_reservationServiceValidator.CanReserved(reservation)) return false;
+        if (!isTest && !_reservationServiceValidator.CanReserved(reservation)) return;
         var index = GlobalLocalStorage.GetRoomIndexInArray(roomNumber);
         Rooms[index].Reservation = reservation;
-        DialogHostController.ShowMessageBox("Комната успешно забронирована!", isCloseDialogViewOnAccept: true);
-        return true;
+        _postmanService.SendNewMessage(new NewRoomReservation { RoomNumber = roomNumber });
+        if(!isTest) DialogHostController.ShowMessageBox("Комната успешно забронирована!", isCloseDialogViewOnAccept: true);
     }
 
     protected override void Update()
@@ -38,13 +38,13 @@ public class ReservationService : AbstractHotelService, IReservationService
                 if (IsReservationExpired(room.Reservation))
                     _postmanService.SendNewMessage(new PayInformationDto
                     {
-                        Price = _financeService.GetTotalPrice(room),
-                        Fines = _financeService.GetFinePrice(room),
+                        Price = _financeService.GetRoomTotalPrice(room),
+                        Fines = _financeService.GetRoomFinePrice(room),
                         NumberRoom = room.Number,
                     });
     }
 
-    private bool IsReservationExpired(Reservation reservation) => DateTime.Now >= reservation.EndData;
+    private bool IsReservationExpired(Reservation reservation) => GlobalLocalStorage.StorageTime >= reservation.EndData;
 
     public T GetReservationInfo<T>(Func<ReservationViewModel, T> expression, int roomNumber)
     {
