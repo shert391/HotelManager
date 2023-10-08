@@ -40,19 +40,23 @@ public abstract class AbstractRoomManagerViewModel : BaseViewModel
 
     private void OnNewMessage(IMessage message)
     {
+        RaisePropertyChanged();
         switch (message)
         {
-            case PayInformationDto payInfo:
+            case NeedPaymentMessage payInfo:
                 RequestPayment(payInfo);
                 break;
-            case NewRoomReservation reservationInfo:
+            case NewRoomReservationMessage reservationInfo:
                 Rooms[Rooms.IndexOf(room => room.Number == reservationInfo.RoomNumber)].CurrentState = RoomState.Busy;
-                RoomsView.Refresh();
+                break;
+            case SuccessfulPaymentRoomMessage successfulPaymentInfo:
+                Rooms[Rooms.IndexOf(room => room.Number == successfulPaymentInfo.RoomNumber)].CurrentState = RoomState.Free;
                 break;
         }
+        RoomsView.Refresh();
     }
 
-    protected virtual void RequestPayment(PayInformationDto payInformation) { }
+    protected virtual void RequestPayment(NeedPaymentMessage payInformation) { }
 
     private void OnRoomServiceCollectionChanged(RoomViewModel? roomViewModel, NotifyCollectionChangedAction action,
         int newIndex, int oldIndex)

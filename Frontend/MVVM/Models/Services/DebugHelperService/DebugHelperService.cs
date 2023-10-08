@@ -23,18 +23,15 @@ public class DebugHelperService : AbstractHotelService, IDebugHelperService
         }
     }
 
-    public void AddHoursToStorageTime(int countHours)
-    {
-        GlobalLocalStorage.StorageTime = GlobalLocalStorage.StorageTime.AddHours(countHours);
-    }
+    public void AddHoursToStorageTime(int countHours) => GlobalLocalStorage.AddHoursForTest += countHours;
     
-    public IEnumerable<ApplicationViewModel> GenerateApplications(int countApplication)
+    public IEnumerable<ApplicationDto> GenerateApplications(int countApplication)
     {
-        var result = new List<ApplicationViewModel>();
+        var result = new List<ApplicationDto>();
         
         for (var i = 0; i < countApplication; i++)
         {
-            result.Add(new ApplicationViewModel
+            result.Add(new ApplicationDto
             {
                 Peoples = _random.Next(1, 4),
                 EndData = DateTime.Now.AddHours(_random.Next(1, 3)),

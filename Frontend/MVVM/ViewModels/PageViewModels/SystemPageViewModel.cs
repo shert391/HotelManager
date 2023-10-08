@@ -70,10 +70,10 @@ public class SystemPageViewModel : AbstractRoomManagerViewModel
         PayRoomCommand = new DelegateCommand<RoomViewModel>(DialogHostController.Show<PayRoomViewModel, RoomViewModel>);
 
         ShowPayHistoryCommand = new DelegateCommand(() => DialogHostController
-            .Show<PayHistoryViewModel, ObservableCollection<PayInformationDto>>(FinanceService.GetPayHistory()));
+            .Show<PayHistoryViewModel, ObservableCollection<NeedPaymentMessage>>(FinanceService.GetPayHistory()));
     }
 
-    protected override void RequestPayment(PayInformationDto payInfo)
+    protected override void RequestPayment(NeedPaymentMessage payInfo)
     {
         var targetRoom = Rooms[Rooms.IndexOf(room => room.Number == payInfo.NumberRoom)];
         if (targetRoom.CurrentState == RoomState.NeedPaid) return;

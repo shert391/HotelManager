@@ -16,7 +16,7 @@ public class AutoMapperProfile : Profile
         
         CreateMap<People, PeopleViewModel>().ReverseMap();
         CreateMap<Reservation, ReservationViewModel>().ReverseMap();
-        CreateMap<PayInformation, PayInformationDto>().ReverseMap();
+        CreateMap<PayInformation, NeedPaymentMessage>().ReverseMap();
         CreateMap<Room, RoomViewModel>().ForMember(dst => dst.Score, opt => opt.MapFrom(src => AverageScore(src.Feedbacks))).ReverseMap();
         CreateMap<Room, RoomViewModel>().ForMember(dst => dst.CurrentState, opt => opt.MapFrom(src => GetRoomType(src.Reservation))).ReverseMap();
     }

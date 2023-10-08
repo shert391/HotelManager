@@ -2,7 +2,8 @@ using DataContract.BusinessModels;
 
 namespace DataContract.ViewModelsDto;
 
-public class ApplicationViewModel
+// TODO: заменить кол-во человек на конкретные рандомизированные ФИО
+public class ApplicationDto
 {
     public int Peoples;
     public DateTime EndData;

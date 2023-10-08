@@ -11,7 +11,7 @@ public class ApplicationService : AbstractHotelService, IApplicationService
 
     public ApplicationService(IReservationService reservationService) => _reservationService = reservationService;
 
-    public int FindBestRoom(ApplicationViewModel application)
+    public int FindBestRoom(ApplicationDto application)
     {
         var bestType = Rooms.Where(room => room.Type == application.Type && room.Reservation is null);
 
@@ -28,7 +28,7 @@ public class ApplicationService : AbstractHotelService, IApplicationService
         return bestRoomNumber;
     }
     
-    public bool Handle(ApplicationViewModel application)
+    public bool Handle(ApplicationDto application)
     {
         var numberRoom = FindBestRoom(application);
 

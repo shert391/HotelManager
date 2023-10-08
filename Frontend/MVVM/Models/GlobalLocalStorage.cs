@@ -8,8 +8,7 @@ public class GlobalLocalStorage : IGlobalLocalStorage
 {
     public ObservableCollection<Room> Rooms { get; } = new();
     public ObservableCollection<Room> RoomsBackup { get; } = new();
-    
-    public DateTime StorageTime { get; set; } = DateTime.Now;
+    public int AddHoursForTest { get; set; }
     public int GetRoomIndexInArray(int roomNumber) => Rooms.IndexOf(room => room.Number == roomNumber);
     public Room? GetRoom(int roomNumber) => Rooms.FirstOrDefault(room => room.Number == roomNumber);
 }

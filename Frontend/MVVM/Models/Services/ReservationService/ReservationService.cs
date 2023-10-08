@@ -27,7 +27,7 @@ public class ReservationService : AbstractHotelService, IReservationService
         if (!isTest && !_reservationServiceValidator.CanReserved(reservation)) return;
         var index = GlobalLocalStorage.GetRoomIndexInArray(roomNumber);
         Rooms[index].Reservation = reservation;
-        _postmanService.SendNewMessage(new NewRoomReservation { RoomNumber = roomNumber });
+        _postmanService.SendNewMessage(new NewRoomReservationMessage { RoomNumber = roomNumber });
         if(!isTest) DialogHostController.ShowMessageBox("Комната успешно забронирована!", isCloseDialogViewOnAccept: true);
     }
 
@@ -36,7 +36,7 @@ public class ReservationService : AbstractHotelService, IReservationService
         foreach (var room in Rooms)
             if (room.Reservation is not null)
                 if (IsReservationExpired(room.Reservation))
-                    _postmanService.SendNewMessage(new PayInformationDto
+                    _postmanService.SendNewMessage(new NeedPaymentMessage
                     {
                         Price = _financeService.GetRoomTotalPrice(room),
                         Fines = _financeService.GetRoomFinePrice(room),
@@ -44,7 +44,7 @@ public class ReservationService : AbstractHotelService, IReservationService
                     });
     }
 
-    private bool IsReservationExpired(Reservation reservation) => GlobalLocalStorage.StorageTime >= reservation.EndData;
+    private bool IsReservationExpired(Reservation reservation) => DateTime.Now.AddHours(GlobalLocalStorage.AddHoursForTest) >= reservation.EndData;
 
     public T GetReservationInfo<T>(Func<ReservationViewModel, T> expression, int roomNumber)
     {

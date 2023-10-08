@@ -3,10 +3,9 @@ using DevExpress.Mvvm;
 namespace DataContract.ViewModelsDto.Messages;
 
 /// <summary>
-/// Платежная информация для клиента, бронь комнаты которого - истекла.
-/// Данный DTO после "условной" оплаты отправится в FinanceService для снятия брони с комнаты.
+/// Сообщение о платежной информации, которую должны осуществить, выселяющиеся жильцы
 /// </summary>
-public class PayInformationDto : BindableBase, IMessage
+public class NeedPaymentMessage : BindableBase, IMessage
 {
     public int NumberRoom { get; init; }
 

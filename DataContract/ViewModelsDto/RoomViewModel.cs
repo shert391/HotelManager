@@ -20,7 +20,7 @@ public class RoomViewModel : BindableBase
     public decimal Price { get; set; }
     public RoomType Type { get; set; }
     public int MaxPeoples => Type.GetMaxPeople();
-    public PayInformationDto? PayInformationDto { get; set; }
+    public NeedPaymentMessage? PayInformationDto { get; set; }
     public RoomState CurrentState { get; set; } = RoomState.Free;
     public RoomViewModel Clone() => (RoomViewModel)MemberwiseClone();
 }

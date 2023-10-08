@@ -29,13 +29,16 @@ public interface IFinanceService
     /// <summary>
     /// Оплатить комнату
     /// </summary>
-    /// <param name="payInformationDto"></param>
+    /// <param name="needPaymentMessage"></param>
     /// <returns></returns>
-    public bool PayRoom(PayInformationDto payInformationDto);
+    public bool PayRoom(NeedPaymentMessage needPaymentMessage);
     
     /// <summary>
     /// Для передачи ViewModel информации об истории оплат
     /// </summary>
     /// <returns></returns>
-    public ObservableCollection<PayInformationDto> GetPayHistory();
+    public ObservableCollection<NeedPaymentMessage> GetPayHistory();
+
+    public void ReturnBackup();
+    public void CreateBackup();
 }

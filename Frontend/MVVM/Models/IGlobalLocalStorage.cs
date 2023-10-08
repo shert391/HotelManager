@@ -7,7 +7,11 @@ public interface IGlobalLocalStorage
 {
     public ObservableCollection<Room> Rooms { get; }
     public ObservableCollection<Room> RoomsBackup { get; }
-    public DateTime StorageTime { get; set; }
+    
+    /// <summary>
+    /// Эта поле нужно исключительно для корректной работы симуляции, когда необходимо "ускорить время"
+    /// </summary>
+    public int AddHoursForTest { get; set; }
     public int GetRoomIndexInArray(int roomNumber);
     public Room? GetRoom(int roomNumber);
 }

@@ -55,6 +55,7 @@ public class RoomService : AbstractHotelService, IRoomService
 
     public void CreateBackup()
     {
+        RoomsBackup.Clear();
         foreach (var room in Rooms)
             RoomsBackup.Add(Mapper.Map<Room>(room));
     }
@@ -65,6 +66,6 @@ public class RoomService : AbstractHotelService, IRoomService
         foreach (var roomBackup in RoomsBackup)
             Rooms.Add(Mapper.Map<Room>(roomBackup));
         RoomsBackup.Clear();
-        GlobalLocalStorage.StorageTime = DateTime.Now;
+        GlobalLocalStorage.AddHoursForTest = 0;
     }
 };

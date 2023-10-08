@@ -11,6 +11,6 @@ public interface IApplicationService
     /// </summary>
     /// <param name="application"></param>
     /// <returns></returns>
-    public int FindBestRoom(ApplicationViewModel application);
-    public bool Handle(ApplicationViewModel application);
+    public int FindBestRoom(ApplicationDto application);
+    public bool Handle(ApplicationDto application);
 }

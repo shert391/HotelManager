@@ -25,10 +25,8 @@ public class PayRoomViewModel : AbstractDialogViewModel, IConfigurable<RoomViewM
 
     private void Pay()
     {
-        if(FinanceService.PayRoom(TargetRoom!.PayInformationDto!)){
+        if(FinanceService.PayRoom(TargetRoom!.PayInformationDto!))
             StatisticService.SendFeedback(TargetRoom!.Number, NumberStars);
-            TargetRoom.CurrentState = RoomState.Free;
-        }
         DialogHostController.Close();
     }
 
