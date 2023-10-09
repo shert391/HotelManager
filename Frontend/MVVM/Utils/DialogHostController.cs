@@ -78,5 +78,9 @@ public static class DialogHostController
         ShowViewModel(messageBoxViewModel);
     }
 
-    public static void Close() => DialogHost.Close(_dialogHostName);
+    public static void Close()
+    {
+        if(DialogHost.IsDialogOpen(_dialogHostName))
+            DialogHost.Close(_dialogHostName);
+    }
 }

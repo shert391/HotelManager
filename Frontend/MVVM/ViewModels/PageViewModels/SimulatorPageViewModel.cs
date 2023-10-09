@@ -9,8 +9,6 @@ using DataContract.ViewModelsDto.Messages;
 
 namespace HotelManager.MVVM.ViewModels.PageViewModels;
 
-// TODO: Добавить возможность завершить моделирование
-
 public enum SimulatorStateViewModel
 {
     Run,
@@ -23,6 +21,7 @@ public class SimulatorPageViewModel : AbstractRoomManagerViewModel
     public decimal Profit { get; private set; }
     public int HandledApplication { get; set; }
     public int CurrentDay { get; set; }
+
     public int CurrentHour
     {
         get => _currentHour;
@@ -34,11 +33,13 @@ public class SimulatorPageViewModel : AbstractRoomManagerViewModel
                 _currentHour = 0;
                 return;
             }
+
             var delta = value - _currentHour;
             DebugHelperService.AddHoursToStorageTime(delta);
             _currentHour += delta;
         }
     }
+
     public int TotalRooms => Rooms.Count;
     public int NoHandledApplication => _applications.Count;
     public int BusyRoomsCount => Rooms.Count(room => room.CurrentState == RoomState.Busy);
@@ -67,7 +68,7 @@ public class SimulatorPageViewModel : AbstractRoomManagerViewModel
         FinanceService.PayRoom(needPaymentMessage);
         Profit += needPaymentMessage.TotalPrice;
     }
-    
+
     private void ResetStats()
     {
         Profit = 0;
@@ -77,7 +78,7 @@ public class SimulatorPageViewModel : AbstractRoomManagerViewModel
         HandledApplication = 0;
         RaisePropertiesChanged();
     }
-    
+
     private void Start()
     {
         State = SimulatorStateViewModel.Run;
@@ -99,21 +100,21 @@ public class SimulatorPageViewModel : AbstractRoomManagerViewModel
     private void Tick()
     {
         CurrentHour++;
-        
+
         _applications.AddRange(DebugHelperService.GenerateApplications(_random.Next(
             SimulatorSettingsConstants.MinNumberApplicationInTick,
             _simulatorConfiguratorViewModel.MaxNumberApplicationInTick)));
 
         foreach (var application in _applications.ToArray())
         {
-            if(!ApplicationService.Handle(application))
+            if (!ApplicationService.Handle(application))
                 continue;
-            
+
             HandledApplication++;
             _applications.Remove(application);
         }
-        
+
         RaisePropertiesChanged();
-        if(CurrentDay >= _simulatorConfiguratorViewModel.NumberDayTestPeriod) Stop();
+        if (CurrentDay >= _simulatorConfiguratorViewModel.NumberDayTestPeriod) Stop();
     }
 }

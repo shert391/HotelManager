@@ -3,17 +3,17 @@ using HotelManager.MVVM.Models.Services.FinanceService;
 using HotelManager.MVVM.Models.Services.StatisticService;
 using HotelManager.MVVM.Utils;
 using System.Windows.Input;
-using DataContract.ViewModelsDto;
+using DataContract.ViewModelsDto.Messages;
 
 namespace HotelManager.MVVM.ViewModels.DialogHostViewModels;
-public class PayRoomViewModel : AbstractDialogViewModel, IConfigurable<RoomViewModel>
+public class PayRoomViewModel : AbstractDialogViewModel, IConfigurable<NeedPaymentMessage>
 {
     public ICommand PayCommand { get; }
 
     public IFinanceService FinanceService { get; set; }
     public IStatisticService StatisticService { get; set; }
 
-    public RoomViewModel? TargetRoom { get; set; }
+    public NeedPaymentMessage NeedPayment { get; set; } = new();
     public double NumberStars { get; set; } = 5;
 
     public PayRoomViewModel(IFinanceService financeService, IStatisticService statisticService)
@@ -25,11 +25,12 @@ public class PayRoomViewModel : AbstractDialogViewModel, IConfigurable<RoomViewM
 
     private void Pay()
     {
-        if(FinanceService.PayRoom(TargetRoom!.PayInformationDto!))
-            StatisticService.SendFeedback(TargetRoom!.Number, NumberStars);
+        if(FinanceService.PayRoom(NeedPayment))
+            StatisticService.SendFeedback(NeedPayment.NumberRoom, NumberStars);
+        
         DialogHostController.Close();
     }
 
-    public void Configure(RoomViewModel targetRoom) => TargetRoom = targetRoom;
+    public void Configure(NeedPaymentMessage needPayment) => NeedPayment = needPayment;
 }
 

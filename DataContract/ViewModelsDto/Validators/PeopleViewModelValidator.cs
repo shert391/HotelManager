@@ -11,7 +11,7 @@ public class PeopleViewModelValidator : AbstractValidator<PeopleViewModel>
         RuleFor(people => people.SeriesPassport).Matches("^[+0-9]+$").NotEmpty().NotNull();
         RuleFor(people => people.NumberPassport).Matches("^[+0-9]+$").NotNull().NotEmpty();
         RuleFor(people => people.PhoneNumber).Matches("^[+0-9]+$").NotNull().NotEmpty();
-        RuleFor(people => people.FullName).Matches("^[а-яА-Я ]+$").NotEmpty().NotNull();
+        RuleFor(people => people.FullName).Matches("^[а-яА-Яa-zA-Z ]+$").NotEmpty().NotNull();
         RuleFor(people => people.ResidenceAddress).NotNull().NotEmpty();
     }
 }

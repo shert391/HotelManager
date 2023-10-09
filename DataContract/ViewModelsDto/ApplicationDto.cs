@@ -1,11 +1,10 @@
+using System.Collections.ObjectModel;
 using DataContract.BusinessModels;
 
 namespace DataContract.ViewModelsDto;
-
-// TODO: заменить кол-во человек на конкретные рандомизированные ФИО
 public class ApplicationDto
 {
-    public int Peoples;
-    public DateTime EndData;
-    public RoomType Type;
+    public ObservableCollection<PeopleViewModel> Peoples { get; init; } = new();
+    public DateTime EndData { get; init; }
+    public RoomType Type { get; init; }
 }

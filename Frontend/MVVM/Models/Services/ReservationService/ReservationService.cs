@@ -40,6 +40,7 @@ public class ReservationService : AbstractHotelService, IReservationService
                     {
                         Price = _financeService.GetRoomTotalPrice(room),
                         Fines = _financeService.GetRoomFinePrice(room),
+                        Lived = _financeService.NumberDaysLived(room),
                         NumberRoom = room.Number,
                     });
     }

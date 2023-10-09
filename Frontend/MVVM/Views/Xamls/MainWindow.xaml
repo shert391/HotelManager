@@ -6,7 +6,7 @@
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     Title="HotelManager"
-    Width="1200"
+    Width="1450"
     Height="800"
     AllowsTransparency="True"
     Background="Transparent"
@@ -35,41 +35,39 @@
 
             <Grid x:Name="GridHeader">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="0.053*" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="0.15*" />
+                    <ColumnDefinition Width="52*" />
+                    <ColumnDefinition Width="1217*" />
+                    <ColumnDefinition Width="181*" />
                 </Grid.ColumnDefinitions>
 
                 <Border
                     x:Name="BoarderHeader"
-                    Grid.ColumnSpan="5"
+                    Grid.ColumnSpan="3"
                     Background="#252525"
                     CornerRadius="20 20 0 0" />
 
                 <StackPanel
                     x:Name="StackPanelControllButtons"
-                    Grid.Column="3"
-                    Margin="10,0"
-                    HorizontalAlignment="Right"
+                    Grid.Column="2"
+                    Margin="91,0,0,0"
+                    HorizontalAlignment="Left"
                     VerticalAlignment="Center"
-                    Orientation="Horizontal">
+                    Orientation="Horizontal" Height="40" Width="80">
                     <Button Click="MinimizeWindow" Style="{StaticResource MinimizeButtonStyle}" />
                     <Button Click="CloseApplication" Style="{StaticResource CloseButtonStyle}" />
                 </StackPanel>
 
                 <Image
-                    Grid.Column="0" x:Name="ImageLogo"
-                    HorizontalAlignment="Left"
-                    Margin="10 0 0 0 "
+                    x:Name="ImageLogo"
                     Width="30"
+                    HorizontalAlignment="Center"
                     RenderOptions.BitmapScalingMode="HighQuality"
                     Source="../Icons/main_app_icon.ico" />
 
                 <StackPanel
                     x:Name="StackPanelTextLogo"
                     Grid.Column="1"
-                    Margin="0,0,0,2"
-                    VerticalAlignment="Center">
+                    VerticalAlignment="Center" Height="33">
                     <Label
                         x:Name="HotelSystemLabel"
                         Padding="0"

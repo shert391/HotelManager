@@ -5,9 +5,9 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:myTwo="clr-namespace:HotelManager.MVVM.ViewModels.PageViewModels"
     xmlns:my="clr-namespace:DataContract.ViewModelsDto;assembly=DataContract"
-    Width="1154"
+    xmlns:myTwo="clr-namespace:HotelManager.MVVM.ViewModels.PageViewModels"
+    Width="1405"
     Height="759"
     Language="ru-Ru"
     Style="{StaticResource PageStyle}"
@@ -51,11 +51,11 @@
                     <Button.Style>
                         <Style BasedOn="{StaticResource ModifyStyleButton}" TargetType="Button">
                             <Setter Property="Background" Value="Yellow" />
-                            <Setter Property="Command" Value="{Binding StartCommand}"></Setter>
+                            <Setter Property="Command" Value="{Binding StartCommand}" />
                             <Style.Triggers>
                                 <DataTrigger Binding="{Binding State}" Value="{x:Static myTwo:SimulatorStateViewModel.Run}">
                                     <Setter Property="Background" Value="DarkGray" />
-                                    <Setter Property="Command" Value="{Binding StopCommand}"></Setter>
+                                    <Setter Property="Command" Value="{Binding StopCommand}" />
                                 </DataTrigger>
                             </Style.Triggers>
                         </Style>
@@ -67,10 +67,10 @@
                             Margin="0,0,5,0">
                             <materialDesign:PackIcon.Style>
                                 <Style TargetType="materialDesign:PackIcon">
-                                    <Setter Property="Kind" Value="Play"></Setter>
+                                    <Setter Property="Kind" Value="Play" />
                                     <Style.Triggers>
                                         <DataTrigger Binding="{Binding State}" Value="{x:Static myTwo:SimulatorStateViewModel.Run}">
-                                            <Setter Property="Kind" Value="CloseCircle"></Setter>
+                                            <Setter Property="Kind" Value="CloseCircle" />
                                         </DataTrigger>
                                     </Style.Triggers>
                                 </Style>
@@ -78,11 +78,11 @@
                         </materialDesign:PackIcon>
                         <TextBlock VerticalAlignment="Center">
                             <TextBlock.Style>
-                                <Style TargetType="TextBlock" BasedOn="{StaticResource MaterialDesignSubtitle2TextBlock}">
-                                    <Setter Property="Text" Value="Начать моделирование"></Setter>
+                                <Style BasedOn="{StaticResource MaterialDesignSubtitle2TextBlock}" TargetType="TextBlock">
+                                    <Setter Property="Text" Value="Начать моделирование" />
                                     <Style.Triggers>
                                         <DataTrigger Binding="{Binding State}" Value="{x:Static myTwo:SimulatorStateViewModel.Run}">
-                                            <Setter Property="Text" Value="Закончить"></Setter>
+                                            <Setter Property="Text" Value="Закончить" />
                                         </DataTrigger>
                                     </Style.Triggers>
                                 </Style>
@@ -169,8 +169,7 @@
                                         <Setter Property="Text" Value="Свободно" />
                                         <Setter Property="Foreground" Value="Green" />
                                     </DataTrigger>
-                                    <DataTrigger Binding="{Binding CurrentState}"
-                                                 Value="{x:Static my:RoomState.NeedPaid}">
+                                    <DataTrigger Binding="{Binding CurrentState}" Value="{x:Static my:RoomState.NeedPaid}">
                                         <Setter Property="Text" Value="Пора выселять" />
                                         <Setter Property="Foreground" Value="Red" />
                                     </DataTrigger>
@@ -182,9 +181,10 @@
             </DataGrid>
             <Border
                 Grid.Column="1"
+                Height="675"
                 Margin="10,10,10,0"
                 Background="#323232"
-                CornerRadius="10,10,20,10" Height="675">
+                CornerRadius="10,10,20,10">
                 <StackPanel Margin="10,10,10,0">
                     <TextBlock
                         Margin="0,0,0,7"
@@ -194,8 +194,8 @@
                         Foreground="White">
                         <TextBlock.Text>
                             <MultiBinding StringFormat="День: {0} Час: {1}">
-                                <Binding Path="CurrentDay"></Binding>
-                                <Binding Path="CurrentHour"></Binding>
+                                <Binding Path="CurrentDay" />
+                                <Binding Path="CurrentHour" />
                             </MultiBinding>
                         </TextBlock.Text>
                     </TextBlock>
@@ -203,20 +203,20 @@
                         Margin="0,0,0,7"
                         FontFamily="Cascadia Mono"
                         FontSize="12"
-                        Foreground="White" Text="{Binding TotalRooms, StringFormat=Всего номеров: {0}}">
-                    </TextBlock>
+                        Foreground="White"
+                        Text="{Binding TotalRooms, StringFormat=Всего номеров: {0}}" />
                     <TextBlock
                         Margin="0,0,0,7"
                         FontFamily="Cascadia Mono"
                         FontSize="12"
-                        Foreground="White" Text="{Binding BusyRoomsCount, StringFormat=Занятых номеров: {0}, UpdateSourceTrigger=PropertyChanged}">
-                    </TextBlock>
+                        Foreground="White"
+                        Text="{Binding BusyRoomsCount, StringFormat=Занятых номеров: {0}, UpdateSourceTrigger=PropertyChanged}" />
                     <TextBlock
                         Margin="0,0,0,7"
                         FontFamily="Cascadia Mono"
                         FontSize="12"
-                        Foreground="White" Text="{Binding FreeRoomsCount, StringFormat=Свободных номеров: {0}, UpdateSourceTrigger=PropertyChanged}">
-                    </TextBlock>
+                        Foreground="White"
+                        Text="{Binding FreeRoomsCount, StringFormat=Свободных номеров: {0}, UpdateSourceTrigger=PropertyChanged}" />
                     <Separator
                         Width="300"
                         Margin="0,0,0,7"
@@ -228,15 +228,13 @@
                         FontFamily="Cascadia Mono"
                         FontSize="12"
                         Foreground="White"
-                        Text="{Binding HandledApplication, StringFormat=Обработано заявок: {0}}">
-                    </TextBlock>
+                        Text="{Binding HandledApplication, StringFormat=Обработано заявок: {0}}" />
                     <TextBlock
-                        FontFamily="Cascadia Mono"
                         Margin="0,0,0,7"
+                        FontFamily="Cascadia Mono"
                         FontSize="12"
                         Foreground="White"
-                        Text="{Binding NoHandledApplication, StringFormat=Необработанных заявок: {0}}">
-                    </TextBlock>
+                        Text="{Binding NoHandledApplication, StringFormat=Необработанных заявок: {0}}" />
                     <TextBlock
                         FontFamily="Cascadia Mono"
                         FontSize="12"

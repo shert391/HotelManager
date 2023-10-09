@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using DataContract.BusinessModels;
+using DataContract.Extensions;
 using DataContract.ViewModelsDto;
 using DataContract.ViewModelsDto.Messages;
 
@@ -17,8 +18,14 @@ public class AutoMapperProfile : Profile
         CreateMap<People, PeopleViewModel>().ReverseMap();
         CreateMap<Reservation, ReservationViewModel>().ReverseMap();
         CreateMap<PayInformation, NeedPaymentMessage>().ReverseMap();
-        CreateMap<Room, RoomViewModel>().ForMember(dst => dst.Score, opt => opt.MapFrom(src => AverageScore(src.Feedbacks))).ReverseMap();
-        CreateMap<Room, RoomViewModel>().ForMember(dst => dst.CurrentState, opt => opt.MapFrom(src => GetRoomType(src.Reservation))).ReverseMap();
+        CreateMap<PayInformation, PayInformationViewModel>()
+            .ForMember(dst => dst.RoomType, opt => opt.MapFrom(src => src.Type.GetDescription()))
+            .ReverseMap();
+        
+        CreateMap<Room, RoomViewModel>()
+            .ForMember(dst => dst.Score, opt => opt.MapFrom(src => AverageScore(src.Feedbacks)))
+            .ForMember(dst => dst.CurrentState, opt => opt.MapFrom(src => GetRoomType(src.Reservation)))
+            .ReverseMap();
     }
 
     /// <summary>

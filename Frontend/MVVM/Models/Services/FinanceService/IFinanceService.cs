@@ -1,5 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 using DataContract.BusinessModels;
+using DataContract.ViewModelsDto;
 using DataContract.ViewModelsDto.Messages;
 
 namespace HotelManager.MVVM.Models.Services.FinanceService;
@@ -29,15 +30,17 @@ public interface IFinanceService
     /// <summary>
     /// Оплатить комнату
     /// </summary>
-    /// <param name="needPaymentMessage"></param>
+    /// <param name="payInfo"></param>
     /// <returns></returns>
-    public bool PayRoom(NeedPaymentMessage needPaymentMessage);
+    public bool PayRoom(NeedPaymentMessage needPay);
     
     /// <summary>
     /// Для передачи ViewModel информации об истории оплат
     /// </summary>
     /// <returns></returns>
-    public ObservableCollection<NeedPaymentMessage> GetPayHistory();
+    public ObservableCollection<PayInformationViewModel> GetPayHistory();
+
+    public double NumberDaysLived(Room room);
 
     public void ReturnBackup();
     public void CreateBackup();

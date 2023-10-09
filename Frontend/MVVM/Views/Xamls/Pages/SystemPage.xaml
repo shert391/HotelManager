@@ -8,7 +8,8 @@
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:my="clr-namespace:DataContract.ViewModelsDto;assembly=DataContract"
-    Width="1154"
+    x:Name="SystemPageUserControll"
+    Width="1405"
     Height="759"
     Language="ru-Ru"
     Style="{StaticResource PageStyle}"
@@ -279,6 +280,7 @@
                                                     <DataTrigger Binding="{Binding CurrentState}" Value="{x:Static my:RoomState.NeedPaid}">
                                                         <Setter Property="Background" Value="Chartreuse" />
                                                         <Setter Property="Command" Value="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}, Path=DataContext.PayRoomCommand}" />
+                                                        <Setter Property="CommandParameter" Value="{Binding NeedPayment}" />
                                                     </DataTrigger>
                                                 </Style.Triggers>
                                             </Style>

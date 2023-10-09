@@ -5,8 +5,8 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    Width="800"
-    Height="356"
+    Width="1440"
+    Height="500"
     Language="ru-Ru"
     Style="{StaticResource PageStyle}"
     mc:Ignorable="d">
@@ -14,8 +14,7 @@
         <Border Background="#323232" ClipToBounds="True">
             <Grid>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="0.10*" />
-                    <RowDefinition Height="*" />
+                    <RowDefinition Height="355*" />
                 </Grid.RowDefinitions>
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -39,7 +38,7 @@
                     <StackPanel>
                         <DataGrid
                             x:Name="RoomsDataGrid"
-                            Height="268"
+                            Height="441"
                             materialDesign:DataGridAssist.SelectedCellBorderBrush="Transparent"
                             AutoGenerateColumns="False"
                             CanUserAddRows="False"
@@ -60,6 +59,27 @@
                                     CanUserResize="True"
                                     ElementStyle="{StaticResource ES}"
                                     Header="Номер комнаты"
+                                    IsReadOnly="True" />
+                                <materialDesign:DataGridTextColumn
+                                    Width="Auto"
+                                    Binding="{Binding Lived, StringFormat={}{0:0.#####}}"
+                                    CanUserResize="True"
+                                    ElementStyle="{StaticResource ES}"
+                                    Header="Прожитых дней"
+                                    IsReadOnly="True" />
+                                <materialDesign:DataGridTextColumn
+                                    Width="Auto"
+                                    Binding="{Binding RoomType}"
+                                    CanUserResize="True"
+                                    ElementStyle="{StaticResource ES}"
+                                    Header="Тип комнаты"
+                                    IsReadOnly="True" />
+                                <materialDesign:DataGridTextColumn
+                                    Width="Auto"
+                                    Binding="{Binding PricePerDay, StringFormat={}{0:C}}"
+                                    CanUserResize="True"
+                                    ElementStyle="{StaticResource ES}"
+                                    Header="Цена за сутки(по договору)"
                                     IsReadOnly="True" />
                                 <materialDesign:DataGridTextColumn
                                     Width="Auto"
@@ -97,7 +117,7 @@
                                 <ColumnDefinition Width="0.75*" />
                             </Grid.ColumnDefinitions>
                             <StackPanel
-                                Margin="10"
+                                Margin="10,20,10,10"
                                 VerticalAlignment="Center"
                                 Orientation="Horizontal">
                                 <Button

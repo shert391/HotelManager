@@ -1,5 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 using DataContract.BusinessModels;
+using DataContract.ViewModelsDto;
 using DataContract.ViewModelsDto.Messages;
 using HotelManager.MVVM.Models.Services.PostmanService;
 
@@ -12,9 +13,11 @@ public class FinanceService : AbstractHotelService, IFinanceService
 
     public FinanceService(IPostmanService postman) => _postman = postman;
 
+    public double NumberDaysLived(Room room) => (room.Reservation!.EndData - room.Reservation!.StartData).TotalDays;
+    
     public decimal GetRoomTotalPrice(Room room)
     {
-        var delta = (room.Reservation!.EndData - room.Reservation!.StartData).TotalDays;
+        var delta = NumberDaysLived(room);
         var price = delta * (double)room.Price;
         return (decimal)price;
     }
@@ -33,21 +36,27 @@ public class FinanceService : AbstractHotelService, IFinanceService
         return (decimal)fine;
     }
 
-    public bool PayRoom(NeedPaymentMessage needPaymentMessage)
+    public bool PayRoom(NeedPaymentMessage needPay)
     {
-        _payHistory.Add(Mapper.Map<PayInformation>(needPaymentMessage));
-        var room = GlobalLocalStorage.GetRoom(needPaymentMessage.NumberRoom);
-        room!.Reservation = null;
-        _postman.SendNewMessage(new SuccessfulPaymentRoomMessage()
-        {
-            RoomNumber = needPaymentMessage.NumberRoom
-        });
+        var room = GlobalLocalStorage.GetRoom(needPay.NumberRoom);
+
+        if (room is null)
+            throw new Exception("Room is null?!");
+        
+        var payInfo = Mapper.Map<PayInformation>(needPay);
+        payInfo.Type = room.Type;
+        payInfo.PricePerDay = room.Price;
+
+        _payHistory.Add(payInfo);
+        room.Reservation = null;
+        _postman.SendNewMessage(new SuccessfulPaymentRoomMessage { RoomNumber = payInfo.NumberRoom });
+        
         return true;
     }
 
-    public ObservableCollection<NeedPaymentMessage> GetPayHistory()
+    public ObservableCollection<PayInformationViewModel> GetPayHistory()
     {
-        return Mapper.Map<ObservableCollection<NeedPaymentMessage>>(_payHistory);
+        return Mapper.Map<ObservableCollection<PayInformationViewModel>>(_payHistory);
     }
 
     public void ReturnBackup()

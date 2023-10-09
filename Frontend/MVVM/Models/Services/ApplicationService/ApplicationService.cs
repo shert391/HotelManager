@@ -19,7 +19,7 @@ public class ApplicationService : AbstractHotelService, IApplicationService
         
         foreach (var room in bestType)
         {
-            var currentDelta = room.Type.GetMaxPeople() - application.Peoples;
+            var currentDelta = room.Type.GetMaxPeople() - application.Peoples.Count;
             if (currentDelta >= minDelta) continue;
             minDelta = currentDelta;
             bestRoomNumber = room.Number;
@@ -35,10 +35,13 @@ public class ApplicationService : AbstractHotelService, IApplicationService
         if (numberRoom == -1)
             return false;
 
+        if (application.Peoples.Count <= 0)
+            throw new ArgumentException("?!");
+        
         _reservationService.Reserved(new ReservationViewModel
         {
             EndData = application.EndData,
-            Peoples = new ObservableCollection<PeopleViewModel>()
+            Peoples = application.Peoples,
         }, numberRoom, true);
 
         return true;

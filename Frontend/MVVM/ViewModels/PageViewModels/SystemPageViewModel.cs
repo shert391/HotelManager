@@ -1,13 +1,13 @@
-﻿using System.Collections.ObjectModel;
-using System.ComponentModel;
+﻿using DataContract.Extensions;
+using DataContract.ViewModelsDto;
+using DataContract.ViewModelsDto.Messages;
 using DevExpress.Mvvm;
 using DevExpress.Mvvm.Native;
 using HotelManager.MVVM.Utils;
 using HotelManager.MVVM.ViewModels.DialogHostViewModels;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Windows.Input;
-using DataContract.Extensions;
-using DataContract.ViewModelsDto;
-using DataContract.ViewModelsDto.Messages;
 
 namespace HotelManager.MVVM.ViewModels.PageViewModels;
 
@@ -67,10 +67,10 @@ public class SystemPageViewModel : AbstractRoomManagerViewModel
         GenerateRoomsCommand = new DelegateCommand(DebugHelperService.GenerateTestRooms);
         EditReservationRoomCommand = new DelegateCommand<RoomViewModel>(EditReservationRoom);
         AddRoomCommand = new DelegateCommand(DialogHostController.Show<RoomCreatorDialogViewModel>);
-        PayRoomCommand = new DelegateCommand<RoomViewModel>(DialogHostController.Show<PayRoomViewModel, RoomViewModel>);
+        PayRoomCommand = new DelegateCommand<NeedPaymentMessage>(DialogHostController.Show<PayRoomViewModel, NeedPaymentMessage>);
 
         ShowPayHistoryCommand = new DelegateCommand(() => DialogHostController
-            .Show<PayHistoryViewModel, ObservableCollection<NeedPaymentMessage>>(FinanceService.GetPayHistory()));
+            .Show<PayHistoryViewModel, ObservableCollection<PayInformationViewModel>>(FinanceService.GetPayHistory()));
     }
 
     protected override void RequestPayment(NeedPaymentMessage payInfo)
@@ -78,7 +78,7 @@ public class SystemPageViewModel : AbstractRoomManagerViewModel
         var targetRoom = Rooms[Rooms.IndexOf(room => room.Number == payInfo.NumberRoom)];
         if (targetRoom.CurrentState == RoomState.NeedPaid) return;
         targetRoom.CurrentState = RoomState.NeedPaid;
-        targetRoom.PayInformationDto = payInfo;
+        targetRoom.NeedPayment = payInfo;
     }
 
     private bool FilteringRooms(object obj)
