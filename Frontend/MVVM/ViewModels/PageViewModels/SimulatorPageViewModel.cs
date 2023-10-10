@@ -51,15 +51,15 @@ public class SimulatorPageViewModel : AbstractRoomManagerViewModel
     private int _currentHour;
     private readonly Random _random = new();
     private readonly List<ApplicationDto> _applications = new();
-    private readonly SimulatorConfiguratorViewModel _simulatorConfiguratorViewModel;
+    private readonly SimulatorConfigViewModel _simulatorConfigViewModel;
 
-    public SimulatorPageViewModel(SimulatorConfiguratorViewModel simulatorConfiguratorViewModel)
+    public SimulatorPageViewModel(SimulatorConfigViewModel simulatorConfigViewModel)
     {
         StopCommand = new DelegateCommand(Stop);
         StartCommand = new DelegateCommand(Start);
-        _simulatorConfiguratorViewModel = simulatorConfiguratorViewModel;
+        _simulatorConfigViewModel = simulatorConfigViewModel;
         ShowSettingSystemCommand =
-            new DelegateCommand(() => DialogHostController.ConcreteShow(simulatorConfiguratorViewModel));
+            new DelegateCommand(() => DialogHostController.ConcreteShow(simulatorConfigViewModel));
     }
 
     protected override void RequestPayment(NeedPaymentMessage needPaymentMessage)
@@ -84,26 +84,26 @@ public class SimulatorPageViewModel : AbstractRoomManagerViewModel
         State = SimulatorStateViewModel.Run;
         RoomService.CreateBackup();
         FinanceService.CreateBackup();
-        RuntimeUpdater.Update += Tick;
+        RuntimeUpdater.CreateUpdater(typeof(SimulatorPageViewModel), _simulatorConfigViewModel.UpdaterDelay, Tick);
         ResetStats();
     }
 
     private void Stop()
     {
         State = SimulatorStateViewModel.Stop;
-        RuntimeUpdater.Update -= Tick;
+        RuntimeUpdater.DeleteUpdater(typeof(SimulatorPageViewModel));
         RoomService.ReturnBackup();
         FinanceService.ReturnBackup();
         RaisePropertiesChanged();
+        DialogHostController.ShowMessageBox("Тестирование завершено!");
     }
 
     private void Tick()
     {
-        CurrentHour++;
+        CurrentHour += _simulatorConfigViewModel.AddHoursPerTick;
 
-        _applications.AddRange(DebugHelperService.GenerateApplications(_random.Next(
-            SimulatorSettingsConstants.MinNumberApplicationInTick,
-            _simulatorConfiguratorViewModel.MaxNumberApplicationInTick)));
+        _applications.AddRange(DebugHelperService.GenerateApplications(_simulatorConfigViewModel.MaxNumberApplicationPerHour,
+            _simulatorConfigViewModel.MaxPeriodReserved));
 
         foreach (var application in _applications.ToArray())
         {
@@ -115,6 +115,6 @@ public class SimulatorPageViewModel : AbstractRoomManagerViewModel
         }
 
         RaisePropertiesChanged();
-        if (CurrentDay >= _simulatorConfiguratorViewModel.NumberDayTestPeriod) Stop();
+        if (CurrentDay >= _simulatorConfigViewModel.NumberDayTestPeriod) Stop();
     }
 }

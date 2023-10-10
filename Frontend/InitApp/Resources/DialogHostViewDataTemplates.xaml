@@ -35,7 +35,7 @@
         <dialogHostViews:PayHistory />
     </DataTemplate>
 
-    <DataTemplate DataType="{x:Type dialogHostViewModels:SimulatorConfiguratorViewModel}">
+    <DataTemplate DataType="{x:Type dialogHostViewModels:SimulatorConfigViewModel}">
         <dialogHostViews:ConfigurationSimulator />
     </DataTemplate>
 </ResourceDictionary>

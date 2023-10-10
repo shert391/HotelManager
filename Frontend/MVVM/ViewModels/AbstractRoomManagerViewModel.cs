@@ -53,8 +53,9 @@ public abstract class AbstractRoomManagerViewModel : BaseViewModel
                 Rooms[Rooms.IndexOf(room => room.Number == successfulPaymentInfo.RoomNumber)].CurrentState = RoomState.Free;
                 break;
         }
+        
         RoomsView.Refresh();
-    }
+    } 
 
     protected virtual void RequestPayment(NeedPaymentMessage payInformation) { }
 

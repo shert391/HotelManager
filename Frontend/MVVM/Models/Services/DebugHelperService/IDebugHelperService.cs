@@ -6,5 +6,5 @@ public interface IDebugHelperService
 {
     public void GenerateTestRooms();
     public void AddHoursToStorageTime(int countHours);
-    public IEnumerable<ApplicationDto> GenerateApplications(int countApplication);
+    public IEnumerable<ApplicationDto> GenerateApplications(int maxCountApplication, int maxPeriodReserved);
 }

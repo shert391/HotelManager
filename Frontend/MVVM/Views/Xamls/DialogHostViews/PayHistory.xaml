@@ -14,6 +14,7 @@
         <Border Background="#323232" ClipToBounds="True">
             <Grid>
                 <Grid.RowDefinitions>
+                    <RowDefinition Height="25*" />
                     <RowDefinition Height="355*" />
                 </Grid.RowDefinitions>
                 <Grid>
@@ -26,7 +27,6 @@
                         VerticalAlignment="Center"
                         Orientation="Horizontal">
                         <TextBlock
-                            Margin="5,10,0,5"
                             VerticalAlignment="Center"
                             FontFamily="Bahnschrift SemiBold"
                             FontSize="16"
@@ -35,10 +35,12 @@
                     </StackPanel>
                 </Grid>
                 <materialDesign:Card Grid.Row="1" Background="#323232">
-                    <StackPanel>
+                    <StackPanel Width="1440" HorizontalAlignment="Center">
                         <DataGrid
                             x:Name="RoomsDataGrid"
-                            Height="441"
+                            Width="1380"
+                            Height="409"
+                            HorizontalAlignment="Left"
                             materialDesign:DataGridAssist.SelectedCellBorderBrush="Transparent"
                             AutoGenerateColumns="False"
                             CanUserAddRows="False"

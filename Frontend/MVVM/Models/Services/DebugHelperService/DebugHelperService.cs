@@ -47,18 +47,18 @@ public class DebugHelperService : AbstractHotelService, IDebugHelperService
 
     public void AddHoursToStorageTime(int countHours) => GlobalLocalStorage.AddHoursForTest += countHours;
     
-    public IEnumerable<ApplicationDto> GenerateApplications(int countApplication)
+    public IEnumerable<ApplicationDto> GenerateApplications(int maxCountApplication, int maxPeriodReserved)
     {
         var result = new List<ApplicationDto>();
         
-        for (var i = 0; i < countApplication; i++)
+        for (var i = 0; i < _random.Next(0, maxCountApplication); i++)
         {
-            var roomType = (RoomType)_random.Next(0, Enum.GetNames(typeof(RoomType)).Length - 1);
+            var roomType = (RoomType)_random.Next(0, Enum.GetNames(typeof(RoomType)).Length);
             
             result.Add(new ApplicationDto
             {
                 Peoples = GeneratePeoples(_random.Next(1, roomType.GetMaxPeople())),
-                EndData = DateTime.Now.AddDays(_random.Next(0,5)).AddHours(_random.Next(5, 24)),
+                EndData = DateTime.Now.AddDays(_random.Next(0, maxPeriodReserved)).AddHours(_random.Next(1, 24)),
                 Type = roomType,
             });
         }
