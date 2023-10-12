@@ -129,7 +129,7 @@
                                     Background="#FFC42828"
                                     Command="{Binding CancelCommand}"
                                     Style="{StaticResource ModifyStyleButton}">
-                                    <TextBlock Style="{StaticResource MaterialDesignSubtitle2TextBlock}">Зыкрыть</TextBlock>
+                                    <TextBlock Style="{StaticResource MaterialDesignSubtitle2TextBlock}">Закрыть</TextBlock>
                                 </Button>
                             </StackPanel>
                         </Grid>
