@@ -1,8 +1,8 @@
 ﻿using DataContract.BusinessModels;
 using DataContract.ViewModelsDto;
 using System.Collections.Specialized;
-using DataContract.Extensions;
 using HotelManager.MVVM.Utils;
+using System.Collections.ObjectModel;
 
 namespace HotelManager.MVVM.Models.Services.RoomService;
 
@@ -19,9 +19,9 @@ public class RoomService : AbstractHotelService, IRoomService
         RoomCollectionChanged?.Invoke(Mapper.Map<RoomViewModel>(e.NewItems?[0]), e.Action, e.NewStartingIndex, e.OldStartingIndex);
     }
     
-    public ExtendedObservableCollection<RoomViewModel> GetRoomsForViewModel()
+    public ObservableCollection<RoomViewModel> GetRoomsForViewModel()
     {
-        ExtendedObservableCollection<RoomViewModel> result = new();
+        ObservableCollection<RoomViewModel> result = new();
 
         foreach (var room in GlobalLocalStorage.Rooms)
             result.Add(Mapper.Map<RoomViewModel>(room));

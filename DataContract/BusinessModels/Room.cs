@@ -24,7 +24,7 @@ public enum RoomType
 
 public class Room
 {
-    public int Number { get; init; } = RoomConstants.MinRoomNumber;
+    public int Number { get; init; }
 
     public decimal Price { get; set; } = RoomConstants.MinPrice;
 

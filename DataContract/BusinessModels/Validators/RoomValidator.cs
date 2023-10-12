@@ -8,7 +8,7 @@ public class RoomValidator : AbstractValidator<Room>
     public RoomValidator()
     {
         RuleFor(room => room.Number)
-            .InclusiveBetween(RoomConstants.MinRoomNumber, RoomConstants.MaxRoomNumber)
+            .GreaterThan(1)
             .NotNull()
             .NotEmpty();
 

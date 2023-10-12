@@ -64,6 +64,7 @@ public class SimulatorPageViewModel : AbstractRoomManagerViewModel
 
     protected override void RequestPayment(NeedPaymentMessage needPaymentMessage)
     {
+        base.RequestPayment(needPaymentMessage);
         if (State != SimulatorStateViewModel.Run) return;
         FinanceService.PayRoom(needPaymentMessage);
         Profit += needPaymentMessage.TotalPrice;

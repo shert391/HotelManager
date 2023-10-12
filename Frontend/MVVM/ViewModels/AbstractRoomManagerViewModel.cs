@@ -2,7 +2,6 @@ using System.Collections.Specialized;
 using DevExpress.Mvvm.Native;
 using System.ComponentModel;
 using System.Windows.Data;
-using DataContract.Extensions;
 using DataContract.ViewModelsDto;
 using DataContract.ViewModelsDto.Messages;
 using HotelManager.InitApp;
@@ -13,6 +12,8 @@ using HotelManager.MVVM.Models.Services.PostmanService;
 using HotelManager.MVVM.Models.Services.ReservationService;
 using HotelManager.MVVM.Models.Services.RoomService;
 using PropertyChanged;
+using System.Collections.ObjectModel;
+using System.Security.Cryptography.Xml;
 
 namespace HotelManager.MVVM.ViewModels;
 
@@ -27,7 +28,7 @@ public abstract class AbstractRoomManagerViewModel : BaseViewModel
 
     private readonly IPostmanService _postmanService = App.Resolve<IPostmanService>();
     
-    protected readonly ExtendedObservableCollection<RoomViewModel> Rooms; 
+    protected readonly ObservableCollection<RoomViewModel> Rooms; 
     public ICollectionView RoomsView { get; }
 
     protected AbstractRoomManagerViewModel()
@@ -40,7 +41,6 @@ public abstract class AbstractRoomManagerViewModel : BaseViewModel
 
     private void OnNewMessage(IMessage message)
     {
-        RaisePropertyChanged();
         switch (message)
         {
             case NeedPaymentMessage payInfo:
@@ -53,11 +53,14 @@ public abstract class AbstractRoomManagerViewModel : BaseViewModel
                 Rooms[Rooms.IndexOf(room => room.Number == successfulPaymentInfo.RoomNumber)].CurrentState = RoomState.Free;
                 break;
         }
-        
-        RoomsView.Refresh();
     } 
 
-    protected virtual void RequestPayment(NeedPaymentMessage payInformation) { }
+    protected virtual void RequestPayment(NeedPaymentMessage payInformation) {
+        var targetRoom = Rooms[Rooms.IndexOf(room => room.Number == payInformation.NumberRoom)];
+        if (targetRoom.CurrentState == RoomState.NeedPaid) return;
+        targetRoom.CurrentState = RoomState.NeedPaid;
+        targetRoom.NeedPayment = payInformation;
+    }
 
     private void OnRoomServiceCollectionChanged(RoomViewModel? roomViewModel, NotifyCollectionChangedAction action,
         int newIndex, int oldIndex)

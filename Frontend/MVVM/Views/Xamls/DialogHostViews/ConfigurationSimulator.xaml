@@ -11,15 +11,16 @@
     mc:Ignorable="d">
     <Grid>
         <Border Background="#454545" Focusable="True">
-            <StackPanel Focusable="True" Margin="10 20 10 10 ">
+            <StackPanel Margin="10,20,10,10" Focusable="True">
                 <TextBlock
                     FontWeight="Medium"
                     Foreground="#9e9e9e"
                     Text="Макс.кол-во заявок в час:" />
                 <Slider
-                    Maximum="100"
+                    Maximum="3333"
+                    Minimum="150"
                     Style="{StaticResource MaterialDesignDiscreteSlider}"
-                    TickFrequency="5"
+                    TickFrequency="30"
                     TickPlacement="BottomRight"
                     Value="{Binding MaxNumberApplicationPerHour}" />
                 <StackPanel Margin="0,10,0,0">
@@ -28,7 +29,7 @@
                         Foreground="#9e9e9e"
                         Text="Период тестирования(в днях):" />
                     <Slider
-                        Maximum="30"
+                        Maximum="60"
                         Style="{StaticResource MaterialDesignDiscreteSlider}"
                         TickFrequency="1"
                         TickPlacement="BottomRight"

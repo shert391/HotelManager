@@ -4,9 +4,9 @@ namespace DataContract.BusinessModels;
 
 public class Reservation
 {
-    public ObservableCollection<People> Peoples { get; init; }
+    public ObservableCollection<People> Peoples { get; init; } = new();
     
-    public DateTime StartData { get; } = DateTime.Now;
+    public DateTime StartData { get; set; }
     public DateTime EndData { get; init; }
 
 }

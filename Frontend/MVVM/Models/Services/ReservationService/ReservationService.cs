@@ -24,6 +24,7 @@ public class ReservationService : AbstractHotelService, IReservationService
     public void Reserved(ReservationViewModel newReservationDto, int roomNumber, bool isTest = false)
     {
         var reservation = Mapper.Map<Reservation>(newReservationDto);
+        reservation.StartData = DateTime.Now;
         if (!isTest && !_reservationServiceValidator.CanReserved(reservation)) return;
         var index = GlobalLocalStorage.GetRoomIndexInArray(roomNumber);
         Rooms[index].Reservation = reservation;

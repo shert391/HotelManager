@@ -1,4 +1,5 @@
-﻿using System.Collections.Specialized;
+﻿using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using DataContract.Extensions;
 using DataContract.ViewModelsDto;
 
@@ -8,7 +9,7 @@ public interface IRoomService
 {
     public event Action<RoomViewModel?, NotifyCollectionChangedAction, int, int>? RoomCollectionChanged;
     
-    public ExtendedObservableCollection<RoomViewModel> GetRoomsForViewModel();
+    public ObservableCollection<RoomViewModel> GetRoomsForViewModel();
     
     public void DeleteRoom(int roomNumber);
     public void AddRoom(RoomViewModel newRoomDto);

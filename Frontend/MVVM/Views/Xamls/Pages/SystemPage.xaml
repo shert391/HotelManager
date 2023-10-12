@@ -68,7 +68,6 @@
                             Margin="5,0,0,0"
                             VerticalAlignment="Center"
                             attached:InputFilterTextBox.AllowedType="Integer"
-                            attached:InputFilterTextBox.MaxValue="100"
                             materialDesign:HintAssist.Hint="Поиск"
                             materialDesign:TextFieldAssist.DecorationVisibility="Hidden"
                             BorderThickness="0"

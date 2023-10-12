@@ -73,14 +73,6 @@ public class SystemPageViewModel : AbstractRoomManagerViewModel
             .Show<PayHistoryViewModel, ObservableCollection<PayInformationViewModel>>(FinanceService.GetPayHistory()));
     }
 
-    protected override void RequestPayment(NeedPaymentMessage payInfo)
-    {
-        var targetRoom = Rooms[Rooms.IndexOf(room => room.Number == payInfo.NumberRoom)];
-        if (targetRoom.CurrentState == RoomState.NeedPaid) return;
-        targetRoom.CurrentState = RoomState.NeedPaid;
-        targetRoom.NeedPayment = payInfo;
-    }
-
     private bool FilteringRooms(object obj)
     {
         if (obj is not RoomViewModel roomViewModel)
