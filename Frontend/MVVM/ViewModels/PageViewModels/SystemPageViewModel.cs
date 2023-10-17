@@ -37,14 +37,13 @@ public class SystemPageViewModel : AbstractRoomManagerViewModel
 
     public ICommand DeleteRoomCommand { get; }
 
-    public ICommand ShowPayHistoryCommand { get; }
-
     public ICommand ReserveRoomCommand { get; }
 
     public ICommand GenerateRoomsCommand { get; }
 
-    public ICommand EditReservationRoomCommand { get; }
+    public ICommand ShowPayHistoryCommand { get; }
 
+    public ICommand EditReservationRoomCommand { get; }
 
     public int? NumberRoomTargetFind { get; set; }
     public TypeViewRooms TypeViewRooms { get; set; } = TypeViewRooms.All;
@@ -64,9 +63,9 @@ public class SystemPageViewModel : AbstractRoomManagerViewModel
         FindRoomCommand = new DelegateCommand(RoomsView.Refresh);
         ShowRoomsCommand = new DelegateCommand(RoomsView.Refresh);
         ReserveRoomCommand = new DelegateCommand<RoomViewModel>(ReserveRoom);
-        GenerateRoomsCommand = new DelegateCommand(DebugHelperService.GenerateTestRooms);
         EditReservationRoomCommand = new DelegateCommand<RoomViewModel>(EditReservationRoom);
         AddRoomCommand = new DelegateCommand(DialogHostController.Show<RoomCreatorDialogViewModel>);
+        GenerateRoomsCommand = new DelegateCommand(DialogHostController.Show<SettingsGeneratorViewModel>);
         PayRoomCommand = new DelegateCommand<NeedPaymentMessage>(DialogHostController.Show<PayRoomViewModel, NeedPaymentMessage>);
 
         ShowPayHistoryCommand = new DelegateCommand(() => DialogHostController

@@ -2,6 +2,7 @@ using DataContract.BusinessModels;
 using DataContract.Extensions;
 using DataContract.GlobalConstants;
 using DataContract.ViewModelsDto;
+using HotelManager.MVVM.Utils;
 using System.Collections.ObjectModel;
 
 namespace HotelManager.MVVM.Models.Services.DebugHelperService;
@@ -30,9 +31,15 @@ public class DebugHelperService : AbstractHotelService, IDebugHelperService
         return result;
     }
 
-    public void GenerateTestRooms()
+    public bool GenerateTestRooms(int minRooms, int maxRooms)
     {
-        for (var i = 1; i <= _random.Next(400, 500); i++)
+        if (minRooms > maxRooms)
+        {
+            DialogHostController.ShowMessageBox("Минимальное значение не может быть больше максимального!");
+            return false;
+        }
+
+        for (var i = 1; i <= _random.Next(minRooms, maxRooms); i++)
         {
             var newRoom = new Room
             {
@@ -42,7 +49,9 @@ public class DebugHelperService : AbstractHotelService, IDebugHelperService
             };
             if (GlobalLocalStorage.GetRoom(i) is null)
                 Rooms.Add(newRoom);
+
         }
+        return true;
     }
 
     public void AddHoursToStorageTime(int countHours) => GlobalLocalStorage.AddHoursForTest += countHours;

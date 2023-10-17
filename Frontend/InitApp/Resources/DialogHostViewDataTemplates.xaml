@@ -38,4 +38,8 @@
     <DataTemplate DataType="{x:Type dialogHostViewModels:SimulatorConfigViewModel}">
         <dialogHostViews:ConfigurationSimulator />
     </DataTemplate>
+
+    <DataTemplate DataType="{x:Type dialogHostViewModels:SettingsGeneratorViewModel}">
+        <dialogHostViews:SettingsGenerator />
+    </DataTemplate>
 </ResourceDictionary>
