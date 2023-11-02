@@ -29,6 +29,8 @@ public class SystemPageViewModel : AbstractRoomManagerViewModel
 
     public ICommand PayRoomCommand { get; }
 
+    public ICommand ClearAllCommand { get; }
+
     public ICommand FindRoomCommand { get; }
 
     public ICommand EditRoomCommand { get; }
@@ -46,6 +48,7 @@ public class SystemPageViewModel : AbstractRoomManagerViewModel
     public ICommand EditReservationRoomCommand { get; }
 
     public int? NumberRoomTargetFind { get; set; }
+
     public TypeViewRooms TypeViewRooms { get; set; } = TypeViewRooms.All;
 
 
@@ -59,6 +62,7 @@ public class SystemPageViewModel : AbstractRoomManagerViewModel
             viewModel.NewRoomDto = roomViewModel.Clone();
         });
 
+        ClearAllCommand = new DelegateCommand(ClearAll);
         DeleteRoomCommand = new DelegateCommand<int>(DeleteRoom);
         FindRoomCommand = new DelegateCommand(RoomsView.Refresh);
         ShowRoomsCommand = new DelegateCommand(RoomsView.Refresh);
@@ -70,6 +74,11 @@ public class SystemPageViewModel : AbstractRoomManagerViewModel
 
         ShowPayHistoryCommand = new DelegateCommand(() => DialogHostController
             .Show<PayHistoryViewModel, ObservableCollection<PayInformationViewModel>>(FinanceService.GetPayHistory()));
+    }
+
+    private void ClearAll()
+    {
+        DialogHostController.ShowMessageBoxConfirmation(RoomService.ClearAll, "Вы точно хотите удалить все комнаты?");
     }
 
     private bool FilteringRooms(object obj)

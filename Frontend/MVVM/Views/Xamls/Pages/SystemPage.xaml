@@ -25,6 +25,7 @@
             Grid.RowSpan="5"
             Background="#25292f"
             CornerRadius="0 0 20 0" />
+        
 
         <Grid x:Name="HeaderGrid">
             <Grid.ColumnDefinitions>
@@ -98,6 +99,26 @@
                         </TextBlock>
                     </StackPanel>
                 </Button>
+
+                <Button
+                    x:Name="ClearAll"
+                    Width="154"
+                    Height="30"
+                    Margin="10,0,0,0"
+                    Command="{Binding ClearAllCommand}"
+                    Style="{StaticResource YellowStyleButton}">
+                    <StackPanel Orientation="Horizontal">
+                        <materialDesign:PackIcon
+                            Width="20"
+                            Height="20"
+                            Margin="0,0,5,0"
+                            Kind="TrashCan" />
+                        <TextBlock VerticalAlignment="Center" Style="{StaticResource MaterialDesignSubtitle2TextBlock}">
+                            Очистить всё
+                        </TextBlock>
+                    </StackPanel>
+                </Button>
+
                 <Button
                     x:Name="GenerateRooms"
                     Width="154"

@@ -68,4 +68,6 @@ public class RoomService : AbstractHotelService, IRoomService
         RoomsBackup.Clear();
         GlobalLocalStorage.AddHoursForTest = 0;
     }
-};
+
+    public void ClearAll() => Rooms.Clear();
+}
