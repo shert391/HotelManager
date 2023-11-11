@@ -9,7 +9,6 @@ namespace HotelManager.MVVM.ViewModels.DialogHostViewModels;
 public class PayRoomViewModel : AbstractDialogViewModel, IConfigurable<NeedPaymentMessage>
 {
     public ICommand PayCommand { get; }
-
     public IFinanceService FinanceService { get; set; }
     public IStatisticService StatisticService { get; set; }
 

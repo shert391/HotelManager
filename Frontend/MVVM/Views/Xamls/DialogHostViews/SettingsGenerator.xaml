@@ -2,37 +2,80 @@
     x:Class="HotelManager.MVVM.Views.Xamls.DialogHostViews.SettingsGenerator"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:attached="clr-namespace:HotelManager.MVVM.Views.Xamls.AttachedProperties"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mah="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     Width="300"
-    Height="156"
+    Height="350"
     Language="ru-Ru"
     Style="{StaticResource PageStyle}"
     mc:Ignorable="d">
     <Grid>
         <Border Background="#454545" Focusable="True" />
         <StackPanel Margin="10">
-            <StackPanel Margin="0,10,0,0">
+            <StackPanel>
+                <TextBox
+                    attached:InputFilterTextBox.AllowedType="Integer"
+                    attached:InputFilterTextBox.DefaultValue="5000"
+                    attached:InputFilterTextBox.MaxValue="100000"
+                    materialDesign:HintAssist.Hint="₽ за люкс"
+                    Foreground="White"
+                    Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                    Text="{Binding RoomGenerationSettingsDto.LuxuryPrice, StringFormat={}{0:C}}" />
+                <TextBox
+                    Margin="0,10,0,0"
+                    attached:InputFilterTextBox.AllowedType="Integer"
+                    attached:InputFilterTextBox.DefaultValue="5000"
+                    attached:InputFilterTextBox.MaxValue="100000"
+                    materialDesign:HintAssist.Hint="₽ за полулюкс"
+                    Foreground="White"
+                    Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                    Text="{Binding RoomGenerationSettingsDto.SemiLuxuryPrice, StringFormat={}{0:C}}" />
+                <TextBox
+                    Margin="0,10,0,0"
+                    attached:InputFilterTextBox.AllowedType="Integer"
+                    attached:InputFilterTextBox.DefaultValue="1000"
+                    attached:InputFilterTextBox.MaxValue="100000"
+                    materialDesign:HintAssist.Hint="₽ за одноместные"
+                    Foreground="White"
+                    Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                    Text="{Binding RoomGenerationSettingsDto.SinglePrice, StringFormat={}{0:C}}" />
+                <TextBox
+                    Margin="0,10,0,0"
+                    attached:InputFilterTextBox.AllowedType="Integer"
+                    attached:InputFilterTextBox.DefaultValue="3000"
+                    attached:InputFilterTextBox.MaxValue="100000"
+                    materialDesign:HintAssist.Hint="₽ за простые двухместные"
+                    Foreground="White"
+                    Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                    Text="{Binding RoomGenerationSettingsDto.DoublePrice, StringFormat={}{0:C}}" />
+                <TextBox
+                    Margin="0,10,0,0"
+                    attached:InputFilterTextBox.AllowedType="Integer"
+                    attached:InputFilterTextBox.DefaultValue="3500"
+                    attached:InputFilterTextBox.MaxValue="100000"
+                    materialDesign:HintAssist.Hint="₽ за двухместные с раскладным диваном"
+                    Foreground="White"
+                    Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                    Text="{Binding RoomGenerationSettingsDto.DoubleConvertibleSofaPrice, StringFormat={}{0:C}}" />
                 <TextBlock
+                    Margin="0,15,0,0"
                     FontWeight="Medium"
                     Foreground="#9e9e9e"
-                    Text="Минимальное кол-во комнат:" />
-                <Slider
-                    Maximum="2000"
-                    Style="{StaticResource MaterialDesignDiscreteSlider}"
-                    TickFrequency="50"
-                    TickPlacement="BottomRight"
-                    Value="{Binding MinRooms}" />
-                <TextBlock
-                    FontWeight="Medium"
-                    Foreground="#9e9e9e"
-                    Text="Максимальное кол-во комнат:" />
-                <Slider
-                    Maximum="2000"
-                    Style="{StaticResource MaterialDesignDiscreteSlider}"
-                    TickFrequency="50"
-                    TickPlacement="BottomRight"
-                    Value="{Binding MaxRooms}" />
+                    Text="Кол-во комнат:" />
+                <mah:RangeSlider
+                    Margin="4"
+                    mah:SliderHelper.ChangeValueBy="LargeChange"
+                    mah:SliderHelper.EnableMouseWheel="MouseHover"
+                    AutoToolTipPlacement="TopLeft"
+                    LowerValue="{Binding RoomGenerationSettingsDto.MinRooms}"
+                    Maximum="30"
+                    Minimum="20"
+                    Orientation="Horizontal"
+                    SmallChange="1"
+                    UpperValue="{Binding RoomGenerationSettingsDto.MaxRooms}" />
             </StackPanel>
             <StackPanel
                 Margin="0,10,0,0"

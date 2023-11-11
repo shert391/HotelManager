@@ -82,11 +82,17 @@ public class SimulatorPageViewModel : AbstractRoomManagerViewModel
 
     private void Start()
     {
-        State = SimulatorStateViewModel.Run;
-        RoomService.CreateBackup();
-        FinanceService.CreateBackup();
-        RuntimeUpdater.CreateUpdater(typeof(SimulatorPageViewModel), _simulatorConfigViewModel.UpdaterDelay, Tick);
-        ResetStats();
+        if (Rooms.Count != 0)
+        {
+            State = SimulatorStateViewModel.Run;
+            RoomService.CreateBackup();
+            FinanceService.CreateBackup();
+            RuntimeUpdater.CreateUpdater(typeof(SimulatorPageViewModel), _simulatorConfigViewModel.UpdaterDelay, Tick);
+            ResetStats();
+            return;
+        }
+
+        DialogHostController.ShowMessageBox("Ошибка: для запуска тестирования нужна хотя бы одна комната!");
     }
 
     private void Stop()

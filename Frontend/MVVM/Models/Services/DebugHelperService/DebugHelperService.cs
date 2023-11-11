@@ -1,6 +1,5 @@
 using DataContract.BusinessModels;
 using DataContract.Extensions;
-using DataContract.GlobalConstants;
 using DataContract.ViewModelsDto;
 using HotelManager.MVVM.Utils;
 using System.Collections.ObjectModel;
@@ -31,27 +30,21 @@ public class DebugHelperService : AbstractHotelService, IDebugHelperService
         return result;
     }
 
-    public bool GenerateTestRooms(int minRooms, int maxRooms)
+    public void GenerateTestRooms(RoomGenerationSettingsDto roomGenerationSettingsDto)
     {
-        if (minRooms > maxRooms)
+        for (var i = 1; i <= _random.Next(roomGenerationSettingsDto.MinRooms, roomGenerationSettingsDto.MaxRooms); i++)
         {
-            DialogHostController.ShowMessageBox("Минимальное значение не может быть больше максимального!");
-            return false;
-        }
+            var type = (RoomType)_random.Next(0, Enum.GetNames(typeof(RoomType)).Length);
 
-        for (var i = 1; i <= _random.Next(minRooms, maxRooms); i++)
-        {
             var newRoom = new Room
             {
                 Number = i,
-                Price = _random.Next((int)RoomConstants.MinPrice, (int)RoomConstants.MaxPrice),
-                Type = (RoomType)_random.Next(0, Enum.GetNames(typeof(RoomType)).Length)
+                Type = type,
+                Price = ReflectionEX.GetValueByNameProperty<decimal>(type.ToString(), roomGenerationSettingsDto)
             };
             if (GlobalLocalStorage.GetRoom(i) is null)
                 Rooms.Add(newRoom);
-
         }
-        return true;
     }
 
     public void AddHoursToStorageTime(int countHours) => GlobalLocalStorage.AddHoursForTest += countHours;
