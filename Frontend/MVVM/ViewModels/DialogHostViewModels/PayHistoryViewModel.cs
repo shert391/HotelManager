@@ -1,5 +1,6 @@
 using System.Collections.ObjectModel;
-using DataContract.ViewModelsDto;
+using DataContract.DTO.MappingEntities;
+using DataContract.DTO.ViewModels;
 using HotelManager.MVVM.Utils;
 
 namespace HotelManager.MVVM.ViewModels.DialogHostViewModels;

@@ -1,7 +1,8 @@
-﻿using DataContract.GlobalConstants;
+﻿using DataContract.DTO.ViewModels;
+using DataContract.GlobalConstants;
 using FluentValidation;
 
-namespace DataContract.ViewModelsDto.Validators;
+namespace DataContract.DTO.MappingEntities.Validators;
 
 public class PeopleViewModelValidator : AbstractValidator<PeopleViewModel>
 {

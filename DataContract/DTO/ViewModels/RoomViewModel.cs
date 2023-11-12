@@ -1,9 +1,9 @@
-﻿using DevExpress.Mvvm;
+﻿using DataContract.BusinessModels;
+using DataContract.DTO.Messages;
 using DataContract.Extensions;
-using DataContract.BusinessModels;
-using DataContract.ViewModelsDto.Messages;
+using DevExpress.Mvvm;
 
-namespace DataContract.ViewModelsDto;
+namespace DataContract.DTO.ViewModels;
 
 public enum RoomState
 {

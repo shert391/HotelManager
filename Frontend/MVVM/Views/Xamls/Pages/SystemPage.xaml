@@ -7,7 +7,8 @@
     xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:my="clr-namespace:DataContract.ViewModelsDto;assembly=DataContract"
+    xmlns:mappingEntities="clr-namespace:DataContract.DTO.MappingEntities;assembly=DataContract"
+    xmlns:viewModels="clr-namespace:DataContract.DTO.ViewModels;assembly=DataContract"
     x:Name="SystemPageUserControll"
     Width="1405"
     Height="759"
@@ -235,11 +236,11 @@
                                 <Setter Property="Foreground" Value="Red" />
                                 <Setter Property="Text" Value="Занято" />
                                 <Style.Triggers>
-                                    <DataTrigger Binding="{Binding CurrentState}" Value="{x:Static my:RoomState.Free}">
+                                    <DataTrigger Binding="{Binding CurrentState}" Value="{x:Static viewModels:RoomState.Free}">
                                         <Setter Property="Text" Value="Свободно" />
                                         <Setter Property="Foreground" Value="Green" />
                                     </DataTrigger>
-                                    <DataTrigger Binding="{Binding CurrentState}" Value="{x:Static my:RoomState.NeedPaid}">
+                                    <DataTrigger Binding="{Binding CurrentState}" Value="{x:Static viewModels:RoomState.NeedPaid}">
                                         <Setter Property="Text" Value="Пора выселять" />
                                         <Setter Property="Foreground" Value="Red" />
                                     </DataTrigger>
@@ -293,11 +294,11 @@
                                                 <Setter Property="CommandParameter" Value="{Binding .}" />
                                                 <Setter Property="Command" Value="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}, Path=DataContext.EditReservationRoomCommand}" />
                                                 <Style.Triggers>
-                                                    <DataTrigger Binding="{Binding CurrentState}" Value="{x:Static my:RoomState.Free}">
+                                                    <DataTrigger Binding="{Binding CurrentState}" Value="{x:Static viewModels:RoomState.Free}">
                                                         <Setter Property="Background" Value="LightBlue" />
                                                         <Setter Property="Command" Value="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}, Path=DataContext.ReserveRoomCommand}" />
                                                     </DataTrigger>
-                                                    <DataTrigger Binding="{Binding CurrentState}" Value="{x:Static my:RoomState.NeedPaid}">
+                                                    <DataTrigger Binding="{Binding CurrentState}" Value="{x:Static viewModels:RoomState.NeedPaid}">
                                                         <Setter Property="Background" Value="Chartreuse" />
                                                         <Setter Property="Command" Value="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}, Path=DataContext.PayRoomCommand}" />
                                                         <Setter Property="CommandParameter" Value="{Binding NeedPayment}" />
@@ -313,10 +314,10 @@
                                                 <Style TargetType="materialDesign:PackIcon">
                                                     <Setter Property="Kind" Value="FileDocumentEditOutline" />
                                                     <Style.Triggers>
-                                                        <DataTrigger Binding="{Binding CurrentState}" Value="{x:Static my:RoomState.Free}">
+                                                        <DataTrigger Binding="{Binding CurrentState}" Value="{x:Static viewModels:RoomState.Free}">
                                                             <Setter Property="Kind" Value="FileDocumentArrowRightOutline" />
                                                         </DataTrigger>
-                                                        <DataTrigger Binding="{Binding CurrentState}" Value="{x:Static my:RoomState.NeedPaid}">
+                                                        <DataTrigger Binding="{Binding CurrentState}" Value="{x:Static viewModels:RoomState.NeedPaid}">
                                                             <Setter Property="Kind" Value="Cash100" />
                                                         </DataTrigger>
                                                     </Style.Triggers>

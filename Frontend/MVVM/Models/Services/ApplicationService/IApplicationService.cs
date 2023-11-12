@@ -1,4 +1,6 @@
-using DataContract.ViewModelsDto;
+using DataContract.DTO;
+using DataContract.DTO.MappingEntities;
+using DataContract.DTO.ViewModels;
 
 namespace HotelManager.MVVM.Models.Services.ApplicationService;
 
@@ -11,6 +13,6 @@ public interface IApplicationService
     /// </summary>
     /// <param name="application"></param>
     /// <returns></returns>
-    public int FindBestRoom(ApplicationDto application);
-    public bool Handle(ApplicationDto application);
+    public int FindBestRoom(ApplicationViewModel application);
+    public bool Handle(ApplicationViewModel application);
 }

@@ -1,6 +1,6 @@
 ﻿using DevExpress.Mvvm;
 
-namespace DataContract.ViewModelsDto;
+namespace DataContract.DTO.ViewModels;
 
 public class PeopleViewModel : BindableBase
 {

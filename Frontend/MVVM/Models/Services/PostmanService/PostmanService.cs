@@ -1,4 +1,4 @@
-using DataContract.ViewModelsDto.Messages;
+using DataContract.DTO.Messages;
 
 namespace HotelManager.MVVM.Models.Services.PostmanService;
 

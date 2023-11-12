@@ -5,8 +5,9 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:my="clr-namespace:DataContract.ViewModelsDto;assembly=DataContract"
     xmlns:myTwo="clr-namespace:HotelManager.MVVM.ViewModels.PageViewModels"
+    xmlns:mappingEntities="clr-namespace:DataContract.DTO.MappingEntities;assembly=DataContract"
+    xmlns:viewModels="clr-namespace:DataContract.DTO.ViewModels;assembly=DataContract"
     Width="1405"
     Height="759"
     Language="ru-Ru"
@@ -165,11 +166,11 @@
                                 <Setter Property="Foreground" Value="Red" />
                                 <Setter Property="Text" Value="Занято" />
                                 <Style.Triggers>
-                                    <DataTrigger Binding="{Binding CurrentState}" Value="{x:Static my:RoomState.Free}">
+                                    <DataTrigger Binding="{Binding CurrentState}" Value="{x:Static viewModels:RoomState.Free}">
                                         <Setter Property="Text" Value="Свободно" />
                                         <Setter Property="Foreground" Value="Green" />
                                     </DataTrigger>
-                                    <DataTrigger Binding="{Binding CurrentState}" Value="{x:Static my:RoomState.NeedPaid}">
+                                    <DataTrigger Binding="{Binding CurrentState}" Value="{x:Static viewModels:RoomState.NeedPaid}">
                                         <Setter Property="Text" Value="Пора выселять" />
                                         <Setter Property="Foreground" Value="Red" />
                                     </DataTrigger>

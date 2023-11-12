@@ -1,6 +1,7 @@
 using DataContract.BusinessModels;
-using DataContract.ViewModelsDto;
-using DataContract.ViewModelsDto.Messages;
+using DataContract.DTO.MappingEntities;
+using DataContract.DTO.Messages;
+using DataContract.DTO.ViewModels;
 using HotelManager.MVVM.Models.Services.FinanceService;
 using HotelManager.MVVM.Models.Services.PostmanService;
 using HotelManager.MVVM.Utils;

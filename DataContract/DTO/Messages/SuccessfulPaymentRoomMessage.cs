@@ -1,6 +1,6 @@
 using DevExpress.Mvvm;
 
-namespace DataContract.ViewModelsDto.Messages;
+namespace DataContract.DTO.Messages;
 
 /// <summary>
 /// Сообщение отправляется, когда за комнату расчитались и бронь снята

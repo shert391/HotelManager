@@ -1,6 +1,8 @@
 using System.Collections.ObjectModel;
+using DataContract.DTO;
+using DataContract.DTO.MappingEntities;
+using DataContract.DTO.ViewModels;
 using DataContract.Extensions;
-using DataContract.ViewModelsDto;
 using HotelManager.MVVM.Models.Services.ReservationService;
 
 namespace HotelManager.MVVM.Models.Services.ApplicationService;
@@ -11,7 +13,7 @@ public class ApplicationService : AbstractHotelService, IApplicationService
 
     public ApplicationService(IReservationService reservationService) => _reservationService = reservationService;
 
-    public int FindBestRoom(ApplicationDto application)
+    public int FindBestRoom(ApplicationViewModel application)
     {
         var bestType = Rooms.Where(room => room.Type == application.Type && room.Reservation is null);
 
@@ -28,7 +30,7 @@ public class ApplicationService : AbstractHotelService, IApplicationService
         return bestRoomNumber;
     }
     
-    public bool Handle(ApplicationDto application)
+    public bool Handle(ApplicationViewModel application)
     {
         var numberRoom = FindBestRoom(application);
 

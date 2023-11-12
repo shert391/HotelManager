@@ -1,8 +1,8 @@
 using System.Collections.ObjectModel;
 using DataContract.BusinessModels;
 
-namespace DataContract.ViewModelsDto;
-public class ApplicationDto
+namespace DataContract.DTO.ViewModels;
+public class ApplicationViewModel
 {
     public ObservableCollection<PeopleViewModel> Peoples { get; init; } = new();
     public DateTime EndData { get; init; }

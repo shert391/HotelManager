@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using DataContract;
+using DataContract.DTO.MappingEntities;
 
 namespace HotelManager.InitApp.HostBuilders;
 

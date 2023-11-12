@@ -1,6 +1,6 @@
 using DevExpress.Mvvm;
 
-namespace DataContract.ViewModelsDto.Messages;
+namespace DataContract.DTO.Messages;
 
 /// <summary>
 /// —ообщение о платежной информации, которую должны осуществить, высел€ющиес€ жильцы

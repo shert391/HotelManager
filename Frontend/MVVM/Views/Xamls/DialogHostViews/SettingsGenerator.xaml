@@ -70,12 +70,12 @@
                     mah:SliderHelper.ChangeValueBy="LargeChange"
                     mah:SliderHelper.EnableMouseWheel="MouseHover"
                     AutoToolTipPlacement="TopLeft"
-                    LowerValue="{Binding RoomGenerationSettingsDto.MinRooms}"
+                    LowerValue="{Binding RoomGenerationSettingsDto.Rooms.Min}"
                     Maximum="30"
                     Minimum="20"
                     Orientation="Horizontal"
                     SmallChange="1"
-                    UpperValue="{Binding RoomGenerationSettingsDto.MaxRooms}" />
+                    UpperValue="{Binding RoomGenerationSettingsDto.Rooms.Max}" />
             </StackPanel>
             <StackPanel
                 Margin="0,10,0,0"

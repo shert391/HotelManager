@@ -1,7 +1,8 @@
 ﻿using DevExpress.Mvvm;
 using HotelManager.MVVM.Utils;
 using System.Windows.Input;
-using DataContract.ViewModelsDto;
+using DataContract.DTO.MappingEntities;
+using DataContract.DTO.ViewModels;
 using HotelManager.MVVM.Models.Services.RoomService;
 
 namespace HotelManager.MVVM.ViewModels.DialogHostViewModels;

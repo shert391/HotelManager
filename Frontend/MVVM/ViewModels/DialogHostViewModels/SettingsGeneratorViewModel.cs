@@ -1,8 +1,8 @@
-﻿using DataContract.ViewModelsDto;
-using DevExpress.Mvvm;
+﻿using DevExpress.Mvvm;
 using HotelManager.MVVM.Models.Services.DebugHelperService;
 using HotelManager.MVVM.Utils;
 using System.Windows.Input;
+using DataContract.DTO.Settings;
 
 namespace HotelManager.MVVM.ViewModels.DialogHostViewModels;
 

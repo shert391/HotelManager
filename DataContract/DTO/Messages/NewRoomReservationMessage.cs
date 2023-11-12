@@ -1,6 +1,6 @@
 using DevExpress.Mvvm;
 
-namespace DataContract.ViewModelsDto.Messages;
+namespace DataContract.DTO.Messages;
 
 /// <summary>
 /// Это сообщение отправляется от сервисов вью-моделям, когда произошло новое бронирование комнаты

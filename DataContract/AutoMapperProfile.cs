@@ -1,8 +1,9 @@
 ﻿using AutoMapper;
 using DataContract.BusinessModels;
+using DataContract.DTO.MappingEntities;
+using DataContract.DTO.Messages;
+using DataContract.DTO.ViewModels;
 using DataContract.Extensions;
-using DataContract.ViewModelsDto;
-using DataContract.ViewModelsDto.Messages;
 
 namespace DataContract;
 

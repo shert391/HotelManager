@@ -1,8 +1,10 @@
 using DataContract.BusinessModels;
 using DataContract.Extensions;
-using DataContract.ViewModelsDto;
 using HotelManager.MVVM.Utils;
 using System.Collections.ObjectModel;
+using DataContract;
+using DataContract.DTO.Settings;
+using DataContract.DTO.ViewModels;
 
 namespace HotelManager.MVVM.Models.Services.DebugHelperService;
 
@@ -32,7 +34,7 @@ public class DebugHelperService : AbstractHotelService, IDebugHelperService
 
     public void GenerateTestRooms(RoomGenerationSettingsDto roomGenerationSettingsDto)
     {
-        for (var i = 1; i <= _random.Next(roomGenerationSettingsDto.MinRooms, roomGenerationSettingsDto.MaxRooms); i++)
+        for (var i = 1; i <= _random.Next(roomGenerationSettingsDto.Rooms.Min, roomGenerationSettingsDto.Rooms.Max); i++)
         {
             var type = (RoomType)_random.Next(0, Enum.GetNames(typeof(RoomType)).Length);
 
@@ -49,18 +51,18 @@ public class DebugHelperService : AbstractHotelService, IDebugHelperService
 
     public void AddHoursToStorageTime(int countHours) => GlobalLocalStorage.AddHoursForTest += countHours;
 
-    public IEnumerable<ApplicationDto> GenerateApplications(int maxCountApplication, int maxPeriodReserved)
+    public IEnumerable<ApplicationViewModel> GenerateApplications(int countApplication, Interval<int> periodReversed)
     {
-        var result = new List<ApplicationDto>();
+        var result = new List<ApplicationViewModel>();
 
-        for (var i = 0; i < _random.Next(maxCountApplication - 100, maxCountApplication); i++)
+        for (var i = 0; i < countApplication; i++)
         {
             var roomType = (RoomType)_random.Next(0, Enum.GetNames(typeof(RoomType)).Length);
 
-            result.Add(new ApplicationDto
+            result.Add(new ApplicationViewModel
             {
                 Peoples = GeneratePeoples(_random.Next(1, roomType.GetMaxPeople())),
-                EndData = DateTime.Now.AddDays(_random.Next(0, maxPeriodReserved)).AddHours(_random.Next(1, 24)),
+                EndData = DateTime.Now.AddDays(_random.Next(periodReversed.Min, periodReversed.Max)).AddHours(_random.Next(1, 24)),
                 Type = roomType,
             });
         }

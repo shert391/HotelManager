@@ -1,11 +1,9 @@
-﻿using DevExpress.Mvvm;
-using DataContract.BusinessModels;
+﻿using DataContract.BusinessModels;
 
-namespace DataContract.ViewModelsDto;
-public class RoomGenerationSettingsDto : BindableBase
+namespace DataContract.DTO.Settings;
+public class RoomGenerationSettingsDto
 {
-    public int MinRooms { get; set; } = 20;
-    public int MaxRooms { get; set; } = 30;
+    public Interval<int> Rooms { get; } = new() { Min = 20, Max = 30 };
 
     /// <summary>
     /// ВАЖНО!

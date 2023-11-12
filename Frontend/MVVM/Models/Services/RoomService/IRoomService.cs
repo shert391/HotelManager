@@ -1,7 +1,8 @@
 ﻿using System.Collections.ObjectModel;
 using System.Collections.Specialized;
+using DataContract.DTO.MappingEntities;
+using DataContract.DTO.ViewModels;
 using DataContract.Extensions;
-using DataContract.ViewModelsDto;
 
 namespace HotelManager.MVVM.Models.Services.RoomService;
 

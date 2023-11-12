@@ -3,7 +3,7 @@ using HotelManager.MVVM.Models.Services.FinanceService;
 using HotelManager.MVVM.Models.Services.StatisticService;
 using HotelManager.MVVM.Utils;
 using System.Windows.Input;
-using DataContract.ViewModelsDto.Messages;
+using DataContract.DTO.Messages;
 
 namespace HotelManager.MVVM.ViewModels.DialogHostViewModels;
 public class PayRoomViewModel : AbstractDialogViewModel, IConfigurable<NeedPaymentMessage>

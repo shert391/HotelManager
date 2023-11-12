@@ -1,11 +1,11 @@
-﻿using DataContract.GlobalConstants;
-using DataContract.ViewModelsDto;
-using DevExpress.Mvvm;
-using HotelManager.MVVM.Models.Services;
-using HotelManager.MVVM.Utils;
-using HotelManager.MVVM.ViewModels.DialogHostViewModels;
+﻿using DevExpress.Mvvm;
 using System.Windows.Input;
-using DataContract.ViewModelsDto.Messages;
+using DataContract.DTO.Messages;
+using DataContract.DTO.ViewModels;
+using HotelManager.MVVM.Utils;
+using HotelManager.MVVM.Models.Services;
+using HotelManager.MVVM.ViewModels.DialogHostViewModels;
+
 
 namespace HotelManager.MVVM.ViewModels.PageViewModels;
 
@@ -31,6 +31,7 @@ public class SimulatorPageViewModel : AbstractRoomManagerViewModel
             {
                 CurrentDay++;
                 _currentHour = 0;
+                _nextSpawnApplication = 0;
                 return;
             }
 
@@ -49,8 +50,9 @@ public class SimulatorPageViewModel : AbstractRoomManagerViewModel
     public ICommand StopCommand { get; }
 
     private int _currentHour;
+    private int _nextSpawnApplication;
     private readonly Random _random = new();
-    private readonly List<ApplicationDto> _applications = new();
+    private readonly List<ApplicationViewModel> _applications = new();
     private readonly SimulatorConfigViewModel _simulatorConfigViewModel;
 
     public SimulatorPageViewModel(SimulatorConfigViewModel simulatorConfigViewModel)
@@ -70,6 +72,7 @@ public class SimulatorPageViewModel : AbstractRoomManagerViewModel
         Profit += needPaymentMessage.TotalPrice;
     }
 
+
     private void ResetStats()
     {
         Profit = 0;
@@ -78,6 +81,7 @@ public class SimulatorPageViewModel : AbstractRoomManagerViewModel
         _applications.Clear();
         HandledApplication = 0;
         RaisePropertiesChanged();
+        _nextSpawnApplication = 0;
     }
 
     private void Start()
@@ -87,8 +91,12 @@ public class SimulatorPageViewModel : AbstractRoomManagerViewModel
             State = SimulatorStateViewModel.Run;
             RoomService.CreateBackup();
             FinanceService.CreateBackup();
+            _nextSpawnApplication += _random.Next(_simulatorConfigViewModel.IntervalSpawnApplication.Min,
+                _simulatorConfigViewModel.IntervalSpawnApplication.Max);
             RuntimeUpdater.CreateUpdater(typeof(SimulatorPageViewModel), _simulatorConfigViewModel.UpdaterDelay, Tick);
             ResetStats();
+            _nextSpawnApplication += _random.Next(_simulatorConfigViewModel.IntervalSpawnApplication.Min,
+                _simulatorConfigViewModel.IntervalSpawnApplication.Max);
             return;
         }
 
@@ -109,8 +117,13 @@ public class SimulatorPageViewModel : AbstractRoomManagerViewModel
     {
         CurrentHour += _simulatorConfigViewModel.AddHoursPerTick;
 
-        _applications.AddRange(DebugHelperService.GenerateApplications(_simulatorConfigViewModel.MaxNumberApplicationPerHour,
-            _simulatorConfigViewModel.MaxPeriodReserved));
+        if (CurrentHour < _nextSpawnApplication)
+            return;
+
+        _nextSpawnApplication = CurrentHour + _random.Next(_simulatorConfigViewModel.IntervalSpawnApplication.Min,
+            _simulatorConfigViewModel.IntervalSpawnApplication.Max);
+
+        _applications.AddRange(DebugHelperService.GenerateApplications(2, _simulatorConfigViewModel.IntervalPeriodReserved));
 
         foreach (var application in _applications.ToArray())
         {
@@ -120,6 +133,7 @@ public class SimulatorPageViewModel : AbstractRoomManagerViewModel
             HandledApplication++;
             _applications.Remove(application);
         }
+
 
         RaisePropertiesChanged();
         if (CurrentDay >= _simulatorConfigViewModel.NumberDayTestPeriod) Stop();
