@@ -7,15 +7,16 @@ using System.Windows;
 namespace HotelManager.InitApp;
 public partial class App : Application
 {
-    private readonly IHost _host;
+    private static readonly IHost _host;
 
-    public App() => _host = CreateHost();
+    static App() => _host = CreateHost();
 
-    public IHost CreateHost(string[]? args = null)
+    private static IHost CreateHost(string[]? args = null)
     {
         return Host.CreateDefaultBuilder(args)
-            .AddViews()
-            .Build();
+                    .AddViewModels()
+                    .AddViews()
+                    .Build();
     }
 
     protected override void OnStartup(StartupEventArgs e)
@@ -35,4 +36,6 @@ public partial class App : Application
 
         base.OnExit(e);
     }
+
+    public static T Resolve<T>() where T : notnull => _host.Services.GetRequiredService<T>();
 }

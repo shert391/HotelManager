@@ -1,11 +1,208 @@
-﻿<Window x:Class="HotelManager.MVVM.Views.Xamls.MainWindow"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
+﻿<Window
+    x:Class="HotelManager.MVVM.Views.Xamls.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="HotelManager"
+    Width="800"
+    Height="450"
+    AllowsTransparency="True"
+    Background="Transparent"
+    ResizeMode="NoResize"
+    Style="{StaticResource WindowStyle}"
+    WindowStartupLocation="CenterScreen"
+    WindowStyle="None"
+    mc:Ignorable="d">
+    <Border
+        x:Name="BorderApp"
+        Background="#25292f"
+        CornerRadius="20"
+        MouseDown="WindowMove">
+        <Grid x:Name="GridApp">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.11*" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
 
-    </Grid>
+            <Grid x:Name="GridHeader">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.08*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="0.15*" />
+                </Grid.ColumnDefinitions>
+
+                <Border
+                    x:Name="BoarderHeader"
+                    Grid.ColumnSpan="5"
+                    Background="#252525"
+                    CornerRadius="20 20 0 0" />
+
+                <StackPanel
+                    x:Name="StackPanelControllButtons"
+                    Grid.Column="3"
+                    Margin="10,0"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Center"
+                    Orientation="Horizontal">
+                    <Button Click="MinimizeWindow" Style="{StaticResource MinimizeButtonStyle}" />
+                    <Button Click="CloseApplication" Style="{StaticResource CloseButtonStyle}" />
+                </StackPanel>
+
+                <Image
+                    x:Name="ImageLogo"
+                    Width="30"
+                    HorizontalAlignment="Center"
+                    RenderOptions.BitmapScalingMode="HighQuality"
+                    Source="../Icons/main_app_icon.ico" />
+
+                <StackPanel
+                    x:Name="StackPanelTextLogo"
+                    Grid.Column="1"
+                    Margin="0,0,0,2"
+                    VerticalAlignment="Center">
+                    <Label
+                        x:Name="HotelSystemLabel"
+                        Padding="0"
+                        Content="HOTEL SYSTEM"
+                        FontSize="15"
+                        FontWeight="Bold"
+                        Foreground="#e0dfe4" />
+                    <Label
+                        x:Name="ManagerLabel"
+                        Padding="0"
+                        Content="MANAGER"
+                        FontSize="10"
+                        FontWeight="Bold"
+                        Foreground="#7f7e83" />
+                </StackPanel>
+            </Grid>
+
+            <Grid x:Name="GridContent" Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition x:Name="stretchable_column" MaxWidth="50" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <Border
+                    x:Name="BorderFade"
+                    Grid.Column="1"
+                    Panel.ZIndex="5"
+                    Background="Black"
+                    CornerRadius="0 0 20 0"
+                    Opacity="0"
+                    Visibility="Collapsed" />
+
+                <Border
+                    x:Name="BoarderNavigationBar"
+                    Background="#252525"
+                    CornerRadius="0 0 0 20" />
+
+                <StackPanel x:Name="StackPanelNavigationButtons">
+                    <ToggleButton
+                        x:Name="StretchButton"
+                        Margin="0,20,0,15"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Top"
+                        Style="{StaticResource StretchNavigationToggleButtonStyle}">
+                        <Image Width="30" Source="../Icons/stretch.png" />
+
+                        <ToggleButton.Triggers>
+                            <EventTrigger RoutedEvent="ToggleButton.Checked">
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation
+                                            BeginTime="0:0:0"
+                                            Storyboard.TargetName="stretchable_column"
+                                            Storyboard.TargetProperty="MaxWidth"
+                                            From="50"
+                                            To="164"
+                                            Duration="0:0:0.2" />
+                                        <DoubleAnimation
+                                            BeginTime="0:0:0"
+                                            Storyboard.TargetName="BorderFade"
+                                            Storyboard.TargetProperty="Opacity"
+                                            From="0"
+                                            To="0.5"
+                                            Duration="0:0:0.2" />
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="BorderFade" Storyboard.TargetProperty="Visibility">
+                                            <DiscreteObjectKeyFrame KeyTime="0:0:0.0" Value="{x:Static Visibility.Visible}" />
+                                        </ObjectAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger>
+                            <EventTrigger RoutedEvent="ToggleButton.Unchecked">
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation
+                                            BeginTime="0:0:0"
+                                            Storyboard.TargetName="stretchable_column"
+                                            Storyboard.TargetProperty="MaxWidth"
+                                            From="164"
+                                            To="50"
+                                            Duration="0:0:0.2" />
+                                        <DoubleAnimation
+                                            BeginTime="0:0:0"
+                                            Storyboard.TargetName="BorderFade"
+                                            Storyboard.TargetProperty="Opacity"
+                                            From="0.5"
+                                            To="0"
+                                            Duration="0:0:0.2" />
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="BorderFade" Storyboard.TargetProperty="Visibility">
+                                            <DiscreteObjectKeyFrame KeyTime="0:0:0.2" Value="{x:Static Visibility.Collapsed}" />
+                                        </ObjectAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger>
+                        </ToggleButton.Triggers>
+                    </ToggleButton>
+
+                    <RadioButton
+                        x:Name="SystemButton"
+                        Width="Auto"
+                        Height="50"
+                        Command="{Binding SelectSystemView}"
+                        IsChecked="True"
+                        Style="{StaticResource NavigateRadioButtonStyle}">
+                        <StackPanel Orientation="Horizontal">
+                            <Image Margin="10,10,0,10" Source="../Icons/system.png" />
+                            <TextBlock
+                                Width="Auto"
+                                Margin="10,0,0,0"
+                                VerticalAlignment="Center"
+                                FontFamily="../Fonts/Montserrat/#Montserrat Bold"
+                                FontSize="15"
+                                Foreground="White"
+                                TextOptions.TextRenderingMode="ClearType">
+                                Система
+                            </TextBlock>
+                        </StackPanel>
+                    </RadioButton>
+
+                    <RadioButton
+                        x:Name="TestButton"
+                        Width="Auto"
+                        Height="50"
+                        Command="{Binding SelectTestView}"
+                        Style="{StaticResource NavigateRadioButtonStyle}">
+                        <StackPanel Orientation="Horizontal">
+                            <Image Margin="10,10,0,10" Source="../Icons/testing.png" />
+                            <TextBlock
+                                Width="Auto"
+                                Margin="10,0,0,0"
+                                VerticalAlignment="Center"
+                                FontFamily="../Fonts/Montserrat/#Montserrat Bold"
+                                FontSize="15"
+                                Foreground="White"
+                                TextOptions.TextRenderingMode="ClearType">
+                                Тестировать
+                            </TextBlock>
+                        </StackPanel>
+                    </RadioButton>
+                </StackPanel>
+
+                <ContentControl Grid.Column="1" Content="{Binding CurrentViewModel}" />
+            </Grid>
+        </Grid>
+    </Border>
 </Window>

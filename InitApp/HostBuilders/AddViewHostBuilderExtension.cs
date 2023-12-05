@@ -1,4 +1,6 @@
-﻿using HotelManager.MVVM.Views.Xamls;
+﻿using HotelManager.MVVM.ViewModels;
+using HotelManager.MVVM.Views.Xamls;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Hosting;
 
@@ -10,7 +12,7 @@ public static class AddViewHostBuilderExtension
     {
         hostBuilder.ConfigureServices(serviceCollection =>
         {
-            serviceCollection.TryAddSingleton(serviceProvider => new MainWindow());
+            serviceCollection.TryAddSingleton(serviceProvider => new MainWindow(serviceProvider.GetRequiredService<MainWindowViewModel>()));
         });
 
         return hostBuilder;
