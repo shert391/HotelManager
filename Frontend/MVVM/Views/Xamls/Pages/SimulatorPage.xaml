@@ -6,7 +6,6 @@
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:myTwo="clr-namespace:HotelManager.MVVM.ViewModels.PageViewModels"
-    xmlns:mappingEntities="clr-namespace:DataContract.DTO.MappingEntities;assembly=DataContract"
     xmlns:viewModels="clr-namespace:DataContract.DTO.ViewModels;assembly=DataContract"
     Width="1405"
     Height="759"
@@ -230,12 +229,27 @@
                         FontSize="12"
                         Foreground="White"
                         Text="{Binding HandledApplication, StringFormat=Обработано заявок: {0}}" />
-                    <TextBlock
-                        Margin="0,0,0,7"
-                        FontFamily="Cascadia Mono"
-                        FontSize="12"
-                        Foreground="White"
-                        Text="{Binding NoHandledApplication, StringFormat=Необработанных заявок: {0}}" />
+
+                    <StackPanel Margin="0,0,0,7" Orientation="Horizontal">
+                        <TextBlock
+                            VerticalAlignment="Center"
+                            FontFamily="Cascadia Mono"
+                            FontSize="12"
+                            Foreground="White"
+                            Text="{Binding NoHandledApplication, StringFormat=Необработанных заявок: {0}}"
+                            TextAlignment="Center" />
+                        <Button
+                            Width="18"
+                            Height="18"
+                            Margin="8,0,0,0"
+                            VerticalAlignment="Center"
+                            VerticalContentAlignment="Center"
+                            Background="Gray"
+                            Command="{Binding NoHandledApplicationViewCommand}"
+                            Style="{StaticResource ModifyStyleButton}">
+                            <materialDesign:PackIcon Kind="Glasses" />
+                        </Button>
+                    </StackPanel>
                     <TextBlock
                         FontFamily="Cascadia Mono"
                         FontSize="12"
@@ -243,6 +257,134 @@
                         Text="{Binding Profit, StringFormat=Прибыль: {0:C}}" />
                 </StackPanel>
             </Border>
+            <DataGrid
+                x:Name="RoomsDataGrid_Копировать"
+                Margin="9,0,11,20"
+                materialDesign:DataGridAssist.SelectedCellBorderBrush="Transparent"
+                AutoGenerateColumns="False"
+                Background="#25292f"
+                CanUserAddRows="False"
+                HorizontalScrollBarVisibility="Disabled"
+                ItemsSource="{Binding RoomsView}">
+                <DataGrid.Resources>
+                    <Style
+                        x:Key="ES"
+                        BasedOn="{StaticResource MaterialDesignDataGridTextColumnStyle}"
+                        TargetType="{x:Type TextBlock}">
+                        <Setter Property="VerticalAlignment" Value="Center" />
+                    </Style>
+                </DataGrid.Resources>
+                <DataGrid.Columns>
+                    <materialDesign:DataGridTextColumn
+                        Width="Auto"
+                        Binding="{Binding Number}"
+                        CanUserResize="True"
+                        ElementStyle="{StaticResource ES}"
+                        Header="Номер комнаты"
+                        IsReadOnly="True" />
+                    <materialDesign:DataGridTextColumn
+                        Width="Auto"
+                        Binding="{Binding Type, Converter={StaticResource EnumConverter}}"
+                        CanUserResize="True"
+                        ElementStyle="{StaticResource ES}"
+                        Header="Тип номера"
+                        IsReadOnly="True" />
+                    <materialDesign:DataGridTextColumn
+                        Width="Auto"
+                        Binding="{Binding Price, StringFormat=\{0:C\}}"
+                        CanUserResize="True"
+                        ElementStyle="{StaticResource ES}"
+                        Header="Цена за сутки"
+                        IsReadOnly="True" />
+                    <materialDesign:DataGridTextColumn
+                        Width="Auto"
+                        CanUserResize="True"
+                        FontWeight="Bold"
+                        Header="Статус"
+                        IsReadOnly="True">
+                        <materialDesign:DataGridTextColumn.ElementStyle>
+                            <Style BasedOn="{StaticResource ES}" TargetType="{x:Type TextBlock}">
+                                <Setter Property="Foreground" Value="Red" />
+                                <Setter Property="Text" Value="Занято" />
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding CurrentState}" Value="{x:Static viewModels:RoomState.Free}">
+                                        <Setter Property="Text" Value="Свободно" />
+                                        <Setter Property="Foreground" Value="Green" />
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding CurrentState}" Value="{x:Static viewModels:RoomState.NeedPaid}">
+                                        <Setter Property="Text" Value="Пора выселять" />
+                                        <Setter Property="Foreground" Value="Red" />
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </materialDesign:DataGridTextColumn.ElementStyle>
+                    </materialDesign:DataGridTextColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+            <DataGrid
+                x:Name="RoomsDataGrid_Копировать1"
+                Margin="8,0,12,20"
+                materialDesign:DataGridAssist.SelectedCellBorderBrush="Transparent"
+                AutoGenerateColumns="False"
+                Background="#25292f"
+                CanUserAddRows="False"
+                HorizontalScrollBarVisibility="Disabled"
+                ItemsSource="{Binding RoomsView}">
+                <DataGrid.Resources>
+                    <Style
+                        x:Key="ES"
+                        BasedOn="{StaticResource MaterialDesignDataGridTextColumnStyle}"
+                        TargetType="{x:Type TextBlock}">
+                        <Setter Property="VerticalAlignment" Value="Center" />
+                    </Style>
+                </DataGrid.Resources>
+                <DataGrid.Columns>
+                    <materialDesign:DataGridTextColumn
+                        Width="Auto"
+                        Binding="{Binding Number}"
+                        CanUserResize="True"
+                        ElementStyle="{StaticResource ES}"
+                        Header="Номер комнаты"
+                        IsReadOnly="True" />
+                    <materialDesign:DataGridTextColumn
+                        Width="Auto"
+                        Binding="{Binding Type, Converter={StaticResource EnumConverter}}"
+                        CanUserResize="True"
+                        ElementStyle="{StaticResource ES}"
+                        Header="Тип номера"
+                        IsReadOnly="True" />
+                    <materialDesign:DataGridTextColumn
+                        Width="Auto"
+                        Binding="{Binding Price, StringFormat=\{0:C\}}"
+                        CanUserResize="True"
+                        ElementStyle="{StaticResource ES}"
+                        Header="Цена за сутки"
+                        IsReadOnly="True" />
+                    <materialDesign:DataGridTextColumn
+                        Width="Auto"
+                        CanUserResize="True"
+                        FontWeight="Bold"
+                        Header="Статус"
+                        IsReadOnly="True">
+                        <materialDesign:DataGridTextColumn.ElementStyle>
+                            <Style BasedOn="{StaticResource ES}" TargetType="{x:Type TextBlock}">
+                                <Setter Property="Foreground" Value="Red" />
+                                <Setter Property="Text" Value="Занято" />
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding CurrentState}" Value="{x:Static viewModels:RoomState.Free}">
+                                        <Setter Property="Text" Value="Свободно" />
+                                        <Setter Property="Foreground" Value="Green" />
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding CurrentState}" Value="{x:Static viewModels:RoomState.NeedPaid}">
+                                        <Setter Property="Text" Value="Пора выселять" />
+                                        <Setter Property="Foreground" Value="Red" />
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </materialDesign:DataGridTextColumn.ElementStyle>
+                    </materialDesign:DataGridTextColumn>
+                </DataGrid.Columns>
+            </DataGrid>
         </Grid>
     </Grid>
 </UserControl>

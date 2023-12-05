@@ -1,7 +1,9 @@
-﻿using DevExpress.Mvvm;
+﻿using System.Collections.ObjectModel;
+using DevExpress.Mvvm;
 using System.Windows.Input;
 using DataContract.DTO.Messages;
 using DataContract.DTO.ViewModels;
+using DevExpress.Mvvm.Native;
 using HotelManager.MVVM.Utils;
 using HotelManager.MVVM.Models.Services;
 using HotelManager.MVVM.ViewModels.DialogHostViewModels;
@@ -45,6 +47,7 @@ public class SimulatorPageViewModel : AbstractRoomManagerViewModel
     public int NoHandledApplication => _applications.Count;
     public int BusyRoomsCount => Rooms.Count(room => room.CurrentState == RoomState.Busy);
     public int FreeRoomsCount => Rooms.Count(room => room.CurrentState == RoomState.Free);
+    public ICommand NoHandledApplicationViewCommand { get; }
     public ICommand ShowSettingSystemCommand { get; }
     public ICommand StartCommand { get; }
     public ICommand StopCommand { get; }
@@ -62,6 +65,7 @@ public class SimulatorPageViewModel : AbstractRoomManagerViewModel
         _simulatorConfigViewModel = simulatorConfigViewModel;
         ShowSettingSystemCommand =
             new DelegateCommand(() => DialogHostController.ConcreteShow(simulatorConfigViewModel));
+        NoHandledApplicationViewCommand = new DelegateCommand(() => DialogHostController.Show<NoHandledApplicationViewModel, ObservableCollection<ApplicationViewModel>>(_applications.ToObservableCollection()));
     }
 
     protected override void RequestPayment(NeedPaymentMessage needPaymentMessage)

@@ -42,4 +42,8 @@
     <DataTemplate DataType="{x:Type dialogHostViewModels:SettingsGeneratorViewModel}">
         <dialogHostViews:SettingsGenerator />
     </DataTemplate>
+
+    <DataTemplate DataType="{x:Type dialogHostViewModels:NoHandledApplicationViewModel}">
+        <dialogHostViews:NoHandledApplicationView />
+    </DataTemplate>
 </ResourceDictionary>
