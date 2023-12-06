@@ -29,15 +29,16 @@ public class SimulatorPageViewModel : AbstractRoomManagerViewModel
         get => _currentHour;
         set
         {
-            if (_currentHour >= 24)
+            var delta = value - _currentHour;
+
+            if (_currentHour + delta >= 24)
             {
                 CurrentDay++;
-                _currentHour = 0;
+                _currentHour = delta - (24 - _currentHour);
                 _nextSpawnApplication = 0;
                 return;
             }
 
-            var delta = value - _currentHour;
             DebugHelperService.AddHoursToStorageTime(delta);
             _currentHour += delta;
         }
