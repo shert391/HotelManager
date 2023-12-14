@@ -48,7 +48,6 @@
                     Orientation="Horizontal">
                     <TextBlock Foreground="LightGray" Text="Осталось мест: " />
                     <TextBlock
-                        Grid.Column="1"
                         HorizontalAlignment="Right"
                         Foreground="LightGray"
                         Text="{Binding RemainPlaces}" />

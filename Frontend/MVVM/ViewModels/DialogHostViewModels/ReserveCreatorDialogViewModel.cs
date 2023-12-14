@@ -4,7 +4,6 @@ using System.Windows.Input;
 using HotelManager.MVVM.Utils;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
-using DataContract.DTO.MappingEntities;
 using DataContract.DTO.ViewModels;
 using HotelManager.MVVM.Models.Services.ReservationService;
 

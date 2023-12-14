@@ -8,7 +8,7 @@ public class RoomValidator : AbstractValidator<Room>
     public RoomValidator()
     {
         RuleFor(room => room.Number)
-            .GreaterThan(1)
+            .GreaterThan(0)
             .NotNull()
             .NotEmpty();
 

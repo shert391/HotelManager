@@ -1,8 +1,6 @@
-﻿using System.Windows.Controls;
-
-namespace HotelManager.MVVM.Views.Xamls.DialogHostViews
+﻿namespace HotelManager.MVVM.Views.Xamls.DialogHostViews
 {
-    public partial class ConfigurationSimulator : UserControl
+    public partial class ConfigurationSimulator
     {
         public ConfigurationSimulator() => InitializeComponent();
     }

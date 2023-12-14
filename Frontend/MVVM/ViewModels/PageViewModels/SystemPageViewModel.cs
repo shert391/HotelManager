@@ -1,12 +1,10 @@
 ﻿using DataContract.Extensions;
 using DevExpress.Mvvm;
-using DevExpress.Mvvm.Native;
 using HotelManager.MVVM.Utils;
 using HotelManager.MVVM.ViewModels.DialogHostViewModels;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Windows.Input;
-using DataContract.DTO.MappingEntities;
 using DataContract.DTO.Messages;
 using DataContract.DTO.ViewModels;
 

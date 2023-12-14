@@ -7,7 +7,6 @@
     xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:mappingEntities="clr-namespace:DataContract.DTO.MappingEntities;assembly=DataContract"
     xmlns:viewModels="clr-namespace:DataContract.DTO.ViewModels;assembly=DataContract"
     x:Name="SystemPageUserControll"
     Width="1405"
@@ -26,7 +25,7 @@
             Grid.RowSpan="5"
             Background="#25292f"
             CornerRadius="0 0 20 0" />
-        
+
 
         <Grid x:Name="HeaderGrid">
             <Grid.ColumnDefinitions>

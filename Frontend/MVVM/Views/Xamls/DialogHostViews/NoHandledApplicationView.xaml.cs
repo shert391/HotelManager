@@ -1,8 +1,6 @@
-﻿using System.Windows.Controls;
+﻿namespace HotelManager.MVVM.Views.Xamls.DialogHostViews;
 
-namespace HotelManager.MVVM.Views.Xamls.DialogHostViews;
-
-public partial class NoHandledApplicationView : UserControl
+public partial class NoHandledApplicationView
 {
     public NoHandledApplicationView() => InitializeComponent();
 }

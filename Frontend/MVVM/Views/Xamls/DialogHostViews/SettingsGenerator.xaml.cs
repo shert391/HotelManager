@@ -1,9 +1,6 @@
-﻿using System.Windows;
-using System.Windows.Controls;
+﻿namespace HotelManager.MVVM.Views.Xamls.DialogHostViews;
 
-namespace HotelManager.MVVM.Views.Xamls.DialogHostViews;
-
-public partial class SettingsGenerator : UserControl
+public partial class SettingsGenerator
 {
     public SettingsGenerator() => InitializeComponent();
 }

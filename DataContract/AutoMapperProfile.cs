@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using DataContract.BusinessModels;
-using DataContract.DTO.MappingEntities;
 using DataContract.DTO.Messages;
 using DataContract.DTO.ViewModels;
 using DataContract.Extensions;
@@ -30,7 +29,7 @@ public class AutoMapperProfile : Profile
     }
 
     /// <summary>
-    /// Score у Room для RoomDTO будет сопоставлятся как среднее арифмитическое между всеми оценками у Room
+    /// Score у Room для RoomDTO будет сопоставляется как среднее арифметическое между всеми оценками у Room
     /// </summary>
     /// <returns></returns>
     private double AverageScore(IReadOnlyCollection<Assessment> assessments)

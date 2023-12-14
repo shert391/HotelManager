@@ -1,6 +1,5 @@
 ﻿using DevExpress.Mvvm;
 using System.Windows.Input;
-using DataContract.DTO.MappingEntities;
 using DataContract.DTO.ViewModels;
 using HotelManager.MVVM.Models.Services.RoomService;
 

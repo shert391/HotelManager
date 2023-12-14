@@ -1,6 +1,3 @@
-using System.Collections.ObjectModel;
-using DataContract.DTO;
-using DataContract.DTO.MappingEntities;
 using DataContract.DTO.ViewModels;
 using DataContract.Extensions;
 using HotelManager.MVVM.Models.Services.ReservationService;

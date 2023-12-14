@@ -1,5 +1,4 @@
 using System.Collections.ObjectModel;
-using DataContract.DTO.MappingEntities;
 using DataContract.DTO.ViewModels;
 using HotelManager.MVVM.Utils;
 

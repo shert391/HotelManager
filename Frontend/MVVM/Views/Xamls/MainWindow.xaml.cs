@@ -5,7 +5,7 @@ using HotelManager.MVVM.ViewModels;
 
 namespace HotelManager.MVVM.Views.Xamls;
 
-public partial class MainWindow : Window
+public partial class MainWindow
 {
     public MainWindow(MainWindowViewModel mainMenuViewModel)
     {

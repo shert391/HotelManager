@@ -9,8 +9,6 @@ using HotelManager.MVVM.Models.Services.ReservationService;
 using HotelManager.MVVM.Models.Services.RoomService;
 using PropertyChanged;
 using System.Collections.ObjectModel;
-using System.Security.Cryptography.Xml;
-using DataContract.DTO.MappingEntities;
 using DataContract.DTO.Messages;
 using DataContract.DTO.ViewModels;
 using HotelManager.MVVM.Models.Services.ApplicationService;

@@ -1,6 +1,5 @@
 ﻿using System.Collections.ObjectModel;
 using DataContract.BusinessModels;
-using DataContract.DTO.MappingEntities;
 using DataContract.DTO.Messages;
 using DataContract.DTO.ViewModels;
 using HotelManager.MVVM.Models.Services.PostmanService;
